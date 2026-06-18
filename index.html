@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,6 +23,41 @@
   --radius: 6px;
   --scanline-opacity: 0.03;
 }
+
+/* ─── Light Theme ─── */
+[data-theme="light"] {
+  --bg-deep: #f8f8fc;
+  --bg-surface: #ffffff;
+  --bg-card: #f0f0f6;
+  --neon-cyan: #2563eb;
+  --neon-magenta: #a21caf;
+  --neon-green: #059669;
+  --neon-yellow: #d97706;
+  --text-bright: #111827;
+  --text-body: #374151;
+  --text-dim: #6b7280;
+  --border-glow: #d1d5db;
+  --scanline-opacity: 0;
+}
+[data-theme="light"] body::after{display:none}
+[data-theme="light"] body::before{display:none}
+[data-theme="light"] h1{text-shadow:none}
+[data-theme="light"] h2{text-shadow:none}
+[data-theme="light"] header .subtitle{text-shadow:none}
+[data-theme="light"] .hero-repos h3{text-shadow:none}
+[data-theme="light"] .tool-table .repo:hover{text-shadow:none}
+[data-theme="light"] .tool-table tr:hover td{background:rgba(37,99,235,0.04)}
+[data-theme="light"] .cat-header:hover{background:rgba(37,99,235,0.04)}
+[data-theme="light"] .search-input:focus{box-shadow:0 0 0 2px rgba(37,99,235,0.15)}
+[data-theme="light"] .hero-card:hover{box-shadow:0 2px 12px rgba(0,0,0,0.08);transform:translateY(-2px)}
+[data-theme="light"] .category.expanded{border-color:var(--neon-cyan)}
+[data-theme="light"] .nav-pill:hover,[data-theme="light"] .nav-pill.active{box-shadow:0 0 0 2px rgba(37,99,235,0.15)}
+[data-theme="light"] .sort-btn.active{box-shadow:0 0 0 1px var(--neon-green)}
+[data-theme="light"] .lang-select:focus{box-shadow:0 0 0 2px rgba(5,150,105,0.15)}
+[data-theme="light"] .lang-clear:hover{box-shadow:0 0 0 1px var(--neon-magenta)}
+[data-theme="light"] header{box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+[data-theme="light"] .loading{color:var(--neon-cyan);animation:none}
+[data-theme="light"] .loading .bar::after{background:var(--neon-cyan)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px}
 body{
@@ -74,6 +109,34 @@ h3{
   letter-spacing:0.06em;
   color:var(--text-bright);
 }
+
+/* ─── Theme Toggle ─── */
+.theme-toggle{
+  position:absolute;
+  top:1rem;
+  right:1.5rem;
+  background:var(--bg-card);
+  border:1px solid var(--border-glow);
+  border-radius:20px;
+  padding:0.35rem 0.7rem;
+  color:var(--neon-yellow);
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.72rem;
+  cursor:pointer;
+  transition:all 0.2s;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:0.35rem;
+}
+.theme-toggle:hover{
+  border-color:var(--neon-yellow);
+  box-shadow:0 0 12px rgba(255,221,0,0.2);
+}
+[data-theme="dark"] .theme-toggle .light-icon{display:none}
+[data-theme="light"] .theme-toggle .dark-icon{display:none}
+[data-theme="light"] .theme-toggle{color:var(--neon-cyan)}
+[data-theme="light"] .theme-toggle:hover{border-color:var(--neon-cyan);box-shadow:0 0 0 2px rgba(37,99,235,0.15)}
 
 /* ─── Layout ─── */
 .container{max-width:1200px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1}
@@ -505,6 +568,9 @@ footer a:hover{text-shadow:0 0 10px rgba(0,240,255,0.5)}
 </head>
 <body>
 <header>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+    <span class="dark-icon">◉</span><span class="light-icon">◎</span> theme
+  </button>
   <div class="container">
     <h1 class="glitch-text">STAR<span style="color:var(--neon-magenta)">//</span>GUIDE</h1>
     <p class="subtitle">curated chaos from the digital underground</p>
@@ -859,6 +925,12 @@ function escHtml(s){
 }
 
 // ─── Boot ───
+(function(){
+  const saved = localStorage.getItem('theme');
+  if(saved === 'light' || (!saved && window.matchMedia('(prefers-color-scheme: light)').matches)){
+    document.documentElement.setAttribute('data-theme','light');
+  }
+})();
 loadData();
 
 // Keyboard shortcut: / to focus search
@@ -867,6 +939,14 @@ document.addEventListener('keydown',e=>{
     e.preventDefault();
     document.getElementById('search').focus();
   }
+});
+
+// Theme toggle
+document.getElementById('theme-toggle').addEventListener('click',()=>{
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme')==='dark'?'light':'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
 });
 </script>
 </body>
