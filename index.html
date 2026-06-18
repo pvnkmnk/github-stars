@@ -199,6 +199,69 @@ header .stats span{
   text-align:center;
   min-height:1.2em;
 }
+.filter-bar{
+  display:flex;
+  gap:0.6rem;
+  align-items:center;
+  justify-content:center;
+  margin-top:0.6rem;
+  flex-wrap:wrap;
+}
+.lang-select{
+  background:var(--bg-card);
+  border:1px solid var(--border-glow);
+  border-radius:var(--radius);
+  padding:0.35rem 0.7rem;
+  color:var(--text-body);
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.78rem;
+  cursor:pointer;
+  transition:all 0.15s;
+  max-width:200px;
+}
+.lang-select:focus{
+  outline:none;
+  border-color:var(--neon-green);
+  box-shadow:0 0 12px rgba(57,255,20,0.15);
+}
+.lang-select option{background:var(--bg-card);color:var(--text-body)}
+.lang-clear{
+  background:none;
+  border:1px solid var(--border-glow);
+  border-radius:var(--radius);
+  padding:0.35rem 0.6rem;
+  color:var(--neon-magenta);
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.72rem;
+  cursor:pointer;
+  transition:all 0.15s;
+}
+.lang-clear:hover{border-color:var(--neon-magenta);box-shadow:0 0 8px rgba(255,0,170,0.15)}
+
+/* ─── Sort Controls ─── */
+.sort-controls{
+  display:flex;
+  gap:3px;
+  margin-left:0.4rem;
+}
+.sort-btn{
+  background:var(--bg-card);
+  border:1px solid var(--border-glow);
+  border-radius:4px;
+  padding:0.18rem 0.4rem;
+  color:var(--text-dim);
+  font-family:'Share Tech Mono',monospace;
+  font-size:0.62rem;
+  cursor:pointer;
+  transition:all 0.12s;
+  white-space:nowrap;
+}
+.sort-btn:hover{border-color:var(--neon-green);color:var(--text-body)}
+.sort-btn.active{
+  border-color:var(--neon-green);
+  color:var(--neon-green);
+  box-shadow:0 0 8px rgba(57,255,20,0.2);
+}
 
 /* ─── Navigation Pills ─── */
 .nav-pills{
@@ -457,6 +520,10 @@ footer a:hover{text-shadow:0 0 10px rgba(0,240,255,0.5)}
 <div class="search-wrap">
   <label for="search" class="sr-only">Search tools</label>
   <input type="text" class="search-input" id="search" aria-label="Search tools by name, language, or description" placeholder="> search tools, languages, descriptions..." autocomplete="off">
+  <div class="filter-bar">
+    <select class="lang-select" id="lang-filter" aria-label="Filter by language"><option value="">all languages</option></select>
+    <button class="lang-clear" id="lang-clear" hidden>× clear</button>
+  </div>
   <div class="search-results" id="search-info"></div>
 </div>
 <div class="nav-pills" id="nav-pills"></div>
@@ -543,13 +610,25 @@ function parseAGENT(text){
     categories[e].sort((a,b)=>b.stars-a.stars);
   }
 
+  // Collect unique languages
+  const langSet = new Set();
+  for(const t of allTools){
+    if(t.lang && t.lang!=='-') langSet.add(t.lang);
+  }
+  window.allLanguages = [...langSet].sort((a,b)=>a.localeCompare(b));
+
   renderAll();
 }
+
+// Per-category sort state: 'stars' (default) or 'name'
+let sortState = {};
+let langFilter = '';
 
 function renderAll(){
   renderHero();
   renderNav();
   renderCategories();
+  setupLangFilter();
   setupSearch();
 }
 
@@ -601,6 +680,10 @@ function renderCategories(){
         <span class="emoji">${e}</span>
         <span class="name">${meta.name}</span>
         <span class="count">${tools.length} tools ★ ${fmtStars(totalStars)}</span>
+        <span class="sort-controls">
+          <button class="sort-btn ${(sortState[e]||'stars')==='stars'?'active':''}" data-emoji="${e}" data-sort="stars" aria-label="Sort by stars">★</button>
+          <button class="sort-btn ${sortState[e]==='name'?'active':''}" data-emoji="${e}" data-sort="name" aria-label="Sort by name">A-Z</button>
+        </span>
         <span class="arrow">▼</span>
       </div>
       <div class="cat-body">
@@ -633,6 +716,21 @@ function renderCategories(){
     });
   });
 
+  // Sort button handlers
+  main.querySelectorAll('.sort-btn').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      const emoji = btn.dataset.emoji;
+      const sort = btn.dataset.sort;
+      sortState[emoji] = sort;
+      // Update active state for this category's buttons
+      const cat = btn.closest('.category');
+      cat.querySelectorAll('.sort-btn').forEach(b=>b.classList.toggle('active',b.dataset.sort===sort));
+      // Re-sort and re-render that category's table
+      reRenderCategory(emoji, cat);
+    });
+  });
+
   // Expand first category by default
   const first = main.querySelector('.category');
   if(first){
@@ -642,6 +740,76 @@ function renderCategories(){
   }
 }
 
+function reRenderCategory(emoji, catEl){
+  let tools = [...categories[emoji]];
+  const sort = sortState[emoji] || 'stars';
+  if(sort==='stars') tools.sort((a,b)=>b.stars-a.stars);
+  else tools.sort((a,b)=>a.repoName.toLowerCase().localeCompare(b.repoName.toLowerCase()));
+  const tbody = catEl.querySelector('tbody');
+  tbody.innerHTML = tools.map(t=>`<tr>
+    <td><a class="repo" href="https://github.com/${t.fullName}" target="_blank">${t.repoName}</a></td>
+    <td class="stars">${fmtStars(t.stars)}</td>
+    <td class="lang">${t.lang&&t.lang!=='-'?t.lang:'—'}</td>
+    <td class="desc" title="${escHtml(t.desc)}">${escHtml(t.desc)}</td>
+  </tr>`).join('');
+  // Re-apply any active filters
+  applyFilters();
+}
+
+function setupLangFilter(){
+  const select = document.getElementById('lang-filter');
+  const clearBtn = document.getElementById('lang-clear');
+  // Populate options
+  select.innerHTML = '<option value="">all languages ('+allLanguages.length+')</option>'+
+    window.allLanguages.map(l=>`<option value="${escHtml(l)}">${l}</option>`).join('');
+
+  select.addEventListener('change',()=>{
+    langFilter = select.value;
+    clearBtn.hidden = !langFilter;
+    applyFilters();
+    updateSearchInfo();
+  });
+  clearBtn.addEventListener('click',()=>{
+    select.value = '';
+    langFilter = '';
+    clearBtn.hidden = true;
+    applyFilters();
+    updateSearchInfo();
+  });
+}
+
+function applyFilters(){
+  const q = (document.getElementById('search').value||'').toLowerCase().trim();
+  let totalVisible = 0;
+
+  document.querySelectorAll('.category').forEach(cat=>{
+    const rows = cat.querySelectorAll('tbody tr');
+    let catVisible = 0;
+    rows.forEach(row=>{
+      let show = true;
+      if(q){
+        const text = row.textContent.toLowerCase();
+        if(!text.includes(q)) show = false;
+      }
+      if(show && langFilter){
+        const langCell = row.querySelector('.lang');
+        const lang = langCell ? langCell.textContent.trim() : '';
+        if(lang !== langFilter) show = false;
+      }
+      row.style.display = show ? '' : 'none';
+      if(show) catVisible++;
+    });
+    if((q || langFilter) && catVisible===0){
+      cat.style.display = 'none';
+    }else{
+      cat.style.display = '';
+      totalVisible += catVisible;
+    }
+  });
+
+  window._filterVisible = totalVisible;
+}
+
 function setupSearch(){
   const input = document.getElementById('search');
   const info = document.getElementById('search-info');
@@ -649,47 +817,38 @@ function setupSearch(){
 
   input.addEventListener('input',()=>{
     const q = input.value.toLowerCase().trim();
-    visible = 0;
-
-    document.querySelectorAll('.category').forEach(cat=>{
-      const rows = cat.querySelectorAll('tbody tr');
-      let catVisible = 0;
-      rows.forEach(row=>{
-        const text = row.textContent.toLowerCase();
-        if(!q || text.includes(q)){
-          row.style.display = '';
-          catVisible++;
-        }else{
-          row.style.display = 'none';
-        }
-      });
-      if(q && catVisible===0){
-        cat.style.display = 'none';
-      }else{
-        cat.style.display = '';
-        visible += catVisible;
-      }
-    });
+    applyFilters();
+    updateSearchInfo();
 
     if(q){
-      info.textContent = `// found ${visible} matches for "${input.value}"`;
-    }else{
-      info.textContent = '';
-      // Re-collapse all except first when search cleared
-      document.querySelectorAll('.category').forEach((c,i)=>{
-        c.classList.toggle('expanded', i===0);
-      });
-    }
-
-    // Auto-expand matching categories when searching
-    if(q){
+      // Auto-expand matching categories when searching
       document.querySelectorAll('.category').forEach(c=>{
         if(c.style.display!=='none' && !c.classList.contains('expanded')){
           c.classList.add('expanded');
         }
       });
+    }else if(!langFilter){
+      // Re-collapse all except first when both search and filter cleared
+      document.querySelectorAll('.category').forEach((c,i)=>{
+        c.classList.toggle('expanded', i===0);
+      });
     }
   });
+
+  function updateSearchInfo(){
+    const q = input.value.toLowerCase().trim();
+    const v = window._filterVisible || 0;
+    if(q && langFilter){
+      info.textContent = `// ${v} matches for "${input.value}" in ${langFilter}`;
+    }else if(q){
+      info.textContent = `// found ${v} matches for "${input.value}"`;
+    }else if(langFilter){
+      info.textContent = `// ${v} repos in ${langFilter}`;
+    }else{
+      info.textContent = '';
+    }
+  }
+  window.updateSearchInfo = updateSearchInfo;
 }
 
 function encodeEmoji(e){
