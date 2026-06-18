@@ -741,7 +741,7 @@ function renderCategories(){
 }
 
 function reRenderCategory(emoji, catEl){
-  let tools = [...categories[emoji]];
+  const tools = [...categories[emoji]];
   const sort = sortState[emoji] || 'stars';
   if(sort==='stars') tools.sort((a,b)=>b.stars-a.stars);
   else tools.sort((a,b)=>a.repoName.toLowerCase().localeCompare(b.repoName.toLowerCase()));
@@ -767,14 +767,14 @@ function setupLangFilter(){
     langFilter = select.value;
     clearBtn.hidden = !langFilter;
     applyFilters();
-    updateSearchInfo();
+    window.updateSearchInfo();
   });
   clearBtn.addEventListener('click',()=>{
     select.value = '';
     langFilter = '';
     clearBtn.hidden = true;
     applyFilters();
-    updateSearchInfo();
+    window.updateSearchInfo();
   });
 }
 
