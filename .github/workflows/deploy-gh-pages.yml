@@ -6,40 +6,48 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: gh-pages
+  group: pages
   cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Prepare deploy directory
-        run: |
-          mkdir -p _deploy
-          cp index.html _deploy/
-          cp -r stars/ _deploy/
-          touch _deploy/.nojekyll
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Prepare site directory
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp -r stars/ _site/
+          touch _site/.nojekyll
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_deploy
-          publish_branch: gh-pages
-          force_orphan: false
-          commit_message: 'deploy: auto-deploy from main'
+          path: ./_site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
       - name: Notify success
         run: |
-          echo "::notice::Deployed to gh-pages — live at https://pvnkmnk.github.io/github-stars/"
+          echo "::notice::Deployed to ${{ steps.deployment.outputs.page_url }}"
 
       - name: Notify failure
         if: failure()
