@@ -72,7 +72,7 @@ self.addEventListener("fetch", e => {
     return;
   }
 
-  // Data files (stars/*): stale-while-revalidate
+  // Data files (stars/*): network-first, cache fallback
   if (pathname.startsWith("/github-stars/stars/")) {
     e.respondWith(
       caches.open(CACHE).then(c =>
