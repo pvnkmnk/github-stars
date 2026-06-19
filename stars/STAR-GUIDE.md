@@ -31,7 +31,20 @@
   - [🎵 Media Top 10](#-media-top-10)
   - [🐳 Docker Top 10](#-docker-top-10)
   - [🧠 AI/LLM Top 10](#-aillm-top-10)
-  - [🏆 If I Could Only Keep 5](#-if-i-could-only-keep-5)
+  - [🗄️ Databases Top 10](#-databases-top-10)
+  - [🔒 Security Top 10](#-security-top-10)
+  - [⚡ Automation Top 10](#-automation-top-10)
+  - [💻 Dev Resources Top 10](#-dev-resources-top-10)
+  - [⌨️ Terminal Top 10](#-terminal-top-10)
+  - [📝 Knowledge & PKM Top 10](#-knowledge--pkm-top-10)
+  - [🌐 Web & Design Top 10](#-web--design-top-10)
+  - [💬 Communication Top 10](#-communication-top-10)
+  - [📄 Documentation Top 10](#-documentation-top-10)
+  - [📱 Mobile Top 10](#-mobile-top-10)
+  - [🪟 Windows Top 10](#-windows-top-10)
+  - [📦 General Platforms Top 10](#-general-platforms-top-10)
+  - [❓ Unique & Niche Top 10](#-unique--niche-top-10)
+  - [🏆 If I Could Only Keep 10](#-if-i-could-only-keep-10)
 - [Part III: Deep Dives](#part-iii-deep-dives) — Specialized topic analysis
   - [🔀 Reverse Proxy](#-reverse-proxy)
   - [📊 Monitoring & Observability](#-monitoring--observability)
@@ -1477,7 +1490,8 @@
 
 # Part II: The Toolbox
 
-> My personal top 10 picks from each category — what I'd actually use and why.
+> My personal top 10 picks from all 18 categories — what I'd actually use and why.
+> Each category has a full annotated listing in [🧰 TOOLBOX.md](TOOLBOX.md).
 > → See [Part I](#part-i-the-catalog) for full listings.
 > → See [Part III](#part-iii-deep-dives) for deep-dives on infrastructure topics.
 
@@ -1653,17 +1667,126 @@ Self-healing browser automation for LLMs. It handles the messy reality of web au
 
 ---
 
-## 🏆 If I Could Only Keep 5
+## 🗄️ Databases & Data Top 10
 
-If I had to rebuild from scratch with only 5 tools from these stars:
+→ See [🧰 TOOLBOX.md](TOOLBOX.md#-databases--data---top-10) for the full annotated Top 10 with "Why I starred this."
+
+**The essentials:** [supabase/supabase](https://github.com/supabase/supabase) — open-source Firebase on Postgres; [pocketbase/pocketbase](https://github.com/pocketbase/pocketbase) — entire backend in one Go binary; [nocodb/nocodb](https://github.com/nocodb/nocodb) — Airtable backed by real SQL; [appwrite/appwrite](https://github.com/appwrite/appwrite) — self-hosted Firebase alternative; [surrealdb/surrealdb](https://github.com/surrealdb/surrealdb) — multi-model DB in Rust; [chartdb/chartdb](https://github.com/chartdb/chartdb) — one-click DB diagrams.
+
+---
+
+## 🔒 Security & Identity Top 10
+
+→ See [🧰 TOOLBOX.md](TOOLBOX.md#-security--identity---top-10) for the full annotated Top 10 with "Why I starred this."
+
+**The essentials:** [NationalSecurityAgency/ghidra](https://github.com/NationalSecurityAgency/ghidra) — NSA reverse engineering framework; [dani-garcia/vaultwarden](https://github.com/dani-garcia/vaultwarden) — Bitwarden in Rust; [tailscale/tailscale](https://github.com/tailscale/tailscale) — zero-config WireGuard mesh; [goauthentik/authentik](https://github.com/goauthentik/authentik) — SSO for self-hosters; [authelia/authelia](https://github.com/authelia/authelia) — auth middleware; [crowdsecurity/crowdsec](https://github.com/crowdsecurity/crowdsec) — modern fail2ban.
+
+---
+
+## ⚡ Automation & Workflow Top 10
+
+→ See [🧰 TOOLBOX.md](TOOLBOX.md#-automation--workflow---top-10) for the full annotated Top 10 with "Why I starred this."
+
+**The essentials:** [n8n-io/n8n](https://github.com/n8n-io/n8n) — open-source Zapier with 400+ integrations; [huginn/huginn](https://github.com/huginn/huginn) — programmable agents that monitor the web; [windmill-labs/windmill](https://github.com/windmill-labs/windmill) — turn scripts into production APIs instantly; [hoppscotch/hoppscotch](https://github.com/hoppscotch/hoppscotch) — browser-based API client; [Kong/insomnia](https://github.com/Kong/insomnia) — the API client I prefer over Postman.
+
+---
+
+## 💻 Developer Resources Top 10
+
+→ See [🧰 TOOLBOX.md](TOOLBOX.md#-developer-resources---top-10) for the full annotated Top 10 with "Why I starred this."
+
+**The essentials:** [codecrafters-io/build-your-own-x](https://github.com/codecrafters-io/build-your-own-x) — learn by building (516k ⭐); [EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books) — the ultimate learning library; [sindresorhus/awesome](https://github.com/sindresorhus/awesome) — the meta-list of curated lists; [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer) — the best system design resource; [kamranahmedse/developer-roadmap](https://github.com/kamranahmedse/developer-roadmap) — interactive career roadmaps.
+
+---
+
+## ⌨️ Terminal & CLI Top 10
+
+→ See [🧰 TOOLBOX.md](TOOLBOX.md#-terminal--cli-tools---top-10) for the full annotated Top 10 with "Why I starred this."
+
+**The essentials:** [junegunn/fzf](https://github.com/junegunn/fzf) — the fuzzy finder that changed everything; [BurntSushi/ripgrep](https://github.com/BurntSushi/ripgrep) — recursive grep at incredible speed; [sharkdp/bat](https://github.com/sharkdp/bat) — cat with syntax highlighting; [ajeetdsouza/zoxide](https://github.com/ajeetdsouza/zoxide) — smarter cd that learns your habits; [jesseduffield/lazygit](https://github.com/jesseduffield/lazygit) — git at the speed of thought; [starship/starship](https://github.com/starship/starship) — cross-shell prompt in Rust.
+
+---
+
+## 📝 Knowledge & PKM Top 10
+
+→ See [🧰 TOOLBOX.md](TOOLBOX.md#-knowledge--pkm---top-10) for the full annotated Top 10 with "Why I starred this."
+
+**The essentials:** [toeverything/AFFiNE](https://github.com/toeverything/AFFiNE) — Notion + Miro, open-source; [AppFlowy-IO/AppFlowy](https://github.com/AppFlowy-IO/AppFlowy) — Notion's open-source doppelganger; [logseq/logseq](https://github.com/logseq/logseq) — knowledge graph with Datalog queries; [outline/outline](https://github.com/outline/outline) — the team wiki Confluence should have been; [foambubble/foam](https://github.com/foambubble/foam) — Roam Research as a VS Code extension.
+
+---
+
+## 🌐 Web & Design Top 10
+
+→ See [🧰 TOOLBOX.md](TOOLBOX.md#-web--design---top-10) for the full annotated Top 10 with "Why I starred this."
+
+**The essentials:** [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) — a senior designer's brain in a repo; [shadcn-ui/ui](https://github.com/shadcn-ui/ui) — copy-paste accessible React components; [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss) — utility-first CSS that changed styling; [vercel/next.js](https://github.com/vercel/next.js) — full-stack React that feels coherent; [sveltejs/svelte](https://github.com/sveltejs/svelte) — the framework that compiles away.
+
+---
+
+## 💬 Communication & Chat Top 10
+
+→ See [🧰 TOOLBOX.md](TOOLBOX.md#-communication--chat---top-10) for the full annotated Top 10 with "Why I starred this."
+
+**The essentials:** [python-telegram-bot/python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) — Telegram bot dev done right; [mattermost/mattermost](https://github.com/mattermost/mattermost) — self-hosted Slack; [zulip/zulip](https://github.com/zulip/zulip) — topics-first chat backed by research; [matrix-org/synapse](https://github.com/matrix-org/synapse) — federated chat like email for messaging; [revoltchat/revolt](https://github.com/revoltchat/revolt) — Discord-like, fully open-source.
+
+---
+
+## 📄 Documentation & Static Sites Top 10
+
+→ See [🧰 TOOLBOX.md](TOOLBOX.md#-documentation--static-sites---top-10) for the full annotated Top 10 with "Why I starred this."
+
+**The essentials:** [squidfunk/mkdocs-material](https://github.com/squidfunk/mkdocs-material) — docs that look beautiful by default; [facebook/docusaurus](https://github.com/facebook/docusaurus) — Meta's documentation framework; [withastro/starlight](https://github.com/withastro/starlight) — zero-JS docs on Astro; [docsifyjs/docsify](https://github.com/docsifyjs/docsify) — no-build documentation; [rust-lang/mdBook](https://github.com/rust-lang/mdBook) — Rust's book tool that everyone steals.
+
+---
+
+## 📱 Mobile & Cross-Platform Top 10
+
+→ See [🧰 TOOLBOX.md](TOOLBOX.md#-mobile--cross-platform---top-10) for the full annotated Top 10 with "Why I starred this."
+
+**The essentials:** [DioxusLabs/dioxus](https://github.com/DioxusLabs/dioxus) — React-in-Rust for every platform; [flutter/flutter](https://github.com/flutter/flutter) — Google's cross-platform UI toolkit; [tauri-apps/tauri](https://github.com/tauri-apps/tauri) — Electron but 10x smaller in Rust; [expo/expo](https://github.com/expo/expo) — React Native without the pain; [facebook/react-native](https://github.com/facebook/react-native) — learn once, write everywhere.
+
+---
+
+## 🪟 Windows Tools Top 10
+
+→ See [🧰 TOOLBOX.md](TOOLBOX.md#-windows-tools---top-10) for the full annotated Top 10 with "Why I starred this."
+
+**The essentials:** [dockur/windows](https://github.com/dockur/windows) — Windows VM as a Docker container; [microsoft/PowerToys](https://github.com/microsoft/PowerToys) — Microsoft's power-user utilities; [ventoy/Ventoy](https://github.com/ventoy/Ventoy) — multi-boot USB from ISO files; [valinet/ExplorerPatcher](https://github.com/valinet/ExplorerPatcher) — restore Windows 10 UI on 11; [ChrisTitusTech/winutil](https://github.com/ChrisTitusTech/winutil) — automated Windows setup and debloating.
+
+---
+
+## 📦 General Platforms & Suites Top 10
+
+→ See [🧰 TOOLBOX.md](TOOLBOX.md#-general-platforms--suites---top-10) for the full annotated Top 10 with "Why I starred this."
+
+**The essentials:** [twentyhq/twenty](https://github.com/twentyhq/twenty) — open-source Salesforce; [plausible/analytics](https://github.com/plausible/analytics) — privacy-first analytics; [directus/directus](https://github.com/directus/directus) — wrap any SQL DB in a REST+GraphQL API; [medusajs/medusa](https://github.com/medusajs/medusa) — Shopify's open-source alternative; [calcom/cal.com](https://github.com/calcom/cal.com) — Calendly but open-source and better; [appsmithorg/appsmith](https://github.com/appsmithorg/appsmith) — the most popular open-source internal tool builder.
+
+---
+
+## ❓ Unique & Niche Top 10
+
+→ See [🧰 TOOLBOX.md](TOOLBOX.md#-unique--niche---top-10) for the full annotated Top 10 with "Why I starred this."
+
+**The essentials:** [awesome-selfhosted/awesome-selfhosted](https://github.com/awesome-selfhosted/awesome-selfhosted) — the self-hosting catalog (240k ⭐); [tldr-pages/tldr](https://github.com/tldr-pages/tldr) — simplified man pages with examples; [jdx/mise](https://github.com/jdx/mise) — asdf evolved (Rust + tasks + env vars); [sharkdp/hyperfine](https://github.com/sharkdp/hyperfine) — scientifically rigorous CLI benchmarking; [simonw/llm](https://github.com/simonw/llm) — the Unix pipe for AI; [charmbracelet/vhs](https://github.com/charmbracelet/vhs) — terminal GIFs as code.
+
+---
+
+## 🏆 If I Could Only Keep 10
+
+If I had to rebuild from scratch with only 10 tools — one per major domain:
 
 | # | Repo | Category | Why |
 |---|------|----------|-----|
-| 1 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | Agentic Dev | The agent I actually live in |
-| 2 | [coollabsio/coolify](https://github.com/coollabsio/coolify) | Homelab | Deploys everything else |
-| 3 | [immich-app/immich](https://github.com/immich-app/immich) | Media | The app my family cares about |
-| 4 | [jesseduffield/lazydocker](https://github.com/jesseduffield/lazydocker) | Docker | Ops without the pain |
-| 5 | [ggml-org/llama.cpp](https://github.com/ggml-org/llama.cpp) | AI/LLM | The engine that runs everything else locally |
+| 1 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | 🤖 Agentic Dev | The agent I actually live in |
+| 2 | [coollabsio/coolify](https://github.com/coollabsio/coolify) | 📡 Homelab | Deploys everything else |
+| 3 | [immich-app/immich](https://github.com/immich-app/immich) | 🎵 Media | The app my family cares about |
+| 4 | [jesseduffield/lazydocker](https://github.com/jesseduffield/lazydocker) | 🐳 Docker | Ops without the pain |
+| 5 | [ggml-org/llama.cpp](https://github.com/ggml-org/llama.cpp) | 🧠 AI/LLM | The engine that runs everything else locally |
+| 6 | [junegunn/fzf](https://github.com/junegunn/fzf) | ⌨️ Terminal | Changes how you use the command line — muscle memory |
+| 7 | [supabase/supabase](https://github.com/supabase/supabase) | 🗄️ Databases | The open-source backend that makes projects possible |
+| 8 | [n8n-io/n8n](https://github.com/n8n-io/n8n) | ⚡ Automation | Connects everything I run to everything else |
+| 9 | [dani-garcia/vaultwarden](https://github.com/dani-garcia/vaultwarden) | 🔒 Security | My family's digital safety, self-hosted |
+| 10 | [codecrafters-io/build-your-own-x](https://github.com/codecrafters-io/build-your-own-x) | 💻 Dev Resources | The curriculum that taught me how things actually work |
 
 ---
 
