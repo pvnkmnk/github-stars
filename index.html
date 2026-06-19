@@ -842,16 +842,23 @@ function renderHero(){
     '</div>';
 }
 
-// ─── Keep 10 ───
+// ─── Keep 10 + Toolbox (shared TOOLBOX.md fetch) ───
 let keep = [];
+let toolbox = {};
 
-async function fetchKeep(){
+async function fetchToolboxData(){
   try{
     const resp = await fetch('stars/TOOLBOX.md');
     if(!resp.ok) return;
     const text = await resp.text();
     parseKeep(text);
     renderKeep();
+    parseToolbox(text);
+    // Pre-populate any already-open toolbox panels
+    document.querySelectorAll('.toolbox-panel.show').forEach(p=>{
+      const emoji = p.dataset.emoji;
+      if(emoji&&toolbox[emoji]) renderToolboxPanel(emoji, p);
+    });
   }catch(e){/* silently degrade */}
 }
 
@@ -893,25 +900,7 @@ function renderKeep(){
     </a>`).join('')+
     '</div>';
 }
-// ─── End Keep 10
-
 // ─── Toolbox ───
-let toolbox = {};
-
-async function fetchToolbox(){
-  try{
-    const resp = await fetch('stars/TOOLBOX.md');
-    if(!resp.ok) return;
-    const text = await resp.text();
-    parseToolbox(text);
-    // Pre-populate any already-open toolbox panels
-    document.querySelectorAll('.toolbox-panel.show').forEach(p=>{
-      const emoji = p.dataset.emoji;
-      if(emoji&&toolbox[emoji]) renderToolboxPanel(emoji, p);
-    });
-  }catch(e){/* silently degrade */}
-}
-
 function parseToolbox(text){
   const map = {};
   const sections = text.split(/\n## /);
@@ -1206,8 +1195,7 @@ function escHtml(s){
   }
 })();
 loadData();
-fetchKeep();
-fetchToolbox();
+fetchToolboxData();
 
 // Keyboard shortcut: / to focus search
 document.addEventListener('keydown',e=>{
