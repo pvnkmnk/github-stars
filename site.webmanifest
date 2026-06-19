@@ -8,7 +8,7 @@
   "background_color": "#06060e",
   "icons": [
     {
-      "src": "/github-stars/og-preview.png",
+      "src": "/github-stars/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
