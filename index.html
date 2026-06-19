@@ -553,6 +553,54 @@ main{
   overflow:visible;
 }
 
+/* ─── Toolbox Panel ─── */
+.toolbox-toggle{
+  background:var(--bg-card);
+  border:1px solid var(--border-glow);
+  border-radius:14px;
+  padding:0.2rem 0.5rem;
+  color:var(--text-dim);
+  font-size:0.7rem;
+  cursor:pointer;
+  transition:all 0.15s;
+  font-family:'Share Tech Mono',monospace;
+  margin-left:0.3rem;
+}
+.toolbox-toggle:hover{border-color:var(--neon-cyan);color:var(--neon-cyan);box-shadow:0 0 8px rgba(0,240,255,0.2)}
+.toolbox-toggle.active{border-color:var(--neon-cyan);color:var(--neon-cyan);box-shadow:0 0 8px rgba(0,240,255,0.2)}
+.toolbox-panel{display:none;padding:0 0.9rem 0.9rem}
+.toolbox-panel.show{display:block}
+.toolbox-entry{
+  display:flex;
+  gap:0.5rem;
+  align-items:flex-start;
+  padding:0.45rem 0;
+  border-bottom:1px solid rgba(26,26,58,0.3);
+  border-left:2px solid var(--neon-cyan);
+  padding-left:0.6rem;
+  margin-bottom:0.15rem;
+}
+.toolbox-entry:last-child{border-bottom:none}
+.t-rank{
+  font-family:'Orbitron',sans-serif;
+  font-weight:700;
+  font-size:0.7rem;
+  color:var(--neon-yellow);
+  min-width:1.2em;
+  text-align:right;
+}
+.t-repo{
+  font-weight:700;
+  color:var(--text-bright);
+  text-decoration:none;
+  font-size:0.78rem;
+  transition:color 0.12s;
+  white-space:nowrap;
+}
+.t-repo:hover{color:var(--neon-magenta)}
+.t-why{font-size:0.7rem;color:var(--text-body);line-height:1.4;flex:1}
+.toolbox-fallback{font-size:0.7rem;color:var(--text-dim);padding:0.5rem 0;font-style:italic}
+
 /* ─── Punk Distress Elements ─── */
 .punk-tear{
   position:relative;
@@ -847,6 +895,76 @@ function renderKeep(){
 }
 // ─── End Keep 10
 
+// ─── Toolbox ───
+let toolbox = {};
+
+async function fetchToolbox(){
+  try{
+    const resp = await fetch('stars/TOOLBOX.md');
+    if(!resp.ok) return;
+    const text = await resp.text();
+    parseToolbox(text);
+    // Pre-populate any already-open toolbox panels
+    document.querySelectorAll('.toolbox-panel.show').forEach(p=>{
+      const emoji = p.dataset.emoji;
+      if(emoji&&toolbox[emoji]) renderToolboxPanel(emoji, p);
+    });
+  }catch(e){/* silently degrade */}
+}
+
+function parseToolbox(text){
+  const map = {};
+  const sections = text.split(/\n## /);
+  const entryRe = /### (\d+)\. \[([^\]]+)\]\(([^)]+)\) ⭐([\d,]+)\n\*\*Why I starred this:\*\* ([\s\S]*?)(?=\n### |\n---|\n## |\n\n## |$)/g;
+  
+  for(const sec of sections){
+    const hm = sec.match(/^([\p{Emoji_Presentation}\p{Emoji}][\u200d\ufe0f]?+)\s/u);
+    if(!hm) continue;
+    const emoji = hm[0].trim();
+    const entries = [];
+    let m;
+    while((m = entryRe.exec(sec)) !== null){
+      entries.push({
+        rank: m[1],
+        name: m[2],
+        url: m[3],
+        stars: m[4],
+        why: m[5].trim()
+      });
+    }
+    if(entries.length > 0) map[emoji] = entries;
+  }
+  toolbox = map;
+}
+
+function renderToolboxPanel(emoji, panel){
+  const entries = toolbox[emoji];
+  if(entries && entries.length > 0){
+    panel.innerHTML = entries.map(e=>`
+      <div class="toolbox-entry">
+        <span class="t-rank">${e.rank}</span>
+        <a class="t-repo" href="${escHtml(e.url)}" target="_blank">${escHtml(e.name)}</a>
+        <span class="t-why">${escHtml(e.why)}</span>
+      </div>`).join('');
+  }else{
+    // Fallback: top 10 from category data
+    const catTools = categories[emoji];
+    if(catTools && catTools.length > 0){
+      const top = catTools.slice(0, 10);
+      panel.innerHTML = '<div class="toolbox-fallback">auto-generated top 10 (TOOLBOX.md entry coming soon)</div>'+
+        top.map((t,i)=>`
+          <div class="toolbox-entry">
+            <span class="t-rank">${i+1}</span>
+            <a class="t-repo" href="https://github.com/${t.fullName}" target="_blank">${escHtml(t.fullName)}</a>
+            <span class="t-why">${escHtml(t.desc)}</span>
+          </div>`).join('');
+    }else{
+      panel.innerHTML = '<div class="toolbox-fallback">no data available</div>';
+    }
+  }
+}
+// ─── End Toolbox
+
 function renderNav(){
   const nav = document.getElementById('nav-pills');
   nav.innerHTML = EMOJI_ORDER.filter(e=>categories[e]&&categories[e].length>0).map(e=>{
@@ -881,6 +999,7 @@ function renderCategories(){
       <div class="cat-header" role="button" tabindex="0" aria-expanded="false" data-emoji="${e}">
         <span class="emoji">${e}</span>
         <span class="name">${meta.name}</span>
+        <button class="toolbox-toggle" data-emoji="${e}" aria-label="Show toolbox">🧰</button>
         <span class="count">${tools.length} tools ★ ${fmtStars(totalStars)}</span>
         <span class="sort-controls">
           <button class="sort-btn ${(sortState[e]||'stars')==='stars'?'active':''}" data-emoji="${e}" data-sort="stars" aria-label="Sort by stars">★</button>
@@ -900,6 +1019,7 @@ function renderCategories(){
             </tr>`).join('')}
           </tbody>
         </table>
+        <div class="toolbox-panel" data-emoji="${e}"></div>
       </div>
     </div>`;
   }).join('');
@@ -940,6 +1060,24 @@ function renderCategories(){
     const firstHeader = first.querySelector('.cat-header');
     if(firstHeader) firstHeader.setAttribute('aria-expanded','true');
   }
+
+  // Toolbox toggle handlers
+  main.querySelectorAll('.toolbox-toggle').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      const emoji = btn.dataset.emoji;
+      const panel = btn.closest('.cat-body').querySelector('.toolbox-panel');
+      const isOpen = panel.classList.contains('show');
+      if(isOpen){
+        panel.classList.remove('show');
+        btn.classList.remove('active');
+      }else{
+        panel.classList.add('show');
+        btn.classList.add('active');
+        if(panel.innerHTML==='') renderToolboxPanel(emoji, panel);
+      }
+    });
+  });
 }
 
 function reRenderCategory(emoji, catEl){
@@ -1069,6 +1207,7 @@ function escHtml(s){
 })();
 loadData();
 fetchKeep();
+fetchToolbox();
 
 // Keyboard shortcut: / to focus search
 document.addEventListener('keydown',e=>{
