@@ -1,0 +1,59 @@
+name: E2E Regression
+
+on:
+  workflow_run:
+    workflows: ["Deploy to GitHub Pages"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Playwright + Chromium
+        run: |
+          npm init -y > /dev/null 2>&1
+          npm install playwright > /dev/null 2>&1
+          npx playwright install chromium --with-deps > /dev/null 2>&1
+
+      - name: Wait for CDN propagation
+        run: |
+          echo "Waiting for GitHub Pages CDN to pick up the new deployment..."
+          for i in $(seq 1 12); do
+            STATUS=$(curl -sI "https://pvnkmnk.github.io/github-stars/?t=$(date +%s)" 2>&1 | head -1 | grep -c "200")
+            if [ "$STATUS" -eq 1 ]; then
+              echo "CDN ready after $((i * 5))s"
+              break
+            fi
+            echo "  attempt $i/12 — waiting 5s..."
+            sleep 5
+          done
+
+      - name: Run E2E regression suite
+        run: node tests/e2e-regression.js
+
+      - name: Upload screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-screenshots
+          path: /tmp/e2e-*.png
+          retention-days: 3

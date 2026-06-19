@@ -24,6 +24,12 @@ function check(label, condition, detail) {
 
 function listenErrors(page) {
   page.on("pageerror", e => allErrors.push(e.message));
+}  // Screenshot directory for CI artifact upload
+const SCREENSHOT_DIR = process.env.CI ? "/tmp" : null;
+
+async function screenshot(page, name) {
+  if (!SCREENSHOT_DIR) return;
+  try { await page.screenshot({ path: `${SCREENSHOT_DIR}/e2e-${name}.png`, fullPage: false }); } catch {}
 }
 
 async function run() {
@@ -55,6 +61,7 @@ async function run() {
   check("Page content populated (>5k chars)", populated, "content too short");
 
   check("Zero JS errors on load", allErrors.length === 0, allErrors.join("; "));
+  await screenshot(desktop, "desktop-load");
   console.log("");
 
   // ──────────────────────────────────────────────
@@ -348,7 +355,7 @@ async function run() {
   }
 
   check("Zero JS errors on mobile", allErrors.length === 0, allErrors.join("; "));
-  // Note: allErrors is cumulative across pages; final check ensures no errors anywhere
+  await screenshot(mobile, "mobile-load");
   await mobile.close();
   console.log("");
 
@@ -413,6 +420,7 @@ async function run() {
   check("apple-touch-icon fetchable", iconResp.ok, `status ${iconResp.status}`);
   check("Icon is image/png", iconResp.type?.includes("png"), iconResp.type);
   check("Icon file size > 50KB", iconResp.size > 50000, `${iconResp.size} bytes`);
+  await screenshot(desktop, "desktop-final");
   console.log("");
 
   await desktop.close();
