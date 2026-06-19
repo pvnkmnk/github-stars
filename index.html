@@ -907,7 +907,7 @@ function parseToolbox(text){
   const entryRe = /### (\d+)\. \[([^\]]+)\]\(([^)]+)\) ⭐([\d,]+)\n\*\*Why I starred this:\*\* ([\s\S]*?)(?=\n### |\n---|\n## |\n\n## |$)/g;
   
   for(const sec of sections){
-    const hm = sec.match(/^([\p{Emoji_Presentation}\p{Emoji}][\u200d\ufe0f]?+)\s/u);
+    const hm = sec.match(/^([\p{Emoji_Presentation}\p{Emoji}][\u200d\ufe0f]?)\s/u);
     if(!hm) continue;
     const emoji = hm[0].trim();
     const entries = [];
