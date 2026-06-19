@@ -34,7 +34,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_deploy
           publish_branch: gh-pages
-          force_orphan: true
+          force_orphan: false
           commit_message: 'deploy: auto-deploy from main'
 
       - name: Notify success
