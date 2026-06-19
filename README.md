@@ -91,6 +91,38 @@ Two GitHub Actions workflows power the repo:
 
 ---
 
+## 🧪 E2E Regression Suite
+
+Comprehensive Playwright test covering all features end-to-end — 50+ checks across 11 feature areas.
+
+```bash
+# Run against the live CDN (default)
+node tests/e2e-regression.js
+
+# Run against a local dev server
+BASE_URL=http://localhost:8080 node tests/e2e-regression.js
+```
+
+### Coverage
+
+| # | Area | What it verifies |
+|---|------|-----------------|
+| 1 | Page Load | Title, 18 categories, content populated, 0 JS errors |
+| 2 | Head Meta | Favicons (dark + light SVG), OG tags (title/desc/image/type/url), Twitter cards, meta description, manifest link, iOS meta (capable/status-bar/title/icon) |
+| 3 | Noscript | Fallback element, JAVASCRIPT REQUIRED text, hidden when JS runs |
+| 4 | Keep 10 | 10 cards, all with content, key tools present (opencode, fzf, coolify) |
+| 5 | Toolbox | Knowledge panel (opens, AFFiNE content, no fallback), Terminal panel (fzf, ripgrep) |
+| 6 | Theme | Toggle exists, dark↔light cycles, localStorage persistence |
+| 7 | Nav Pills | 18 pills, click scrolls to category, category expands |
+| 8 | Search | Input exists, filtering works, info text, clear restores all |
+| 9 | Lang Filter | Select populated, Python filter works, all rows verified, clear restores |
+| 10 | Mobile (480px) | Rank badges hidden, hero grid adapts, 0 JS errors |
+| 11 | PWA / SW | SW registered, scope correct, manifest fetchable, theme_color, standalone, maskable icon, apple-touch-icon fetchable |
+
+**Requires:** `playwright` (`npm install playwright`)
+
+---
+
 ## 🔍 Quick Search
 
 ```bash

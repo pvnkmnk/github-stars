@@ -15,7 +15,7 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
 
     steps:
       - name: Checkout repository
@@ -45,7 +45,18 @@ jobs:
         run: |
           echo "::notice::Deployed to gh-pages — live at https://pvnkmnk.github.io/github-stars/"
 
+      - name: Run E2E regression suite (post-deploy)
+        run: |
+          echo "::group::Installing Playwright"
+          npm init -y > /dev/null 2>&1
+          npm install playwright > /dev/null 2>&1
+          npx playwright install chromium > /dev/null 2>&1
+          echo "::endgroup::"
+          echo "::group::Running regression suite"
+          node tests/e2e-regression.js
+          echo "::endgroup::"
+
       - name: Notify failure
         if: failure()
         run: |
-          echo "::error::Deploy failed! Check logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          echo "::error::Deploy or validation failed! Check logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
