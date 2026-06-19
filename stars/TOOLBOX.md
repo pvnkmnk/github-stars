@@ -617,9 +617,9 @@
 
 ---
 
-## 🏆 The "If I Could Only Keep 5" List
+## 🏆 The "If I Could Only Keep 10" List
 
-If I had to rebuild from scratch with only 5 tools from these stars:
+If I had to rebuild from scratch with only 10 tools from these stars — one per major domain:
 
 | # | Repo | Category | Why |
 |---|------|----------|-----|
@@ -628,6 +628,11 @@ If I had to rebuild from scratch with only 5 tools from these stars:
 | 3 | [immich-app/immich](https://github.com/immich-app/immich) | Media | The app my family cares about |
 | 4 | [jesseduffield/lazydocker](https://github.com/jesseduffield/lazydocker) | Docker | Ops without the pain |
 | 5 | [ggml-org/llama.cpp](https://github.com/ggml-org/llama.cpp) | AI/LLM | The engine that runs everything else locally |
+| 6 | [junegunn/fzf](https://github.com/junegunn/fzf) | Terminal | Changes how you use the command line — muscle memory |
+| 7 | [supabase/supabase](https://github.com/supabase/supabase) | Databases | The open-source backend that makes projects possible |
+| 8 | [n8n-io/n8n](https://github.com/n8n-io/n8n) | Automation | Connects everything I run to everything else |
+| 9 | [dani-garcia/vaultwarden](https://github.com/dani-garcia/vaultwarden) | Security | My family's digital safety, self-hosted |
+| 10 | [codecrafters-io/build-your-own-x](https://github.com/codecrafters-io/build-your-own-x) | Dev Resources | The curriculum that taught me how things actually work |
 
 ---
 
