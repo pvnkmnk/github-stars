@@ -1,0 +1,2 @@
+# Treat all PNG images as binary — prevents git from attempting text diffs
+*.png binary
