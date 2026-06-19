@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   refresh-stars:
@@ -69,31 +68,21 @@ jobs:
             echo "No changes detected."
           else
             echo "changed=true" >> $GITHUB_OUTPUT
-            echo "Changes detected, will create PR."
+            echo "Changes detected, will push to main."
           fi
 
-      - name: Create PR with refreshed stars
+      - name: Commit and push refreshed stars
         if: steps.git-check.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v7
-        with:
-          commit-message: 'weekly: refresh stars & regenerate guides'
-          title: 'Weekly Star Refresh'
-          body: |
-            Automated weekly refresh of GitHub stars.
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "weekly: refresh stars & regenerate guides"
+          git push
 
-            **What changed:**
-            - Fetched latest stars for pvnkmnk via gh-stars
-            - New repos scoring ≥8 with clear category match auto-curated into STAR-GUIDE
-            - Remaining uncategorized repos appended to NOT-CURATED.md
-            - AGENT-GUIDE.md regenerated from STAR-GUIDE.md + DB metadata
-            - CHEATSHEET.md regenerated
-            - CSV/TXT exports updated
-          branch: weekly-star-refresh
-          delete-branch: true
-          base: ${{ github.ref_name }}
-          labels: |
-            automated
-            stars
+      - name: Trigger deploy
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          echo "::notice::Pushed to main — deploy workflow should auto-trigger at ${{ github.server_url }}/${{ github.repository }}/actions/workflows/deploy-gh-pages.yml"
 
       - name: Notify failure
         if: failure()
