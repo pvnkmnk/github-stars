@@ -230,6 +230,87 @@ header .stats span{
   color:var(--text-dim);
 }
 
+/* ─── Keep 10 Section ─── */
+.keep-wrap{
+  padding:2rem 1.5rem 1rem;
+  position:relative;
+  z-index:1;
+}
+.keep-wrap h3{
+  text-align:center;
+  color:var(--neon-yellow);
+  text-shadow:0 0 25px rgba(255,221,0,0.4);
+  margin-bottom:0.3rem;
+  font-size:1rem;
+  letter-spacing:0.1em;
+}
+.keep-wrap .keep-subtitle{
+  text-align:center;
+  color:var(--text-dim);
+  font-size:0.72rem;
+  margin-bottom:1rem;
+}
+.keep-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:0.6rem;
+  max-width:1200px;
+  margin:0 auto;
+}
+.keep-card{
+  background:var(--bg-card);
+  border:1px solid var(--border-glow);
+  border-radius:var(--radius);
+  padding:0.8rem 0.9rem;
+  transition:all 0.2s ease;
+  text-decoration:none;
+  color:inherit;
+  display:flex;
+  flex-direction:column;
+  gap:0.15rem;
+  position:relative;
+  overflow:hidden;
+}
+.keep-card:hover{
+  border-color:var(--neon-yellow);
+  box-shadow:0 0 18px rgba(255,221,0,0.2),inset 0 0 18px rgba(255,221,0,0.03);
+  transform:translateY(-2px);
+}
+.k-rank{
+  position:absolute;
+  top:3px;
+  right:7px;
+  font-family:'Orbitron',sans-serif;
+  font-size:1.1rem;
+  font-weight:900;
+  color:var(--neon-yellow);
+  opacity:0.15;
+}
+.k-emoji{font-size:1.3rem}
+.k-name{
+  color:var(--text-bright);
+  font-weight:700;
+  font-size:0.88rem;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.k-cat{
+  font-family:'Orbitron',sans-serif;
+  font-size:0.62rem;
+  color:var(--neon-cyan);
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+}
+.k-why{
+  font-size:0.7rem;
+  color:var(--text-body);
+  line-height:1.45;
+  margin-top:0.2rem;
+  opacity:0.85;
+}
+[data-theme="light"] .keep-card:hover{box-shadow:0 2px 12px rgba(0,0,0,0.08);transform:translateY(-2px)}
+
 /* ─── Search ─── */
 .search-wrap{
   padding:1.5rem;
@@ -584,6 +665,7 @@ footer a:hover{text-shadow:0 0 10px rgba(0,240,255,0.5)}
 </header>
 
 <div class="hero-repos" id="hero"><div class="loading neon-flicker">SYNCHRONIZING<span class="bar"></span></div></div>
+<div class="keep-wrap" id="keep"></div>
 <div class="search-wrap">
   <label for="search" class="sr-only">Search tools</label>
   <input type="text" class="search-input" id="search" aria-label="Search tools by name, language, or description" placeholder="> search tools, languages, descriptions..." autocomplete="off">
@@ -711,6 +793,59 @@ function renderHero(){
     </a>`).join('')+
     '</div>';
 }
+
+// ─── Keep 10 ───
+let keep = [];
+
+async function fetchKeep(){
+  try{
+    const resp = await fetch('stars/TOOLBOX.md');
+    if(!resp.ok) return;
+    const text = await resp.text();
+    parseKeep(text);
+    renderKeep();
+  }catch(e){/* silently degrade */}
+}
+
+function parseKeep(text){
+  keep = [];
+  // Find the 🏆 table section
+  const tableRe = /\|\s*(\d+)\s*\|\s*\[([^\]]+)\]\(([^)]+)\)\s*\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|/g;
+  let match;
+  while((match = tableRe.exec(text)) !== null){
+    keep.push({
+      rank: match[1],
+      name: match[2],
+      url: match[3],
+      category: match[4].trim(),
+      why: match[5].trim()
+    });
+  }
+}
+
+function renderKeep(){
+  if(!keep.length) return;
+  // Category name → emoji map (short names from TOOLBOX table)
+  const katMap = {
+    'Agentic Dev':'🤖','Homelab':'📡','Media':'🎵','Docker':'🐳',
+    'AI/LLM':'🧠','Terminal':'⌨️','Databases':'🗄️','Automation':'⚡',
+    'Security':'🔒','Dev Resources':'💻'
+  };
+  const wrap = document.getElementById('keep');
+  wrap.innerHTML = 
+    '<h3>🏆 IF I COULD ONLY KEEP 10</h3>'+
+    '<p class="keep-subtitle">one standout from each major domain</p>'+
+    '<div class="keep-grid">'+
+    keep.map(k=>`<a class="keep-card" href="${escHtml(k.url)}" target="_blank">
+      <span class="k-rank">${k.rank}</span>
+      <span class="k-emoji">${katMap[k.category]||'⭐'}</span>
+      <span class="k-name">${escHtml(k.name)}</span>
+      <span class="k-cat">${escHtml(k.category)}</span>
+      <span class="k-why">${escHtml(k.why)}</span>
+    </a>`).join('')+
+    '</div>';
+}
+// ─── End Keep 10
 
 function renderNav(){
   const nav = document.getElementById('nav-pills');
@@ -933,6 +1068,7 @@ function escHtml(s){
   }
 })();
 loadData();
+fetchKeep();
 
 // Keyboard shortcut: / to focus search
 document.addEventListener('keydown',e=>{
