@@ -1,0 +1,17 @@
+{
+  "name": "pvnkmnk ★ STAR//GUIDE",
+  "short_name": "STAR//GUIDE",
+  "description": "Curated GitHub stars — a cyberpunk guide to the best open-source tools",
+  "start_url": "/github-stars/",
+  "display": "standalone",
+  "theme_color": "#06060e",
+  "background_color": "#06060e",
+  "icons": [
+    {
+      "src": "/github-stars/og-preview.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

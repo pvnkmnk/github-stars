@@ -26,6 +26,7 @@ jobs:
           mkdir -p _deploy
           cp index.html _deploy/
           cp og-preview.png _deploy/ 2>/dev/null || true
+          cp site.webmanifest _deploy/
           cp -r stars/ _deploy/
           touch _deploy/.nojekyll
 
