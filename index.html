@@ -1055,7 +1055,7 @@ function renderCategories(){
     btn.addEventListener('click',e=>{
       e.stopPropagation();
       const emoji = btn.dataset.emoji;
-      const panel = btn.closest('.cat-body').querySelector('.toolbox-panel');
+      const panel = btn.closest('.category').querySelector('.cat-body .toolbox-panel');
       const isOpen = panel.classList.contains('show');
       if(isOpen){
         panel.classList.remove('show');
