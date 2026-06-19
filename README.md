@@ -85,7 +85,9 @@ git add stars/ && git commit -m "chore: weekly star refresh" && git push
 
 ### CI/CD
 
-A GitHub Actions workflow (`.github/workflows/update-stars.yml`) runs the pipeline automatically on a schedule.
+Two GitHub Actions workflows power the repo:
+- **[update-stars.yml](.github/workflows/update-stars.yml)** — fetches stars, regenerates guides, and pushes to `main` on a weekly schedule
+- **[deploy-gh-pages.yml](.github/workflows/deploy-gh-pages.yml)** — deploys `index.html` + `stars/` to `gh-pages` on every push to `main`
 
 ---
 
