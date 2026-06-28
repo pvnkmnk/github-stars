@@ -970,6 +970,7 @@
 | [mui/mui-x](https://github.com/mui/mui-x) | 5,740 | TypeScript | Build complex data-rich apps with advanced React components |
 | [dembrandt/dembrandt](https://github.com/dembrandt/dembrandt) | 1,942 | TypeScript | Extract any website's design system into tokens in seconds |
 
+| [N-Zik-Group/N-Zik](https://github.com/N-Zik-Group/N-Zik) | 129 | Kotlin | A multilingual YouTube Music frontend for Android, focused on performance, UI/UX refinements, feature expansion, and lon | 🆕 |
 | [umami-software/umami](https://github.com/umami-software/umami) | 37,219 | TypeScript | Umami is a modern, privacy-focused analytics platform. An open-source alternative to Google Analytics, Mixpanel and Ampl | 🆕 |
 | [vercel-labs/dev3000](https://github.com/vercel-labs/dev3000) | 1,531 | TypeScript | Captures your web app's complete development timeline - server logs, browser events, console messages, network requests, | 🆕 |
 | [NeoApplications/Neo-Store](https://github.com/NeoApplications/Neo-Store) | 4,733 | Kotlin | An F-Droid client with modern UI and an arsenal of extra features. | 🆕 |
@@ -1152,6 +1153,7 @@
 | [tjackenpacken/taskbar-groups](https://github.com/tjackenpacken/taskbar-groups) | 2,747 | C# | Organize the Windows taskbar through groups |
 | [lukeyou05/tacky-borders](https://github.com/lukeyou05/tacky-borders) | 504 | Rust | Customizable borders for Windows 11/10 |
 
+| [TranslucentTB/TranslucentTB](https://github.com/TranslucentTB/TranslucentTB) | 19,779 | C++ | A lightweight utility that makes the Windows taskbar translucent/transparent. | 🆕 |
 | [jiripolasek/ErrorsAndCodesExtension](https://github.com/jiripolasek/ErrorsAndCodesExtension) | 5 | C# | Quickly access details about error codes and messages from PowerToys Command Palette. Supports NTSTATUS and HRESULT erro | 🆕 |
 | [ThioJoe/Resources-From-Videos](https://github.com/ThioJoe/Resources-From-Videos) | 63 | PowerShell | Stuff I've shown or mentioned in videos, from scripts to random code snippets | 🆕 |
 | [johansan/pixel-perfect-image](https://github.com/johansan/pixel-perfect-image) | 85 | TypeScript | Pixel perfect 100% image resizing, copy to clipboard, show image in Finder/Explorer, edit image in external editor, and  | 🆕 |
