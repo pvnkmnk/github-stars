@@ -485,6 +485,7 @@
 | [hiyouga/LlamaFactory](https://github.com/hiyouga/LlamaFactory) | 72,279 | Python | Unified efficient fine-tuning of 100+ LLMs & VLMs | ⭐ [Pick](#-aillm-top-10) |
 | [AlexsJones/llmfit](https://github.com/AlexsJones/llmfit) | 28,237 | Rust | Find what LLM runs on your hardware — hundreds of models & providers | |
 
+| [Light-Heart-Labs/ODS](https://github.com/Light-Heart-Labs/ODS) | 2,510 | Shell | Turn your PC, Mac, or Linux box into an AI server.  LLM inference, chat UI, voice, agents, workflows, RAG, and image gen | 🆕 |
 | [tinyhumansai/openhuman](https://github.com/tinyhumansai/openhuman) | 32,590 | Rust | Your Personal AI super intelligence. Private, Simple and extremely powerful. | 🆕 |
 | [ItzCrazyKns/Vane](https://github.com/ItzCrazyKns/Vane) | 35,349 | TypeScript | Vane is an AI-powered answering engine. | 🆕 |
 | [facebookresearch/faiss](https://github.com/facebookresearch/faiss) | 40,327 | C++ | A library for efficient similarity search and clustering of dense vectors. | 🆕 |

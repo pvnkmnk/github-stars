@@ -56,3 +56,7 @@
 - [derekbar90/opencode-conductor](https://github.com/derekbar90/opencode-conductor) — ⭐115 (TypeScript) 
 - [est4ever/AcouLM](https://github.com/est4ever/AcouLM) — ⭐11 (C++) Local AI accelerator
 - [fyaic/Understory-Obsidian-Plugin](https://github.com/fyaic/Understory-Obsidian-Plugin) — ⭐1 (JavaScript) A connection-sustain plugin: find connections and conflicts, update them over time
+
+## 🆕 New Stars — 2026-07-05 02:50 UTC
+
+- [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) — ⭐77,709 (Python) AI coding assistant skill (Claude Code, Codex, OpenCode, Cursor, Gemini CLI, and more). Turn any folder of code, SQL sch
