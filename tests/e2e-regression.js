@@ -424,7 +424,56 @@ async function run() {
   await screenshot(desktop, "desktop-final");
   console.log("");
 
-  await desktop.close();
+  // ──────────────────────────────────────────────
+  // 12. VISUAL POLISH — Sticky Header + Card Hover
+  // ──────────────────────────────────────────────
+  console.log("▶ VISUAL POLISH");
+
+  // Sticky header: verify position, top, backdrop-filter
+  const headerStyles = await desktop.evaluate(() => {
+    const h = document.querySelector("header");
+    if (!h) return null;
+    const s = getComputedStyle(h);
+    return { position: s.position, top: s.top, backdropFilter: s.backdropFilter };
+  });
+  check(`Header position is ${CONFIG.visual.stickyHeader.position}`, headerStyles?.position === CONFIG.visual.stickyHeader.position, headerStyles?.position);
+  check(`Header top is ${CONFIG.visual.stickyHeader.top}`, headerStyles?.top === CONFIG.visual.stickyHeader.top, headerStyles?.top);
+  check("Header has backdrop-filter blur", headerStyles?.backdropFilter?.includes("blur"), headerStyles?.backdropFilter);
+
+  // Card hover lift: check that :hover rules contain translateY(-1px) via cssText
+  const hoverLift = await desktop.evaluate((translateY) => {
+    for (const sheet of document.styleSheets) {
+      try {
+        for (const rule of sheet.cssRules) {
+          if (rule.selectorText && (rule.selectorText.includes(".hero-card:hover") || rule.selectorText.includes(".keep-card:hover"))) {
+            if (rule.cssText.includes(translateY)) return rule.selectorText;
+          }
+        }
+      } catch(e) { /* cross-origin sheet */ }
+    }
+    return null;
+  }, CONFIG.visual.cardHoverLift.translateY);
+  check(`Card hover has ${CONFIG.visual.cardHoverLift.translateY}`, !!hoverLift, hoverLift || "not found in stylesheets");
+
+  // Button :active press feedback: check for scale in :active rules via cssText
+  const pressRule = await desktop.evaluate(() => {
+    for (const sheet of document.styleSheets) {
+      try {
+        for (const rule of sheet.cssRules) {
+          if (rule.selectorText && rule.selectorText.includes(":active") && rule.cssText.includes("scale")) {
+            return rule.selectorText;
+          }
+        }
+      } catch(e) {}
+    }
+    return null;
+  });
+  check("Button :active press feedback (scale) present", !!pressRule, pressRule || "not found");
+
+  await screenshot(desktop, "visual-polish");
+  console.log("");
+
+await desktop.close();
   await browser.close();
 
   // ──────────────────────────────────────────────

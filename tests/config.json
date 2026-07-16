@@ -50,5 +50,16 @@
   "css": {
     "bodyBgVar": "--ink"
   },
-  "screenshotDir": "/tmp"
+  "screenshotDir": "/tmp",
+  "visual": {
+    "stickyHeader": {
+      "position": "sticky",
+      "top": "0px",
+      "backdropFilter": "blur(12px)"
+    },
+    "cardHoverLift": {
+      "property": "transform",
+      "translateY": "translateY(-1px)"
+    }
+  }
 }
