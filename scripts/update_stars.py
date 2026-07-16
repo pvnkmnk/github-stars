@@ -14,7 +14,7 @@ Usage:
     python3 scripts/update_stars.py --fetch-only  # only fetch, no regeneration
     python3 scripts/update_stars.py --suggest-only  # only categorization, no file changes
     python3 scripts/update_stars.py --auto-curate       # auto-insert high-score repos into STAR-GUIDE
-    python3 scripts/update_stars.py --auto-curate 10    # custom threshold (default 8)
+    python3 scripts/update_stars.py --auto-curate 10    # custom threshold (default 7)
     python3 scripts/update_stars.py --dry-run            # show what would happen, no file changes
     python3 scripts/update_stars.py --verbose            # debug-level logging
 """
@@ -321,7 +321,7 @@ def insert_repo_into_section(content, emoji, stars, full_name, lang, desc):
     return new_content
 
 
-def auto_curate_repos(new_repos, star_guide_path, threshold=8, not_curated_path=None,
+def auto_curate_repos(new_repos, star_guide_path, threshold=7, not_curated_path=None,
                       dry_run=False):
     """
     Auto-curate repos that score above threshold in a single clear category.
@@ -767,8 +767,8 @@ def main():
     parser.add_argument("--fetch-only", action="store_true", help="Only fetch, no regeneration")
     parser.add_argument("--suggest-only", action="store_true",
                         help="Only generate categorization suggestions from new repos (no file regeneration)")
-    parser.add_argument("--auto-curate", nargs="?", const=8, type=int, metavar="THRESHOLD",
-                        help="Auto-insert repos scoring >= THRESHOLD (default 8) with clear category match into STAR-GUIDE")
+    parser.add_argument("--auto-curate", nargs="?", const=7, type=int, metavar="THRESHOLD",
+                        help="Auto-insert repos scoring >= THRESHOLD (default 7) with clear category match into STAR-GUIDE")
     parser.add_argument("--dry-run", action="store_true",
                         help="Show what would happen without modifying any files")
     parser.add_argument("--verbose", action="store_true",

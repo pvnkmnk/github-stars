@@ -39,7 +39,7 @@ class TestThresholdLogic:
         assert "Infrastructure" in autos[0][1] or "Homelab" in autos[0][1]
     def test_low_score_not_auto_curated(self, tmp_star_guide):
         repos = [(10, "user/xqzzy-repo", "Unknown", "No keywords matched here")]
-        autos, remaining, modified = auto_curate_repos(repos, str(tmp_star_guide), threshold=8, not_curated_path=None, dry_run=False)
+        autos, remaining, modified = auto_curate_repos(repos, str(tmp_star_guide), threshold=7, not_curated_path=None, dry_run=False)
         assert len(autos) == 0
         assert len(remaining) == 1
         assert modified is False

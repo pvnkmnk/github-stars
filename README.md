@@ -81,7 +81,7 @@ git add stars/ && git commit -m "chore: weekly star refresh" && git push
 | `--no-fetch` | Skip star fetch (use cached DB) |
 | `--fetch-only` | Only fetch, no regeneration |
 | `--suggest-only` | Only generate categorization suggestions, no file changes |
-| `--auto-curate N` | Auto-insert repos scoring ≥ N with clear category match into STAR-GUIDE (default: 8) |
+| `--auto-curate N` | Auto-insert repos scoring ≥ N with clear category match into STAR-GUIDE (default: 7) |
 
 ### CI/CD
 
