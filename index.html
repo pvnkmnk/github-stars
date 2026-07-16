@@ -86,16 +86,19 @@ h3{font-size:0.875rem;font-weight:600;color:var(--text-primary);letter-spacing:0
   cursor:pointer;transition:all 0.15s;z-index:2;
   display:flex;align-items:center;gap:0.35rem;
 }
-.theme-toggle:hover{border-color:var(--border-hover);color:var(--text-primary)}
+.theme-toggle:hover{border-color:var(--border-hover);color:var(--text-primary)}.theme-toggle:active,.nav-pill:active,.sort-btn:active,.lang-clear:active,.toolbox-toggle:active{transform:scale(0.96)}
 [data-theme="dark"] .theme-toggle .light-icon{display:none}
 [data-theme="light"] .theme-toggle .dark-icon{display:none}
 
 /* ─── Layout ─── */
 .container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
 header{
-  padding:3.5rem 1.5rem 2rem;text-align:center;
+  position:sticky;top:0;z-index:10;
+  background:rgba(7,10,11,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  padding:2rem 1.5rem 1.25rem;text-align:center;
   border-bottom:1px solid var(--border);
 }
+[data-theme="light"] header{background:rgba(245,245,247,0.85)}
 header .subtitle{color:var(--accent);font-size:0.9rem;font-weight:500;margin-top:0.5rem}
 header .stats{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1.25rem;font-size:0.8rem}
 header .stats span{
@@ -112,7 +115,7 @@ header .stats span{
   padding:0.85rem 1rem;cursor:pointer;transition:all 0.15s;
   text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:0.15rem;
 }
-.hero-card:hover{border-color:var(--accent);background:var(--surface)}
+.hero-card:hover{border-color:var(--accent);background:var(--surface);transform:translateY(-1px)}
 .hero-card .repo-name{color:var(--text-primary);font-size:0.875rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hero-card .repo-stars{color:var(--accent);font-size:0.75rem;font-weight:500}
 .hero-card .repo-cat{font-size:0.7rem;color:var(--text-muted)}
@@ -127,7 +130,7 @@ header .stats span{
   padding:0.75rem 0.85rem;transition:all 0.15s;
   text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:0.1rem;position:relative;
 }
-.keep-card:hover{border-color:var(--accent);background:var(--surface)}
+.keep-card:hover{border-color:var(--accent);background:var(--surface);transform:translateY(-1px)}
 .k-rank{position:absolute;top:4px;right:8px;font-size:0.9rem;font-weight:700;color:var(--text-muted);opacity:0.3}
 .k-emoji{font-size:1.15rem}
 .k-name{color:var(--text-primary);font-weight:600;font-size:0.83rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -263,12 +266,12 @@ footer a:hover{color:var(--text-primary)}
   content:'';position:absolute;inset:0;background:var(--accent);
   animation:load 1.5s ease-in-out infinite;width:30%;border-radius:2px;
 }
-@keyframes load{0%{transform:translateX(-100%)}100%{transform:translateX(400%)}}
+@keyframes load{0%{transform:translateX(-100%);opacity:0.4}50%{opacity:1}100%{transform:translateX(400%);opacity:0.4}}
 
 /* ─── Responsive ─── */
 @media(max-width:768px){
   h1{font-size:1.5rem}
-  header{padding:2.5rem 1rem 1.5rem}
+  header{padding:1.5rem 1rem 1rem}
   .hero-grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
   .tool-table{font-size:0.7rem}
   .tool-table th,.tool-table td{padding:0.3rem 0.35rem}
