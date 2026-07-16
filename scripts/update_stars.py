@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Weekly star refresh pipeline:
-1. Fetch latest stars via gh-stars
+1. Fetch latest stars via gh api --paginate (zero-dependency, cross-platform)
 2. Find repos in DB not yet in STAR-GUIDE.md → append to NOT-CURATED.md
 3. Generate smart categorization suggestions for new repos
 4. Regenerate AGENT-GUIDE.md from STAR-GUIDE.md sections + DB metadata
@@ -10,7 +10,7 @@ Weekly star refresh pipeline:
 
 Usage:
     python3 scripts/update_stars.py          # from project root
-    python3 scripts/update_stars.py --no-fetch  # skip gh-stars fetch
+    python3 scripts/update_stars.py --no-fetch  # skip star fetch
     python3 scripts/update_stars.py --fetch-only  # only fetch, no regeneration
     python3 scripts/update_stars.py --suggest-only  # only categorization, no file changes
     python3 scripts/update_stars.py --auto-curate       # auto-insert high-score repos into STAR-GUIDE
@@ -22,6 +22,7 @@ Usage:
 import logging
 import re
 import os
+import json
 import sys
 import sqlite3
 import subprocess
@@ -434,7 +435,7 @@ def get_db_connection():
     """Connect to SQLite stars database."""
     if not CACHE_DB.exists():
         print(f"Error: Database not found at {CACHE_DB}")
-        print("Run: gh-stars fetch {GITHUB_USER}")
+        print(f"Run: python3 scripts/update_stars.py --fetch-only")
         sys.exit(1)
     conn = sqlite3.connect(str(CACHE_DB))
     conn.row_factory = sqlite3.Row
@@ -688,28 +689,75 @@ def export_raw_files(conn):
 # ─── Main Pipeline ────────────────────────────────────────────────
 
 def fetch_stars():
-    """Run gh-stars fetch to refresh the database."""
-    print("Fetching latest stars via gh-stars...")
-    
+    """Fetch latest stars via gh api --paginate (no Rust dependency, works cross-platform)."""
+    print("Fetching latest stars via gh api...")
+
     # Ensure cache dir exists
     CACHE_DB.parent.mkdir(parents=True, exist_ok=True)
-    
+
+    # Fetch all starred repos as TSV (one line per repo, tab-separated)
+    # @tsv handles escaping of tabs/newlines within field values
     result = subprocess.run(
-        ["gh-stars", "fetch", GITHUB_USER],
-        capture_output=True,
-        text=True,
-        timeout=300,  # 5 minutes for large star collections
+        ["gh", "api", "--paginate", f"/users/{GITHUB_USER}/starred",
+         "--jq", '.[] | [.full_name, .stargazers_count, (.language // "-"), '
+                 '(.description // ""), .html_url, .created_at, .updated_at] | @tsv'],
+        capture_output=True, text=True, timeout=300,
     )
-    
+
     if result.returncode != 0:
-        print(f"Warning: gh-stars fetch returned {result.returncode}")
-        print(result.stderr[-500:] if result.stderr else "")
-    else:
-        print(f"  → Fetch complete")
-        # Print last few lines of output for status
-        lines = result.stdout.strip().split('\n')
-        for line in lines[-3:]:
-            print(f"    {line}")
+        print(f"Error: gh api fetch failed (exit code {result.returncode})")
+        msg = result.stderr[-800:] if result.stderr else "(no stderr)"
+        print(msg)
+        sys.exit(1)
+
+    # Parse tab-separated output (one line per repo, 7 fields per line)
+    repos = []
+    for line in result.stdout.strip().split("\n"):
+        line = line.strip()
+        if not line:
+            continue
+        fields = line.split("\t")
+        if len(fields) < 7:
+            print(f"Warning: skipping malformed entry ({len(fields)} fields): {line[:120]}")
+            continue
+        full_name, stars_str, lang, desc, html_url, created_at, updated_at = fields[:7]
+        try:
+            stars = int(stars_str)
+        except ValueError:
+            stars = 0
+        repos.append((full_name, stars, lang or "-", desc or "",
+                      html_url or f"https://github.com/{full_name}",
+                      created_at or "", updated_at or "", GITHUB_USER))
+
+    if not repos:
+        print("Error: no stars fetched. Is gh CLI authenticated? Run: gh auth status")
+        sys.exit(1)
+
+    # Create/replace SQLite database
+    conn = sqlite3.connect(str(CACHE_DB))
+    conn.execute("DROP TABLE IF EXISTS repos")
+    conn.execute("""
+        CREATE TABLE repos (
+            full_name TEXT PRIMARY KEY,
+            stars INTEGER,
+            language TEXT,
+            description TEXT,
+            html_url TEXT,
+            created_at TEXT,
+            updated_at TEXT,
+            username TEXT
+        )
+    """)
+    conn.executemany(
+        "INSERT OR REPLACE INTO repos "
+        "(full_name, stars, language, description, html_url, created_at, updated_at, username) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        repos,
+    )
+    conn.commit()
+    conn.close()
+
+    print(f"  → Fetch complete: {len(repos)} stars saved to {CACHE_DB}")
 
 
 def main():

@@ -22,44 +22,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Rust (for gh-stars)
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Cache Rust build artifacts
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cargo/bin/gh-stars
-            ~/.cargo/registry
-            ~/.cargo/git
-          key: gh-stars-${{ runner.os }}-v0.1.11
-
-      - name: Install gh-stars
-        run: |
-          if ! command -v gh-stars &> /dev/null; then
-            git clone https://github.com/prabirshrestha/gh-stars /tmp/gh-stars-build
-            cd /tmp/gh-stars-build
-            cargo install --path . --root ~/.cargo
-            echo "$HOME/.cargo/bin" >> $GITHUB_PATH
-          fi
-
-      - name: Restore stars database cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/gh-stars
-          key: stars-db-${{ runner.os }}
-          restore-keys: |
-            stars-db-${{ runner.os }}
-
-      - name: Fetch latest stars
+      - name: Fetch latest stars (gh api)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          mkdir -p ~/.cache/gh-stars
-          gh-stars fetch pvnkmnk
+          python3 scripts/update_stars.py --fetch-only
         timeout-minutes: 10
 
-      - name: Run regeneration script
+      - name: Run regeneration + auto-curation
         run: |
           python3 scripts/update_stars.py --no-fetch --auto-curate
 
