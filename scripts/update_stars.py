@@ -15,8 +15,11 @@ Usage:
     python3 scripts/update_stars.py --suggest-only  # only categorization, no file changes
     python3 scripts/update_stars.py --auto-curate       # auto-insert high-score repos into STAR-GUIDE
     python3 scripts/update_stars.py --auto-curate 10    # custom threshold (default 8)
+    python3 scripts/update_stars.py --dry-run            # show what would happen, no file changes
+    python3 scripts/update_stars.py --verbose            # debug-level logging
 """
 
+import logging
 import re
 import os
 import sys
@@ -67,133 +70,11 @@ PART_II_HEADERS = [
 
 # ─── Smart Categorization ─────────────────────────────────────────
 
-# Category keywords: (emoji, category_name, [strong_keywords], [weak_keywords])
-# strong = exact word match (weight 3), weak = substring match (weight 1)
-CATEGORY_KEYWORDS = [
-    ("📡", "Homelab Infrastructure",
-     ["self-host", "homelab", "selfhost", "self-hosted", "selfhosted",
-      "home-server", "PaaS", "reverse-proxy", "wireguard", "tailscale",
-      "proxmox", "ansible", "terraform", "coolify", "unraid",
-      "port-forward", "dyndns", "home-assistant", "homeassistant",
-      "esphome", "zigbee", "zwave"],
-     ["dashboard", "server", "hosting", "infrastructure", "vpn",
-      "proxy", "network", "monitoring", "docker-compose", "pi-hole",
-      "pihole", "home", "private-cloud", "domains", "cloudflare",
-      "vercel", "heroku", "netlify"]),
-
-    ("🤖", "Agentic Dev Tools",
-     ["agentic", "coding-agent", "AI-agent", "LLM-agent", "openai-codex",
-      "claude-code", "opencode", "gemini-cli", "cursor-ai", "codex-cli",
-      "MCP-server", "agent-memory", "agent-skills", "agent-harness",
-      "coding-assistant", "superpowers", "aider"],
-     ["agent", "MCP", "skills", "coding", "LLM", "AI", "Claude", "Codex",
-      "Gemini", "harness", "memory", "context", "subagent", "orchestrat",
-      "prompt", "sandbox"]),
-
-    ("🎵", "Self-Hosted Media",
-     ["music", "audio", "media-stream", "jellyfin", "plex", "emby",
-      "navidrome", "subsonic", "sonarr", "radarr", "lidarr", "beets",
-      "soulseek", "picard", "musicbrainz", "immich", "gonic",
-      "music-library", "music-player", "music-server"],
-     ["streaming", "player", "playback", "lyrics", "tagger", "library",
-      "photo", "video", "media", "mpd", "spotify", "tidal", "deezer",
-      "youtube-music", "flac", "mp3", "lossless", "iptv"]),
-
-    ("🐳", "Docker & Container Management",
-     ["docker", "docker-compose", "container", "kubernetes", "k8s",
-      "podman", "dockerfile", "docker-swarm", "containerize"],
-     ["compose", "orchestrat", "swarm", "devpod", "codespace",
-      "container-registry", "registry"]),
-
-    ("🧠", "AI / LLM Tools",
-     ["LLM", "large-language-model", "GPT", "transformer", "inference",
-      "fine-tuning", "fine-tune", "RAG",
-      "embedding", "ollama", "llama.cpp", "local-ai", "langchain",
-      "huggingface", "stable-diffusion", "whisper", "neural-network",
-      "deep-learning", "machine-learning", "openai-api",
-      "computer-vision"],
-     ["model", "AI", "artificial-intelligence", "semantic-search",
-      "tokenizer", "NLP", "speech-recognition", "text-to-speech",
-      "TTS", "STT", "generative", "prompt-engineering"]),
-
-    ("🗄️", "Databases & Storage",
-     ["database", "postgres", "postgresql", "mysql", "mariadb", "sqlite",
-      "mongodb", "redis", "vector-db", "vector-database", "timeseries",
-      "graph-database", "key-value", "object-storage", "S3",
-      "backup", "qdrant", "milvus", "supabase", "pocketbase"],
-     ["SQL", "NoSQL", "storage", "query", "cache", "index",
-      "data-warehouse", "ETL", "data-lake"]),
-
-    ("🔒", "Security & Authentication",
-     ["security", "authentication", "authorization", "OAuth", "OIDC",
-      "SSO", "single-sign-on", "firewall", "vulnerability", "pentest",
-      "reverse-engineering", "ghidra", "gitleaks", "secret-scan",
-      "encrypt", "password-manager", "WAF", "zero-trust"],
-     ["auth", "vpn", "scan", "secret", "password", "2FA", "MFA",
-      "intrusion", "detection", "malware", "exploit", "harden"]),
-
-    ("⚡", "Automation & Workflows",
-     ["workflow", "automation", "CI/CD", "CI", "CD", "pipeline",
-      "n8n", "ansible", "terraform", "deployment", "GitHub-Actions",
-      "Jenkins", "scheduler", "task-runner"],
-     ["automate", "scripting", "scheduling", "github-actions",
-      "gitlab-ci", "jenkins", "operat", "devops", "orchestrat"]),
-
-    ("💻", "Dev Tools & Languages",
-     ["programming", "framework", "compiler", "interpreter", "package-manager",
-      "formatter", "linter", "testing", "API", "REST", "GraphQL",
-      "static-site-generator", "web-framework", "tailwind", "playwright",
-      "free-programming-books", "build-your-own-x", "bundler", "runtime",
-      "javascript-runtime", "task-runner"],
-     ["language", "library", "toolkit", "SDK", "template", "boilerplate",
-      "curriculum", "tutorial", "algorithm", "course", "cheat-sheet"]),
-
-    ("⌨️", "Terminal, CLI & Shell",
-     ["terminal", "CLI", "TUI", "command-line", "shell", "zsh", "bash",
-      "neovim", "nvim", "vim", "tmux", "multiplexer", "fuzzy-finder",
-      "fzf", "zoxide", "alacritty", "file-manager", "yazi"],
-     ["fuzzy", "prompt", "editor", "emulator", "console", "ncurses",
-      "readline", "zellij", "wezterm", "cheat"]),
-
-    ("📝", "Knowledge Management & PKM",
-     ["knowledge", "PKM", "obsidian", "note-taking", "note-app",
-      "second-brain", "wiki", "personal-knowledge", "markdown-notes",
-      "notebook", "AFFiNE", "joplin"],
-     ["note", "vault", "canvas", "mind-map", "knowledge-base",
-      "digital-garden", "journal", "logseq", "roam"]),
-
-    ("🌐", "Web & Frontend",
-     ["web", "frontend", "UI", "UX", "design-system", "React", "Vue",
-      "Svelte", "CSS", "HTML", "component-library", "web-app",
-      "browser-extension", "website", "email-template", "landing-page",
-      "shadcn", "mui", "tailwind"],
-     ["design", "template", "component", "interface", "responsive",
-      "chrome-extension", "email", "landing", "analytics"]),
-
-    ("💬", "Chat & Messaging",
-     ["chat", "messaging", "messenger", "Discord", "Telegram", "Slack",
-      "Signal", "Matrix", "WhatsApp", "IRC", "communication"],
-     ["message", "bot", "webhook", "real-time", "presence"]),
-
-    ("📄", "Docs & Blog",
-     ["documentation", "docs", "blog", "static-site", "Hugo", "mkdocs",
-      "writing", "publish", "SSG"],
-     ["markdown", "content", "article", "guide", "tutorial", "readme"]),
-
-    ("📱", "Mobile",
-     ["android", "iOS", "mobile", "app", "iphone", "ipad",
-      "flutter", "kotlin", "swift", "termux", "revanced",
-      "APK", "phone"],
-     ["tablet", "wearable", "smartphone", "mobile-app", "play-store",
-      "app-store"]),
-
-    ("🪟", "Windows",
-     ["windows", "win32", "PowerShell", "taskbar", "explorer",
-      "winget", "WSL", "win11", "win10", "desktop-enhance",
-      "explorer-patcher", "seelen-ui", "everything-toolbar"],
-     ["desktop", "WinUI", "registry", ".msi", "chocolatey", "scoop",
-      "system-tray", "start-menu"]),
-]
+# Category keywords loaded from stars/categories.json via the categories module.
+# To add/edit keywords, edit categories.json directly.
+# strong = exact token match (weight 4), weak = substring match (weight 1)
+# phrases = multi-token phrase match (weight 3) - used by score_repo_for_category
+from categories import CATEGORY_KEYWORDS_WITH_PHRASES
 
 
 def tokenize(text):
@@ -210,7 +91,8 @@ def tokenize(text):
     return tokens
 
 
-def score_repo_for_category(full_name, lang, desc, strong_keywords, weak_keywords):
+def score_repo_for_category(full_name, lang, desc, strong_keywords, weak_keywords,
+                             phrases=None, stars=0):
     """
     Score a repo against a category's keywords.
     Returns integer score. Higher = better match.
@@ -248,6 +130,19 @@ def score_repo_for_category(full_name, lang, desc, strong_keywords, weak_keyword
         elif kw_lower in all_text:
             score += 0.5
     
+    # Multi-token phrase matching (weight 3 per phrase)
+    if phrases:
+        for phrase in phrases:
+            phrase_lower = phrase.lower()
+            if phrase_lower in all_text:
+                score += 3
+                if phrase_lower in name_part.lower():
+                    score += 1
+
+    # Star-based popularity bonus: +1 per 20k stars (caps at +5)
+    if stars and stars > 0:
+        score += min(int(stars / 20_000), 5)
+
     return int(score)
 
 
@@ -260,8 +155,9 @@ def suggest_categories(new_repos):
     results = []
     for stars, full_name, lang, desc in new_repos:
         cat_scores = []
-        for emoji, cat_name, strong_kw, weak_kw in CATEGORY_KEYWORDS:
-            score = score_repo_for_category(full_name, lang, desc, strong_kw, weak_kw)
+        for emoji, cat_name, strong_kw, weak_kw, phrases_kw in CATEGORY_KEYWORDS_WITH_PHRASES:
+            score = score_repo_for_category(full_name, lang, desc, strong_kw, weak_kw,
+                                             phrases=phrases_kw, stars=stars)
             if score > 0:
                 cat_scores.append((emoji, cat_name, score))
         
@@ -424,14 +320,16 @@ def insert_repo_into_section(content, emoji, stars, full_name, lang, desc):
     return new_content
 
 
-def auto_curate_repos(new_repos, star_guide_path, threshold=8, not_curated_path=None):
+def auto_curate_repos(new_repos, star_guide_path, threshold=8, not_curated_path=None,
+                      dry_run=False):
     """
     Auto-curate repos that score above threshold in a single clear category.
 
     Rules:
     - Top score must be >= threshold
-    - If multiple categories matched, top score must be >= 1.5x second-best
-    - If only one category matched, the gap check is trivially satisfied
+    - If only one category matched, auto-curate (no ambiguity)
+    - If top score >= threshold+4, auto-curate regardless of gap (very high confidence)
+    - Otherwise, top score must be >= 1.3x second-best (clear winner)
 
     Returns: (auto_curated, remaining, modified) where:
       - auto_curated: [(emoji, cat_name, score, stars, full_name, lang, desc), ...]
@@ -454,8 +352,12 @@ def auto_curate_repos(new_repos, star_guide_path, threshold=8, not_curated_path=
         top_emoji, top_cat, top_score = cats[0]
         second_score = cats[1][2] if len(cats) > 1 else 0
 
-        if top_score >= threshold and top_score >= 1.5 * second_score:
-            autos.append((top_emoji, top_cat, top_score, stars, full_name, lang, desc))
+        if top_score >= threshold:
+            # Floating gap: higher confidence -> looser gap needed
+            if second_score == 0 or top_score >= threshold + 4 or top_score >= 1.3 * second_score:
+                autos.append((top_emoji, top_cat, top_score, stars, full_name, lang, desc))
+            else:
+                remaining.append((stars, full_name, lang, desc))
         else:
             remaining.append((stars, full_name, lang, desc))
 
@@ -475,7 +377,7 @@ def auto_curate_repos(new_repos, star_guide_path, threshold=8, not_curated_path=
         else:
             print(f"  ⚠️  Could not insert {full_name} into {cat_name} section (section not found?)")
 
-    if modified:
+    if modified and not dry_run:
         Path(star_guide_path).write_text(content, encoding="utf-8")
         print(f"  → Wrote {star_guide_path} with {len(autos)} auto-curated repos")
 
@@ -485,6 +387,8 @@ def auto_curate_repos(new_repos, star_guide_path, threshold=8, not_curated_path=
             removed = remove_from_not_curated(auto_names, not_curated_path)
             if removed:
                 print(f"  → Removed {removed} repos from NOT-CURATED.md")
+    elif modified and dry_run:
+        print(f"  🔒 DRY RUN: would write {star_guide_path} with {len(autos)} auto-curated repos")
 
     return autos, remaining, modified
 
@@ -817,7 +721,16 @@ def main():
                         help="Only generate categorization suggestions from new repos (no file regeneration)")
     parser.add_argument("--auto-curate", nargs="?", const=8, type=int, metavar="THRESHOLD",
                         help="Auto-insert repos scoring >= THRESHOLD (default 8) with clear category match into STAR-GUIDE")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="Show what would happen without modifying any files")
+    parser.add_argument("--verbose", action="store_true",
+                        help="Enable debug-level logging")
     args = parser.parse_args()
+
+    # Configure logging
+    level = logging.DEBUG if args.verbose else logging.INFO
+    logging.basicConfig(level=level, format="%(asctime)s [%(levelname)s] %(message)s",
+                        datefmt="%H:%M:%S")
     
     # Step 1: Fetch
     if not args.no_fetch:
@@ -863,9 +776,12 @@ def main():
     if args.suggest_only:
         # Only generate categorization suggestions, no file changes
         suggestions_path = STARS_DIR / "CATEGORIZATION-SUGGESTIONS.md"
-        generate_suggestions_report(new_repo_list, suggestions_path)
+        if args.dry_run:
+            print("DRY RUN: would generate suggestions for " + str(len(new_repo_list)) + " repos at " + str(suggestions_path))
+        else:
+            generate_suggestions_report(new_repo_list, suggestions_path)
+            print(f"\n✅ Suggestions generated for {len(new_repo_list)} repos")
         conn.close()
-        print(f"\n✅ Suggestions generated for {len(new_repo_list)} repos")
         return
 
     # ── Auto-curation (if enabled) ──────────────────────────
@@ -879,7 +795,8 @@ def main():
 
         auto_curated, needs_review, star_guide_modified = auto_curate_repos(
             new_repo_list, star_guide_path, threshold,
-            not_curated_path=STARS_DIR / "NOT-CURATED.md"
+            not_curated_path=STARS_DIR / "NOT-CURATED.md",
+            dry_run=args.dry_run
         )
 
         if star_guide_modified:
@@ -889,6 +806,12 @@ def main():
             print(f"   Re-parsed: {len(curated_repos)} curated in {len(sections)} sections")
 
         print(f"   Auto-curated: {len(auto_curated)} · Needs review: {len(needs_review)}")
+
+    # In dry-run mode, stop before any file writes
+    if args.dry_run:
+        print(f"🔒 DRY RUN complete - no files were modified")
+        conn.close()
+        return
 
     # ── Append remaining new repos to NOT-CURATED.md ────────
     not_curated_path = STARS_DIR / "NOT-CURATED.md"
