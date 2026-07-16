@@ -69,3 +69,19 @@
 - [mksglu/context-mode](https://github.com/mksglu/context-mode) — ⭐18,825 (TypeScript) Context window optimization for AI coding agents. Sandboxes tool output (98% reduction), persists session memory, and   
 - [huggingface/ml-intern](https://github.com/huggingface/ml-intern) — ⭐10,626 (Python) 🤗 ml-intern: an open-source ML engineer that reads papers, trains models, and ships ML models
 - [dmgrok/agent-plugins](https://github.com/dmgrok/agent-plugins) — ⭐17 (Python) Intelligent skill discovery for AI agents. Find quality-validated skills that match your project with smart recommendati
+
+## 🆕 New Stars — 2026-07-16 05:12 UTC
+
+- [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) — ⭐84,156 (JavaScript) Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.
+- [headroomlabs-ai/headroom](https://github.com/headroomlabs-ai/headroom) — ⭐59,387 (Python) Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 20% fewer tokens for coding agents, 60-95%
+- [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) — ⭐52,366 (Python) AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a gro
+- [refactoringhq/tolaria](https://github.com/refactoringhq/tolaria) — ⭐18,686 (TypeScript) Desktop app to manage markdown knowledge bases
+- [pranshuparmar/witr](https://github.com/pranshuparmar/witr) — ⭐18,244 (Go) Why is this running?
+- [XiaomiMiMo/MiMo-Code](https://github.com/XiaomiMiMo/MiMo-Code) — ⭐12,133 (TypeScript) MiMo Code: Where Models and Agents Co-Evolve
+- [SimonSchubert/Kai](https://github.com/SimonSchubert/Kai) — ⭐1,061 (Kotlin) OpenClaw alternative in your pocket
+- [jsgrrchg/NeverWrite](https://github.com/jsgrrchg/NeverWrite) — ⭐728 (TypeScript) Your ultimate agentic markdown workspace
+- [alchemy-run/alchemy](https://github.com/alchemy-run/alchemy) — ⭐694 (TypeScript) Infrastructure as Effects
+- [oil-oil/beautify-github-readme](https://github.com/oil-oil/beautify-github-readme) — ⭐588 (Python) Design clear, theme-specific GitHub README homepages with SVG titles, real proof, and maintainable Markdown
+- [nicobailon/surf-cli](https://github.com/nicobailon/surf-cli) — ⭐548 (TypeScript) The CLI for AI agents to control Chrome. Zero config, agent-agnostic, battle-tested.
+- [Shrey113/App-Scrcpy](https://github.com/Shrey113/App-Scrcpy) — ⭐97 (HTML) A scrcpy-inspired Android screen, audio, and control streaming client for Windows — built without ADB, using pure WebSoc
+- [vgreg/faceoff](https://github.com/vgreg/faceoff) — ⭐71 (Python) Terminal tool to watch hockey games

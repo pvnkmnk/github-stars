@@ -1,8 +1,8 @@
 # 🏷️ Categorization Suggestions
 
 > Auto-generated suggestions for where new repos might fit in STAR-GUIDE.md.
-> Generated: 2026-07-12
-> 6 repos analyzed
+> Generated: 2026-07-16
+> 13 repos analyzed
 
 ## How to use
 
@@ -13,36 +13,63 @@ the matching section of STAR-GUIDE.md and remove it from NOT-CURATED.md.
 
 ---
 
-## 🤖 Agentic Dev Tools
-
-| Stars | Repo | Lang | Description | Also consider |
-|------:|------|------|-------------|---------------|
-| 27,862 | [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills) | - | A curated collection of 1000+ agent skills from official dev teams and the community, compatible wit | ⌨️ Terminal, CLI & Shell (4), ⚡ Automation & Workflows (1) |
-| 18,825 | [mksglu/context-mode](https://github.com/mksglu/context-mode) | TypeScript | Context window optimization for AI coding agents. Sandboxes tool output (98% reduction), persists se | 🧠 AI / LLM Tools (1) |
-
-## ⌨️ Terminal, CLI & Shell
-
-| Stars | Repo | Lang | Description | Also consider |
-|------:|------|------|-------------|---------------|
-| 27,735 | [tobi/qmd](https://github.com/tobi/qmd) | TypeScript | mini cli search engine for your docs, knowledge bases, meeting notes, whatever. Tracking current sot | 📝 Knowledge Management & PKM (4), 📄 Docs & Blog (4) |
-
 ## 💻 Dev Tools & Languages
 
 | Stars | Repo | Lang | Description | Also consider |
 |------:|------|------|-------------|---------------|
-| 21,111 | [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search) | TypeScript | The job search that runs on your machine. AI job application framework built on Claude Code: evaluat | 🤖 Agentic Dev Tools (2), 🧠 AI / LLM Tools (1) |
+| 12,133 | [XiaomiMiMo/MiMo-Code](https://github.com/XiaomiMiMo/MiMo-Code) | TypeScript | MiMo Code: Where Models and Agents Co-Evolve | 🤖 Agentic Dev Tools (1) |
+| 1,061 | [SimonSchubert/Kai](https://github.com/SimonSchubert/Kai) | Kotlin | OpenClaw alternative in your pocket | 📱 Mobile (4) |
+| 694 | [alchemy-run/alchemy](https://github.com/alchemy-run/alchemy) | TypeScript | Infrastructure as Effects | 📡 Homelab Infrastructure (1) |
+| 588 | [oil-oil/beautify-github-readme](https://github.com/oil-oil/beautify-github-readme) | Python | Design clear, theme-specific GitHub README homepages with SVG titles, real proof, and maintainable M | 📄 Docs & Blog (2), ⚡ Automation & Workflows (1) |
+| 71 | [vgreg/faceoff](https://github.com/vgreg/faceoff) | Python | Terminal tool to watch hockey games | ⌨️ Terminal, CLI & Shell (4) |
+
+## 🤖 Agentic Dev Tools
+
+| Stars | Repo | Lang | Description | Also consider |
+|------:|------|------|-------------|---------------|
+| 84,156 | [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | JavaScript | Makes your AI agent think like the laziest senior dev in the room. The best code is the code you nev | 💻 Dev Tools & Languages (9), 🧠 AI / LLM Tools (5) |
 
 ## 🧠 AI / LLM Tools
 
 | Stars | Repo | Lang | Description | Also consider |
 |------:|------|------|-------------|---------------|
-| 10,626 | [huggingface/ml-intern](https://github.com/huggingface/ml-intern) | Python | 🤗 ml-intern: an open-source ML engineer that reads papers, trains models, and ships ML models | — |
+| 59,387 | [headroomlabs-ai/headroom](https://github.com/headroomlabs-ai/headroom) | Python | Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 20% fewer tokens for c | 🤖 Agentic Dev Tools (8), 💻 Dev Tools & Languages (7) |
 
-## 🔒 Security & Authentication
+## 🤖 Agentic Dev Tools
 
 | Stars | Repo | Lang | Description | Also consider |
 |------:|------|------|-------------|---------------|
-| 17 | [dmgrok/agent-plugins](https://github.com/dmgrok/agent-plugins) | Python | Intelligent skill discovery for AI agents. Find quality-validated skills that match your project wit | 🤖 Agentic Dev Tools (2), 🧠 AI / LLM Tools (1) |
+| 52,366 | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) | Python | AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - th | 💻 Dev Tools & Languages (6), 🌐 Web & Frontend (6) |
+
+## 📝 Knowledge Management & PKM
+
+| Stars | Repo | Lang | Description | Also consider |
+|------:|------|------|-------------|---------------|
+| 18,686 | [refactoringhq/tolaria](https://github.com/refactoringhq/tolaria) | TypeScript | Desktop app to manage markdown knowledge bases | 💻 Dev Tools & Languages (4), 📄 Docs & Blog (4) |
+
+## ❓ Uncertain
+
+| Stars | Repo | Lang | Description | Also consider |
+|------:|------|------|-------------|---------------|
+| 18,244 | [pranshuparmar/witr](https://github.com/pranshuparmar/witr) | Go | Why is this running? | — |
+
+## 🤖 Agentic Dev Tools
+
+| Stars | Repo | Lang | Description | Also consider |
+|------:|------|------|-------------|---------------|
+| 728 | [jsgrrchg/NeverWrite](https://github.com/jsgrrchg/NeverWrite) | TypeScript | Your ultimate agentic markdown workspace | 💻 Dev Tools & Languages (4), 📄 Docs & Blog (1) |
+
+## ⌨️ Terminal, CLI & Shell
+
+| Stars | Repo | Lang | Description | Also consider |
+|------:|------|------|-------------|---------------|
+| 548 | [nicobailon/surf-cli](https://github.com/nicobailon/surf-cli) | TypeScript | The CLI for AI agents to control Chrome. Zero config, agent-agnostic, battle-tested. | 🤖 Agentic Dev Tools (4), 💻 Dev Tools & Languages (4) |
+
+## 🌐 Web & Frontend
+
+| Stars | Repo | Lang | Description | Also consider |
+|------:|------|------|-------------|---------------|
+| 97 | [Shrey113/App-Scrcpy](https://github.com/Shrey113/App-Scrcpy) | HTML | A scrcpy-inspired Android screen, audio, and control streaming client for Windows — built without AD | 📱 Mobile (6), 🎵 Self-Hosted Media (5) |
 
 ---
-*Generated by `scripts/update_stars.py` · 2026-07-12*
+*Generated by `scripts/update_stars.py` · 2026-07-16*

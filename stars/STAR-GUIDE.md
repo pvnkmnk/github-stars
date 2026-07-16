@@ -129,6 +129,7 @@
 | [Aider-AI/aider](https://github.com/Aider-AI/aider) | 46,427 | Python | AI pair programming in your terminal | |
 | [aaif-goose/goose](https://github.com/aaif-goose/goose) | 49,755 | Rust | Open source extensible AI agent — install, execute, edit, test | ⭐ [Pick](#-agentic-dev-top-10) |
 
+| [omnigent-ai/omnigent](https://github.com/omnigent-ai/omnigent) | 7,348 | Python | Omnigent is an open-source AI agent framework and meta-harness: orchestrate Claude Code, Codex, Cursor, Pi, and custom a | 🆕 |
 | [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) | 42,916 | Python | Installable GitHub library of 1,900+ agentic skills for Claude Code, Cursor, Codex CLI, Autohand Code, Gemini CLI, Antig | 🆕 |
 | [iOfficeAI/AionUi](https://github.com/iOfficeAI/AionUi) | 28,570 | TypeScript | Free, local, open-source 24/7 Cowork app for OpenClaw, Hermes Agent, Claude Code, Codex, OpenCode, Gemini CLI and 20+ mo | 🆕 |
 | [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) | 33,909 | JavaScript | Marketing skills for Claude Code and AI agents. CRO, copywriting, SEO, analytics, and growth engineering. | 🆕 |
@@ -486,6 +487,7 @@
 | [hiyouga/LlamaFactory](https://github.com/hiyouga/LlamaFactory) | 72,279 | Python | Unified efficient fine-tuning of 100+ LLMs & VLMs | ⭐ [Pick](#-aillm-top-10) |
 | [AlexsJones/llmfit](https://github.com/AlexsJones/llmfit) | 28,237 | Rust | Find what LLM runs on your hardware — hundreds of models & providers | |
 
+| [BerriAI/litellm](https://github.com/BerriAI/litellm) | 53,729 | Python | Python SDK, Proxy Server (AI Gateway) to call 100+ LLM APIs in OpenAI (or native) format, with cost tracking, guardrails | 🆕 |
 | [Emmimal/context-graph-benchmark](https://github.com/Emmimal/context-graph-benchmark) | 27 | Python | A pure-Python structured memory benchmark for multi-agent LLM systems — context graph vs vector RAG vs raw history dump, | 🆕 |
 | [Osmantic/ODS](https://github.com/Osmantic/ODS) | 2,933 | Shell | Turn your PC, Mac, or Linux box into an AI server.  LLM inference, chat UI, voice, agents, workflows, RAG, and image gen | 🆕 |
 | [Light-Heart-Labs/ODS](https://github.com/Light-Heart-Labs/ODS) | 2,510 | Shell | Turn your PC, Mac, or Linux box into an AI server.  LLM inference, chat UI, voice, agents, workflows, RAG, and image gen | 🆕 |
@@ -726,6 +728,9 @@
 | [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev) | ~95k | — | SaaS, PaaS, IaaS free tiers for devs/devops |
 | [microsoft/Web-Dev-For-Beginners](https://github.com/microsoft/Web-Dev-For-Beginners) | ~85k | JavaScript | 24-lesson web development curriculum |
 
+| [BrunkenClaas/lx](https://github.com/BrunkenClaas/lx) | 20 | Rust | AI-native equivalents of the Unix tools you know — 72 small, composable, local-first LLM CLIs. One static Rust binary ea | 🆕 |
+| [nubjs/nub](https://github.com/nubjs/nub) | 2,924 | Rust | The fast all-in-one Node.js toolkit | 🆕 |
+| [Panniantong/Agent-Reach](https://github.com/Panniantong/Agent-Reach) | 56,898 | Python | Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongSh | 🆕 |
 | [oven-sh/bun](https://github.com/oven-sh/bun) | 93,293 | Rust | Incredibly fast JavaScript runtime, bundler, test runner, and package manager – all in one | 🆕 |
 | [supermemoryai/supermemory](https://github.com/supermemoryai/supermemory) | 27,180 | TypeScript | Memory and context engine + app that is extremely fast, scalable, and can be run fully locally. The Memory API for the A | 🆕 |
 | [mps-youtube/yewtube](https://github.com/mps-youtube/yewtube) | 8,740 | Python | yewtube, forked from mps-youtube , is a Terminal based YouTube player and downloader. No Youtube API key required. | 🆕 |
