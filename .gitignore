@@ -4,3 +4,6 @@ __pycache__/
 
 # Node.js
 node_modules/
+
+# Stuck empty dir with colon in name (NTFS artifact)
+J:ReposGHSTARS/
