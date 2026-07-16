@@ -1,0 +1,12 @@
+{
+  "name": "star-guide",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Curated star guide \u2014 auto-categorized GitHub stars wiki",
+  "scripts": {
+    "test:e2e": "node tests/e2e-regression.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.61.1"
+  }
+}
