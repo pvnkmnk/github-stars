@@ -3,7 +3,7 @@ const CACHE = "starguide-v1";
 
 // Pre-cache lightweight static assets on install
 const PRE = [
-  "/github-stars/site.webmanifest",
+  "/star-guide/site.webmanifest",
 ];
 
 self.addEventListener("install", e => {
@@ -46,7 +46,7 @@ self.addEventListener("fetch", e => {
   if (url.origin !== self.location.origin) return;
 
   // Out of scope: don't cache
-  if (!pathname.startsWith("/github-stars/")) return;
+  if (!pathname.startsWith("/star-guide/")) return;
 
   // Pre-cached assets: cache-first (uses network as fallback when cache misses)
   if (PRE.includes(pathname)) {
@@ -57,7 +57,7 @@ self.addEventListener("fetch", e => {
   }
 
   // index.html: stale-while-revalidate (serve cached, update in background)
-  if (pathname === "/github-stars/") {
+  if (pathname === "/star-guide/") {
     e.respondWith(
       caches.open(CACHE).then(c =>
         c.match(e.request).then(cached => {
@@ -73,7 +73,7 @@ self.addEventListener("fetch", e => {
   }
 
   // Data files (stars/*): network-first, cache fallback
-  if (pathname.startsWith("/github-stars/stars/")) {
+  if (pathname.startsWith("/star-guide/stars/")) {
     e.respondWith(
       caches.open(CACHE).then(c =>
         c.match(e.request).then(cached =>

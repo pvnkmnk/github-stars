@@ -166,4 +166,4 @@
 
 ---
 
-*From [pvnkmnk's stars](https://github.com/pvnkmnk) via [github-stars pipeline](https://github.com/pvnkmnk/github-stars)*
+*From [pvnkmnk's stars](https://github.com/pvnkmnk) via [star-guide pipeline](https://github.com/pvnkmnk/star-guide)*

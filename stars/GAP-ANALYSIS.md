@@ -254,4 +254,4 @@ If I could only add 10 repos to the STAR-GUIDE, they would be:
 
 ---
 
-*Generated from 1,033 starred repos via [github-stars pipeline](https://github.com/pvnkmnk/github-stars) · [pvnkmnk](https://github.com/pvnkmnk) · 2026-06-18*
+*Generated from 1,033 starred repos via [star-guide pipeline](https://github.com/pvnkmnk/star-guide) · [pvnkmnk](https://github.com/pvnkmnk) · 2026-06-18*

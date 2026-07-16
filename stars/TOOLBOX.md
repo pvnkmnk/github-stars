@@ -636,4 +636,4 @@ If I had to rebuild from scratch with only 10 tools from these stars — one per
 
 ---
 
-*From [pvnkmnk's stars](https://github.com/pvnkmnk) · Curated with [github-stars pipeline](https://github.com/pvnkmnk/github-stars)*
+*From [pvnkmnk's stars](https://github.com/pvnkmnk) · Curated with [star-guide pipeline](https://github.com/pvnkmnk/star-guide)*
