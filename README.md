@@ -20,8 +20,8 @@
 | **[DEEP-DIVE.md](stars/DEEP-DIVE.md)** | Specialized topic analysis (proxy, monitoring, backup, secrets, CI/CD, security) | Markdown tables |
 | **[GAP-ANALYSIS.md](stars/GAP-ANALYSIS.md)** | Category coverage audit — what's missing from my stars | Narrative markdown |
 | **[NOT-CURATED.md](stars/NOT-CURATED.md)** | Inbox for new un-categorized stars — reviewed and curated weekly | Simple link list |
-| **[gh-stars-pvnkmnk.csv](stars/gh-stars-pvnkmnk.csv)** | Raw CSV export of all 1,033 stars | CSV |
-| **[gh-stars-pvnkmnk.txt](stars/gh-stars-pvnkmnk.txt)** | Formatted text export of all stars | Human-readable text |
+| **[github-stars-pvnkmnk.csv](stars/github-stars-pvnkmnk.csv)** | Raw CSV export of all 1,033 stars | CSV |
+| **[github-stars-pvnkmnk.txt](stars/github-stars-pvnkmnk.txt)** | Formatted text export of all stars | Human-readable text |
 
 ---
 
