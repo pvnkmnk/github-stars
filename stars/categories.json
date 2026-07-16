@@ -146,7 +146,9 @@
         "dev",
         "integration",
         "plugin",
-        "autocomplete"
+        "autocomplete",
+        "research",
+        "chrome"
       ],
       "phrases": [
         "coding assistant",
@@ -161,7 +163,8 @@
         "ai agent",
         "agent orchestration",
         "prompt engineering",
-        "agent plugin"
+        "agent plugin",
+        "agent skill"
       ]
     },
     {
@@ -887,6 +890,7 @@
       "name": "Knowledge Management & PKM",
       "strong": [
         "knowledge",
+        "knowledge-base",
         "PKM",
         "obsidian",
         "note-taking",
@@ -952,7 +956,9 @@
         "daily notes",
         "bullet journal",
         "personal wiki",
-        "task management"
+        "task management",
+        "desktop app",
+        "knowledge base"
       ]
     },
     {
@@ -1196,6 +1202,7 @@
         "swift",
         "termux",
         "revanced",
+        "scrcpy",
         "APK",
         "phone",
         "grapheneos",
@@ -1244,7 +1251,9 @@
         "music player",
         "file manager",
         "podcast player",
-        "video player"
+        "video player",
+        "screen mirroring",
+        "streaming client"
       ]
     },
     {
