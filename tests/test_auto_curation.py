@@ -249,3 +249,234 @@ class TestDryRun:
         assert "user/new-tool" in content
         assert content != original
         assert modified is True
+
+class TestRemoveFromNotCurated:
+    """Unit tests for remove_from_not_curated directly."""
+
+    def test_removes_matching_lines(self, tmp_path):
+        from update_stars import remove_from_not_curated
+        nc = tmp_path / "NOT-CURATED.md"
+        nc.write_text(
+            "# Not Curated\n\n"
+            "## June 2026\n\n"
+            "- [user/tool1](https://github.com/user/tool1) — Interesting tool\n"
+            "- [user/tool2](https://github.com/user/tool2) — Another one\n"
+            "- [user/tool3](https://github.com/user/tool3) — Keep this\n",
+            encoding="utf-8",
+        )
+        removed = remove_from_not_curated({"user/tool1", "user/tool2"}, str(nc))
+        assert removed == 2
+        result = nc.read_text(encoding="utf-8")
+        assert "user/tool1" not in result
+        assert "user/tool2" not in result
+        assert "user/tool3" in result
+
+    def test_no_matches_returns_zero(self, tmp_path):
+        from update_stars import remove_from_not_curated
+        nc = tmp_path / "NOT-CURATED.md"
+        original = "# Not Curated\n\n- [user/keep](https://github.com/user/keep) — Keep\n"
+        nc.write_text(original, encoding="utf-8")
+        removed = remove_from_not_curated({"user/other"}, str(nc))
+        assert removed == 0
+        assert nc.read_text(encoding="utf-8") == original
+
+    def test_missing_file_returns_zero(self, tmp_path):
+        from update_stars import remove_from_not_curated
+        nc = tmp_path / "NONEXISTENT.md"
+        removed = remove_from_not_curated({"user/any"}, str(nc))
+        assert removed == 0
+
+    def test_empty_repo_names_removes_nothing(self, tmp_path):
+        from update_stars import remove_from_not_curated
+        nc = tmp_path / "NOT-CURATED.md"
+        original = "# Not Curated\n\n- [user/keep](https://github.com/user/keep) — Keep\n"
+        nc.write_text(original, encoding="utf-8")
+        removed = remove_from_not_curated(set(), str(nc))
+        assert removed == 0
+
+    def test_preserves_non_repo_lines(self, tmp_path):
+        from update_stars import remove_from_not_curated
+        nc = tmp_path / "NOT-CURATED.md"
+        original = (
+            "# Not Curated\n\n"
+            "## June 2026\n\n"
+            "Some intro text here.\n\n"
+            "- [user/remove](https://github.com/user/remove) — Remove me\n"
+            "- Not a repo line\n"
+            "- [user/keep](https://github.com/user/keep) — Keep\n"
+            "\n"
+            "Footer text\n"
+        )
+        nc.write_text(original, encoding="utf-8")
+        removed = remove_from_not_curated({"user/remove"}, str(nc))
+        assert removed == 1
+        result = nc.read_text(encoding="utf-8")
+        assert "user/remove" not in result
+        assert "user/keep" in result
+        assert "Some intro text" in result
+        assert "Not a repo line" in result
+        assert "Footer text" in result
+
+
+class TestNotCuratedPath:
+    """not_curated_path parameter: removes curated repos from NOT-CURATED.md."""
+
+    def test_none_path_does_nothing(self, tmp_path):
+        from update_stars import auto_curate_repos
+        sg = tmp_path / "STAR-GUIDE.md"
+        sg.write_text(
+            "# Part I: The Catalog\n\n"
+            "## 🤖 Agentic Dev Tools\n\n"
+            "| Repository | Stars | Language | Description | Status |\n"
+            "|------------|-------|----------|-------------|--------|\n"
+            "| [existing/repo](https://github.com/existing/repo) | 1,000 | Python | Existing | ✅ |\n\n",
+            encoding="utf-8",
+        )
+        repos = [(5000, "user/curated-tool", "Agentic:9,Dev:5", "Clear win")]
+        with patch("update_stars.suggest_categories", side_effect=_mock_suggest):
+            curated, remaining, modified = auto_curate_repos(
+                repos, str(sg), threshold=7, not_curated_path=None, dry_run=False
+            )
+        assert len(curated) == 1
+        assert curated[0][4] == "user/curated-tool"
+        assert modified is True
+
+    def test_dry_run_preserves_not_curated_file(self, tmp_path):
+        from update_stars import auto_curate_repos
+        sg = tmp_path / "STAR-GUIDE.md"
+        nc = tmp_path / "NOT-CURATED.md"
+        original_nc = "# Not Curated\n\n- [user/will-curate](https://github.com/user/will-curate) — Soon\n"
+        nc.write_text(original_nc, encoding="utf-8")
+        sg.write_text(
+            "# Part I: The Catalog\n\n"
+            "## 🧠 AI / LLM Tools\n\n"
+            "| Repository | Stars | Language | Description | Status |\n"
+            "|------------|-------|----------|-------------|--------|\n"
+            "| [existing/repo](https://github.com/existing/repo) | 1,000 | Python | Existing | ✅ |\n\n",
+            encoding="utf-8",
+        )
+        repos = [(8000, "user/will-curate", "AI:11,Dev:5", "High confidence")]
+        with patch("update_stars.suggest_categories", side_effect=_mock_suggest):
+            curated, remaining, modified = auto_curate_repos(
+                repos, str(sg), threshold=7, not_curated_path=str(nc), dry_run=True
+            )
+        assert len(curated) == 1
+        assert nc.read_text(encoding="utf-8") == original_nc
+        assert modified is True
+
+    def test_removes_curated_repos_from_not_curated(self, tmp_path):
+        from update_stars import auto_curate_repos
+        sg = tmp_path / "STAR-GUIDE.md"
+        nc = tmp_path / "NOT-CURATED.md"
+        nc.write_text(
+            "# Not Curated\n\n"
+            "## July 2026\n\n"
+            "- [user/auto-me](https://github.com/user/auto-me) — Auto-curate me\n"
+            "- [user/stay-here](https://github.com/user/stay-here) — Stay in NOT-CURATED\n"
+            "- [user/also-curated](https://github.com/user/also-curated) — Me too\n\n"
+            "Footer.\n",
+            encoding="utf-8",
+        )
+        sg.write_text(
+            "# Part I: The Catalog\n\n"
+            "## 🤖 Agentic Dev Tools\n\n"
+            "| Repository | Stars | Language | Description | Status |\n"
+            "|------------|-------|----------|-------------|--------|\n"
+            "| [existing/repo](https://github.com/existing/repo) | 1,000 | Python | Existing | ✅ |\n\n",
+            encoding="utf-8",
+        )
+        repos = [
+            (5000, "user/auto-me", "Agentic:9,Dev:5", "Clear winner"),
+            (3000, "user/also-curated", "Agentic:8,Dev:6", "Good gap"),
+        ]
+        with patch("update_stars.suggest_categories", side_effect=_mock_suggest):
+            curated, remaining, modified = auto_curate_repos(
+                repos, str(sg), threshold=7, not_curated_path=str(nc), dry_run=False
+            )
+        assert len(curated) == 2
+        assert modified is True
+        result = nc.read_text(encoding="utf-8")
+        assert "user/auto-me" not in result
+        assert "user/also-curated" not in result
+        assert "user/stay-here" in result
+        assert "Footer" in result
+
+    def test_missing_not_curated_file_no_error(self, tmp_path):
+        from update_stars import auto_curate_repos
+        sg = tmp_path / "STAR-GUIDE.md"
+        nc = tmp_path / "DOES-NOT-EXIST.md"
+        sg.write_text(
+            "# Part I: The Catalog\n\n"
+            "## 🧠 AI / LLM Tools\n\n"
+            "| Repository | Stars | Language | Description | Status |\n"
+            "|------------|-------|----------|-------------|--------|\n"
+            "| [existing/repo](https://github.com/existing/repo) | 1,000 | Python | Existing | ✅ |\n\n",
+            encoding="utf-8",
+        )
+        repos = [(5000, "user/new-tool", "AI:10,Agentic:5", "Strong AI match")]
+        with patch("update_stars.suggest_categories", side_effect=_mock_suggest):
+            curated, remaining, modified = auto_curate_repos(
+                repos, str(sg), threshold=7, not_curated_path=str(nc), dry_run=False
+            )
+        assert len(curated) == 1
+        assert modified is True
+        assert not nc.exists()
+
+    def test_not_curated_repos_preserved_when_not_curated(self, tmp_path):
+        from update_stars import auto_curate_repos
+        sg = tmp_path / "STAR-GUIDE.md"
+        nc = tmp_path / "NOT-CURATED.md"
+        original_nc = (
+            "# Not Curated\n\n"
+            "- [user/not-good-enough](https://github.com/user/not-good-enough) — Too low\n"
+        )
+        nc.write_text(original_nc, encoding="utf-8")
+        sg.write_text(
+            "# Part I: The Catalog\n\n"
+            "## 🤖 Agentic Dev Tools\n\n"
+            "| Repository | Stars | Language | Description | Status |\n"
+            "|------------|-------|----------|-------------|--------|\n"
+            "| [existing/repo](https://github.com/existing/repo) | 1,000 | Python | Existing | ✅ |\n\n",
+            encoding="utf-8",
+        )
+        repos = [(200, "user/not-good-enough", "Dev:5", "Below threshold")]
+        with patch("update_stars.suggest_categories", side_effect=_mock_suggest):
+            curated, remaining, modified = auto_curate_repos(
+                repos, str(sg), threshold=7, not_curated_path=str(nc), dry_run=False
+            )
+        assert len(curated) == 0
+        assert modified is False
+        assert nc.read_text(encoding="utf-8") == original_nc
+
+    def test_partial_curation_leaves_uncurated_in_not_curated(self, tmp_path):
+        from update_stars import auto_curate_repos
+        sg = tmp_path / "STAR-GUIDE.md"
+        nc = tmp_path / "NOT-CURATED.md"
+        nc.write_text(
+            "# Not Curated\n\n"
+            "- [user/curated](https://github.com/user/curated) — Now good enough\n"
+            "- [user/still-not](https://github.com/user/still-not) — Still borderline\n",
+            encoding="utf-8",
+        )
+        sg.write_text(
+            "# Part I: The Catalog\n\n"
+            "## 🧠 AI / LLM Tools\n\n"
+            "| Repository | Stars | Language | Description | Status |\n"
+            "|------------|-------|----------|-------------|--------|\n"
+            "| [existing/repo](https://github.com/existing/repo) | 1,000 | Python | Existing | ✅ |\n\n",
+            encoding="utf-8",
+        )
+        repos = [
+            (5000, "user/curated", "AI:9,Dev:5", "Clear win"),
+            (100, "user/still-not", "Dev:6", "Still below threshold"),
+        ]
+        with patch("update_stars.suggest_categories", side_effect=_mock_suggest):
+            curated, remaining, modified = auto_curate_repos(
+                repos, str(sg), threshold=7, not_curated_path=str(nc), dry_run=False
+            )
+        assert len(curated) == 1
+        assert curated[0][4] == "user/curated"
+        result = nc.read_text(encoding="utf-8")
+        assert "user/curated" not in result
+        assert "user/still-not" in result
+        assert modified is True
