@@ -82,6 +82,5 @@
 - [jsgrrchg/NeverWrite](https://github.com/jsgrrchg/NeverWrite) — ⭐728 (TypeScript) Your ultimate agentic markdown workspace
 - [alchemy-run/alchemy](https://github.com/alchemy-run/alchemy) — ⭐694 (TypeScript) Infrastructure as Effects
 - [oil-oil/beautify-github-readme](https://github.com/oil-oil/beautify-github-readme) — ⭐588 (Python) Design clear, theme-specific GitHub README homepages with SVG titles, real proof, and maintainable Markdown
-- [nicobailon/surf-cli](https://github.com/nicobailon/surf-cli) — ⭐548 (TypeScript) The CLI for AI agents to control Chrome. Zero config, agent-agnostic, battle-tested.
 - [Shrey113/App-Scrcpy](https://github.com/Shrey113/App-Scrcpy) — ⭐97 (HTML) A scrcpy-inspired Android screen, audio, and control streaming client for Windows — built without ADB, using pure WebSoc
 - [vgreg/faceoff](https://github.com/vgreg/faceoff) — ⭐71 (Python) Terminal tool to watch hockey games

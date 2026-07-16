@@ -129,6 +129,7 @@
 | [Aider-AI/aider](https://github.com/Aider-AI/aider) | 46,427 | Python | AI pair programming in your terminal | |
 | [aaif-goose/goose](https://github.com/aaif-goose/goose) | 49,755 | Rust | Open source extensible AI agent — install, execute, edit, test | ⭐ [Pick](#-agentic-dev-top-10) |
 
+| [nicobailon/surf-cli](https://github.com/nicobailon/surf-cli) | 548 | TypeScript | The CLI for AI agents to control Chrome. Zero config, agent-agnostic, battle-tested. | 🆕 |
 | [omnigent-ai/omnigent](https://github.com/omnigent-ai/omnigent) | 7,348 | Python | Omnigent is an open-source AI agent framework and meta-harness: orchestrate Claude Code, Codex, Cursor, Pi, and custom a | 🆕 |
 | [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) | 42,916 | Python | Installable GitHub library of 1,900+ agentic skills for Claude Code, Cursor, Codex CLI, Autohand Code, Gemini CLI, Antig | 🆕 |
 | [iOfficeAI/AionUi](https://github.com/iOfficeAI/AionUi) | 28,570 | TypeScript | Free, local, open-source 24/7 Cowork app for OpenClaw, Hermes Agent, Claude Code, Codex, OpenCode, Gemini CLI and 20+ mo | 🆕 |
