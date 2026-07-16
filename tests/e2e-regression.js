@@ -11,8 +11,9 @@
  */
 
 const { chromium } = require("playwright");
+const CONFIG = require("./config.json");
 
-const BASE = process.env.BASE_URL || "https://pvnkmnk.github.io/star-guide";
+const BASE = process.env.BASE_URL || CONFIG.baseUrl;
 const URL  = `${BASE}/?t=${Date.now()}`;  let passed = 0, failed = 0;
 const failMsgs = [];
 const allErrors = [];
@@ -25,7 +26,7 @@ function check(label, condition, detail) {
 function listenErrors(page) {
   page.on("pageerror", e => allErrors.push(e.message));
 }  // Screenshot directory for CI artifact upload
-const SCREENSHOT_DIR = process.env.CI ? "/tmp" : null;
+const SCREENSHOT_DIR = process.env.CI ? CONFIG.screenshotDir : null;
 
 async function screenshot(page, name) {
   if (!SCREENSHOT_DIR) return;
@@ -45,20 +46,20 @@ async function run() {
   // 1. DESKTOP PAGE LOAD
   // ──────────────────────────────────────────────
   console.log("▶ DESKTOP PAGE LOAD (1280×800)");
-  const desktop = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  const desktop = await browser.newPage({ viewport: CONFIG.viewport.desktop });
   listenErrors(desktop);
 
-  await desktop.goto(URL, { waitUntil: "networkidle", timeout: 30000 });
-  await desktop.waitForSelector(".cat-header", { timeout: 15000 });
+  await desktop.goto(URL, { waitUntil: "networkidle", timeout: CONFIG.timeouts.navigation });
+  await desktop.waitForSelector(".cat-header", { timeout: CONFIG.timeouts.selector });
 
   const title = await desktop.title();
-  check("Page title contains 'STAR'", title.includes("STAR"), title);
+  check(`Page title contains '${CONFIG.expected.pageTitle}'`, title.includes(CONFIG.expected.pageTitle), title);
 
   const catCount = await desktop.$$eval(".cat-header", els => els.length);
-  check("18 category headers present", catCount === 18, `found ${catCount}`);
+  check(`${CONFIG.thresholds.categoryCount} category headers present`, catCount === CONFIG.thresholds.categoryCount, `found ${catCount}`);
 
-  const populated = await desktop.$eval("body", b => b.innerText.length > 5000);
-  check("Page content populated (>5k chars)", populated, "content too short");
+  const populated = await desktop.$eval("body", (b, minChars) => b.innerText.length > minChars, CONFIG.thresholds.minContentChars);
+  check(`Page content populated (>${Math.floor(CONFIG.thresholds.minContentChars/1000)}k chars)`, populated, "content too short");
 
   check("Zero JS errors on load", allErrors.length === 0, allErrors.join("; "));
   await screenshot(desktop, "desktop-load");
@@ -115,10 +116,10 @@ async function run() {
   const iosTitle    = await desktop.$eval("meta[name='apple-mobile-web-app-title']", e => e.content).catch(() => null);
   const iosIcon     = await desktop.$eval("link[rel='apple-touch-icon']", e => ({ href: e.href, sizes: e.sizes?.value })).catch(() => null);
   check("apple-mobile-web-app-capable = yes", iosCapable === "yes", iosCapable);
-  check("apple-mobile-web-app-status-bar-style = black-translucent", iosStatus === "black-translucent", iosStatus);
-  check("apple-mobile-web-app-title = STAR//GUIDE", iosTitle === "STAR//GUIDE", iosTitle);
+  check(`apple-mobile-web-app-status-bar-style = ${CONFIG.pwa.iosStatusBar}`, iosStatus === CONFIG.pwa.iosStatusBar, iosStatus);
+  check(`apple-mobile-web-app-title = ${CONFIG.pwa.iosTitle}`, iosTitle === CONFIG.pwa.iosTitle, iosTitle);
   check("apple-touch-icon present", !!iosIcon, "missing");
-  check("apple-touch-icon sizes = 512x512", iosIcon?.sizes === "512x512", iosIcon?.sizes);
+  check(`apple-touch-icon sizes = ${CONFIG.pwa.iosIconSizes}`, iosIcon?.sizes === CONFIG.pwa.iosIconSizes, iosIcon?.sizes);
   console.log("");
 
   // ──────────────────────────────────────────────
@@ -171,7 +172,7 @@ async function run() {
   if (toolboxBtns.length > 0) {
     // Click the first toolbox toggle (Knowledge/PKM category — 📝)
     await toolboxBtns[0].click();
-    await desktop.waitForTimeout(800);
+    await desktop.waitForTimeout(CONFIG.timeouts.animation);
 
     const firstPanel = await desktop.$(".toolbox-panel.show");
     const panelText = firstPanel ? await firstPanel.innerText() : "";
@@ -182,7 +183,7 @@ async function run() {
     // Click a second toolbox toggle to verify another panel works
     if (toolboxBtns.length > 1) {
       await toolboxBtns[1].click();
-      await desktop.waitForTimeout(800);
+      await desktop.waitForTimeout(CONFIG.timeouts.animation);
       const panelsOpen = await desktop.$$eval(".toolbox-panel.show", els => els.length);
       check("Multiple toolbox panels can open", panelsOpen >= 1, `open panels: ${panelsOpen}`);
     }
@@ -199,13 +200,13 @@ async function run() {
 
   if (themeBtn) {
     // Get initial background
-    const bgBefore = await desktop.$eval("body", el => getComputedStyle(el).getPropertyValue("--bg-deep").trim() || getComputedStyle(el).backgroundColor);
+    const bgBefore = await desktop.$eval("body", (el, bgVar) => getComputedStyle(el).getPropertyValue(bgVar).trim() || getComputedStyle(el).backgroundColor);
 
     // Toggle to light
     await themeBtn.click();
-    await desktop.waitForTimeout(500);
+    await desktop.waitForTimeout(CONFIG.timeouts.themeToggle);
 
-    const bgAfter = await desktop.$eval("body", el => getComputedStyle(el).getPropertyValue("--bg-deep").trim() || getComputedStyle(el).backgroundColor);
+    const bgAfter = await desktop.$eval("body", (el, bgVar) => getComputedStyle(el).getPropertyValue(bgVar).trim() || getComputedStyle(el).backgroundColor);
     check("Background color changed after toggle", bgBefore !== bgAfter, `before=${bgBefore} after=${bgAfter}`);
 
     // localStorage persistence
@@ -214,8 +215,8 @@ async function run() {
 
     // Toggle back to dark
     await themeBtn.click();
-    await desktop.waitForTimeout(500);
-    const bgRestored = await desktop.$eval("body", el => getComputedStyle(el).getPropertyValue("--bg-deep").trim() || getComputedStyle(el).backgroundColor);
+    await desktop.waitForTimeout(CONFIG.timeouts.themeToggle);
+    const bgRestored = await desktop.$eval("body", (el, bgVar) => getComputedStyle(el).getPropertyValue(bgVar).trim() || getComputedStyle(el).backgroundColor);
     check("Theme toggles back", bgRestored === bgBefore, `expected ${bgBefore} got ${bgRestored}`);
   }
   console.log("");
@@ -231,7 +232,7 @@ async function run() {
   const securityPill = await desktop.$(".nav-pill[data-emoji='🔒']");
   if (securityPill) {
     await securityPill.click();
-    await desktop.waitForTimeout(800);
+    await desktop.waitForTimeout(CONFIG.timeouts.animation);
 
     const secCat = await desktop.$("#cat-1f512"); // 🔒 = U+1F512
     check("Clicking Security pill scrolls to Security section", !!secCat, "category not found");
@@ -242,7 +243,7 @@ async function run() {
     if (pills.length > 0) {
       const emoji = await pills[0].getAttribute("data-emoji");
       await pills[0].click();
-      await desktop.waitForTimeout(800);
+      await desktop.waitForTimeout(CONFIG.timeouts.animation);
       const catId = await desktop.evaluate(emoji => {
         const id = "cat-" + [...emoji].map(c => c.codePointAt(0).toString(16)).join("-");
         return document.getElementById(id) !== null;
@@ -260,22 +261,22 @@ async function run() {
   check("Search input exists", !!searchInput, "no search input found");
 
   if (searchInput) {
-    await searchInput.fill("fzf");
-    await desktop.waitForTimeout(1000);
+    await searchInput.fill(CONFIG.expected.searchTerm);
+    await desktop.waitForTimeout(CONFIG.timeouts.searchFilter);
 
     const visibleRows = await desktop.$$eval("tbody tr:not([style*='display: none'])", els => els.length);
-    check("Search 'fzf' narrows results", visibleRows > 0 && visibleRows < 500, `visible rows: ${visibleRows}`);
+    check("Search 'fzf' narrows results", visibleRows > 0 && visibleRows < CONFIG.thresholds.searchNarrowMax, `visible rows: ${visibleRows}`);
 
     // Check info text in #search-info
     const infoText = await desktop.$eval("#search-info", e => e.innerText).catch(() => "");
-    const infoOk = infoText.includes("fzf") || infoText.includes("match");
+    const infoOk = infoText.includes(CONFIG.expected.searchTerm) || infoText.includes("match");
     check("Search info text shows match count", infoOk, infoText || "(empty)");
 
     // Clear search
     await searchInput.fill("");
-    await desktop.waitForTimeout(1000);
+    await desktop.waitForTimeout(CONFIG.timeouts.searchFilter);
     const rowsAfter = await desktop.$$eval("tbody tr:not([style*='display: none'])", els => els.length);
-    check("Clear search restores all rows", rowsAfter > 500, `restored to ${rowsAfter}`);
+    check("Clear search restores all rows", rowsAfter > CONFIG.thresholds.restoreMinRows, `restored to ${rowsAfter}`);
   } else {
     check("Search 'fzf' narrows results", false, "no input");
     check("Search info text shows match count", false, "no input");
@@ -292,37 +293,37 @@ async function run() {
 
   if (langSelect) {
     const options = await langSelect.$$eval("option", els => els.map(e => e.value));
-    const hasPython = options.includes("Python") || options.some(o => o.toLowerCase() === "python");
-    check("Language filter has Python option", hasPython, `total options: ${options.length}`);
+    const hasPython = options.includes(CONFIG.expected.langFilter) || options.some(o => o.toLowerCase() === CONFIG.expected.langFilter.toLowerCase());
+    check(`Language filter has ${CONFIG.expected.langFilter} option`, hasPython, `total options: ${options.length}`);
 
     if (hasPython) {
-      await langSelect.selectOption({ label: "Python" });
-      await desktop.waitForTimeout(1000);
+      await langSelect.selectOption({ label: CONFIG.expected.langFilter });
+      await desktop.waitForTimeout(CONFIG.timeouts.searchFilter);
 
       const filteredRows = await desktop.$$eval("tbody tr:not([style*='display: none'])", els => els.length);
-      check("Python filter narrows rows", filteredRows > 0 && filteredRows < 500, `filtered to ${filteredRows}`);
+      check("Language filter narrows rows", filteredRows > 0 && filteredRows < CONFIG.thresholds.searchNarrowMax, `filtered to ${filteredRows}`);
 
       // Verify all visible rows have Python in the .lang cell
       const langTexts = await desktop.$$eval("tbody tr:not([style*='display: none']) .lang", els =>
         els.map(e => e.innerText.trim())
       );
-      const allPython = langTexts.length > 0 && langTexts.every(t => t === "Python");
-      check("All visible rows are Python", allPython, `found non-Python: ${langTexts.filter(t => t !== "Python").slice(0, 3).join(", ")} (total ${langTexts.length} rows)`);
+      const allPython = langTexts.length > 0 && langTexts.every(t => t === CONFIG.expected.langFilter);
+      check(`All visible rows are ${CONFIG.expected.langFilter}`, allPython, `found non-Python: ${langTexts.filter(t => t !== CONFIG.expected.langFilter).slice(0, 3).join(", ")} (total ${langTexts.length} rows)`);
 
       // Clear
       await langSelect.selectOption({ value: "" });
-      await desktop.waitForTimeout(1000);
+      await desktop.waitForTimeout(CONFIG.timeouts.searchFilter);
       const afterClear = await desktop.$$eval("tbody tr:not([style*='display: none'])", els => els.length);
-      check("Clear lang filter restores all rows", afterClear > 500, `restored to ${afterClear}`);
+      check("Clear lang filter restores all rows", afterClear > CONFIG.thresholds.restoreMinRows, `restored to ${afterClear}`);
     } else {
-      check("Python filter narrows rows", false, "Python not in options");
-      check("All visible rows are Python", false, "Python not in options");
-      check("Clear lang filter restores all rows", false, "Python not in options");
+      check("Language filter narrows rows", false, `${CONFIG.expected.langFilter} not in options`);
+      check(`All visible rows are ${CONFIG.expected.langFilter}`, false, `${CONFIG.expected.langFilter} not in options`);
+      check("Clear lang filter restores all rows", false, `${CONFIG.expected.langFilter} not in options`);
     }
   } else {
-    check("Language filter has Python option", false, "no select");
-    check("Python filter narrows rows", false, "no select");
-    check("All visible rows are Python", false, "no select");
+    check(`Language filter has ${CONFIG.expected.langFilter} option`, false, "no select");
+    check("Language filter narrows rows", false, "no select");
+    check(`All visible rows are ${CONFIG.expected.langFilter}`, false, "no select");
     check("Clear lang filter restores all rows", false, "no select");
   }
   console.log("");
@@ -331,11 +332,11 @@ async function run() {
   // 10. MOBILE RESPONSIVE (480px)
   // ──────────────────────────────────────────────
   console.log("▶ MOBILE RESPONSIVE (480×900)");
-  const mobile = await browser.newPage({ viewport: { width: 480, height: 900 } });
+  const mobile = await browser.newPage({ viewport: CONFIG.viewport.mobile });
   listenErrors(mobile);
 
-  await mobile.goto(URL, { waitUntil: "networkidle", timeout: 30000 });
-  await mobile.waitForSelector(".cat-header", { timeout: 15000 });
+  await mobile.goto(URL, { waitUntil: "networkidle", timeout: CONFIG.timeouts.navigation });
+  await mobile.waitForSelector(".cat-header", { timeout: CONFIG.timeouts.selector });
 
   // Check rank badges are hidden on mobile
   const rankVisible = await mobile.$$eval(".k-rank, [class*='k-rank']", els =>
@@ -369,22 +370,22 @@ async function run() {
 
   if (swSupported) {
     // Wait for SW to activate, then check registration
-    await desktop.waitForTimeout(2000);
-    const swReg = await desktop.evaluate(async () => {
+    await desktop.waitForTimeout(CONFIG.timeouts.serviceWorker);
+    const swReg = await desktop.evaluate(async (swScope) => {
       const reg = await navigator.serviceWorker.getRegistration();
       if (reg) return { scope: reg.scope, active: !!reg.active };
       // Try scope-based lookup
-      const scoped = await navigator.serviceWorker.getRegistration("/star-guide/");
+      const scoped = await navigator.serviceWorker.getRegistration(swScope);
       return scoped ? { scope: scoped.scope, active: !!scoped.active } : null;
     });
     check("Service worker registered", !!swReg, "no registration after 2s wait");
     if (swReg) {
-      check("SW scope contains /star-guide/", swReg.scope?.includes("/star-guide/"), swReg.scope);
+      check(`SW scope contains ${CONFIG.pwa.swScope}`, swReg.scope?.includes(CONFIG.pwa.swScope), swReg.scope);
       check("SW has active worker", swReg.active, "not active");
     }
   } else {
     check("Service worker registered", false, "API unsupported");
-    check("SW scope contains /star-guide/", false, "API unsupported");
+    check(`SW scope contains ${CONFIG.pwa.swScope}`, false, "API unsupported");
     check("SW has active worker", false, "API unsupported");
   }
 
@@ -401,9 +402,9 @@ async function run() {
     }
   });
   check("Manifest fetchable (HTTP 200)", manifestResp.ok, `status ${manifestResp.status}`);
-  check("Manifest theme_color = #06060e", manifestResp.json?.theme_color === "#06060e", manifestResp.json?.theme_color);
-  check("Manifest display = standalone", manifestResp.json?.display === "standalone", manifestResp.json?.display);
-  check("Manifest has maskable icon", manifestResp.json?.icons?.some(i => (i.purpose || "").includes("maskable")), JSON.stringify(manifestResp.json?.icons?.map(i => i.purpose)));
+  check(`Manifest theme_color = ${CONFIG.pwa.themeColor}`, manifestResp.json?.theme_color === CONFIG.pwa.themeColor, manifestResp.json?.theme_color);
+  check(`Manifest display = ${CONFIG.pwa.display}`, manifestResp.json?.display === CONFIG.pwa.display, manifestResp.json?.display);
+  check(`Manifest has ${CONFIG.pwa.iconPurpose} icon`, manifestResp.json?.icons?.some(i => (i.purpose || "").includes(CONFIG.pwa.iconPurpose)), JSON.stringify(manifestResp.json?.icons?.map(i => i.purpose)));
 
   // Icon fetchable
   const iconResp = await desktop.evaluate(async () => {
@@ -419,7 +420,7 @@ async function run() {
   });
   check("apple-touch-icon fetchable", iconResp.ok, `status ${iconResp.status}`);
   check("Icon is image/png", iconResp.type?.includes("png"), iconResp.type);
-  check("Icon file size > 50KB", iconResp.size > 50000, `${iconResp.size} bytes`);
+  check(`Icon file size > ${Math.floor(CONFIG.thresholds.iconMinSize/1000)}KB`, iconResp.size > CONFIG.thresholds.iconMinSize, `${iconResp.size} bytes`);
   await screenshot(desktop, "desktop-final");
   console.log("");
 

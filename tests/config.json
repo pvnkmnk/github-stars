@@ -1,0 +1,54 @@
+{
+  "baseUrl": "https://pvnkmnk.github.io/star-guide",
+  "viewport": {
+    "desktop": {
+      "width": 1280,
+      "height": 800
+    },
+    "mobile": {
+      "width": 480,
+      "height": 900
+    }
+  },
+  "timeouts": {
+    "navigation": 30000,
+    "selector": 15000,
+    "animation": 800,
+    "themeToggle": 500,
+    "serviceWorker": 2000,
+    "searchFilter": 1000
+  },
+  "thresholds": {
+    "categoryCount": 18,
+    "minContentChars": 5000,
+    "minKeepCards": 10,
+    "minNavPills": 16,
+    "searchNarrowMax": 500,
+    "restoreMinRows": 500,
+    "iconMinSize": 50000
+  },
+  "expected": {
+    "pageTitle": "STAR",
+    "keepCards": [
+      "opencode",
+      "fzf",
+      "coolify"
+    ],
+    "searchTerm": "fzf",
+    "langFilter": "Python",
+    "securityPillEmoji": "\ud83d\udd12"
+  },
+  "pwa": {
+    "swScope": "/star-guide/",
+    "themeColor": "#070A0B",
+    "display": "standalone",
+    "iconPurpose": "maskable",
+    "iosStatusBar": "black-translucent",
+    "iosTitle": "STAR//GUIDE",
+    "iosIconSizes": "512x512"
+  },
+  "css": {
+    "bodyBgVar": "--ink"
+  },
+  "screenshotDir": "/tmp"
+}
