@@ -225,3 +225,36 @@ class TestAppendNewToNotCurated:
         assert nc_file.exists()
         content = nc_file.read_text(encoding="utf-8")
         assert "user/first-ever" in content
+
+    def test_case_insensitive_dedup_prevents_duplicates(self, tmp_path):
+        """GitHub repo renames (FastApps vs fastapps) are caught by case-insensitive check."""
+        from update_stars import append_new_to_not_curated, extract_repos_from_file
+
+        # Simulate: NOT-CURATED has "user/fastapps" (old casing)
+        # DB has "user/FastApps" (new casing after rename)
+        stars_db = {
+            "user/FastApps": (100, "Python", "Renamed repo"),
+        }
+        curated = []
+        nc_file = tmp_path / "NOT-CURATED.md"
+        nc_file.write_text(
+            "# Not Curated\n\n"
+            "## Old Batch\n\n"
+            "- [user/fastapps](https://github.com/user/fastapps) — ⭐100 (Python) Old casing\n"
+        )
+
+        # Case-sensitive check (OLD BUG): would return 1, creating a duplicate
+        # Case-insensitive check (FIX): should return 0
+        result = append_new_to_not_curated(stars_db, curated, str(nc_file))
+
+        # Verify: old lowercased entry excluded the new-cased repo → 0 appended
+        assert result == 0
+
+        # Double-check: extract_repos_from_file still returns the old casing
+        repos = extract_repos_from_file(str(nc_file))
+        assert "user/fastapps" in repos  # extracted with original casing
+
+        # The FIX: comparing .lower() versions catches the duplicate
+        nc_lower = set(r.lower() for r in repos)
+        assert "user/fastapps" in nc_lower  # old casing, lowered
+        assert "user/fastapps" == "user/FastApps".lower()

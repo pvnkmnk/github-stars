@@ -609,20 +609,22 @@ def regenerate_cheatsheet(sections, stars_db, filepath):
 
 def append_new_to_not_curated(stars_db, curated_repos, filepath):
     """
+    DEPRECATED: main() now uses a direct-write approach with case-insensitive
+    deduplication (see main() lines 866-885). This function is retained only
+    for standalone use and existing test coverage.
+
     Find repos in DB not in any curated file, append to NOT-CURATED.md.
-    Note: main() now uses a direct-write approach that handles auto-curation
-    filtering. This function is retained for standalone/imported use.
     """
-    curated_all = set(curated_repos)
+    curated_all = set(r.lower() for r in curated_repos)
     
-    # Also exclude repos already in NOT-CURATED.md
+    # Also exclude repos already in NOT-CURATED.md (case-insensitive)
     if Path(filepath).exists():
         not_curated_repos = extract_repos_from_file(filepath)
-        curated_all |= not_curated_repos
+        curated_all |= set(r.lower() for r in not_curated_repos)
     
     new_repos = []
     for full_name, (stars, lang, desc) in stars_db.items():
-        if full_name not in curated_all:
+        if full_name.lower() not in curated_all:
             new_repos.append((stars, full_name, lang, desc))
     
     if not new_repos:
@@ -809,17 +811,17 @@ def main():
         print("Error: No sections found in STAR-GUIDE.md. Check file format - aborting.")
         sys.exit(1)
     
-    # Build the full "already seen" set
-    curated_all = set(curated_repos)
+    # Build the full "already seen" set (case-insensitive: GitHub may rename repos)
+    curated_all = set(r.lower() for r in curated_repos)
     for guide_file in ["NOT-CURATED.md"]:
         fp = STARS_DIR / guide_file
         if fp.exists():
-            curated_all |= extract_repos_from_file(fp)
+            curated_all |= set(r.lower() for r in extract_repos_from_file(fp))
     
-    # Identify truly new repos
+    # Identify truly new repos (case-insensitive comparison)
     new_repo_list = []
     for full_name, (stars, lang, desc) in stars_db.items():
-        if full_name not in curated_all:
+        if full_name.lower() not in curated_all:
             new_repo_list.append((stars, full_name, lang, desc))
     new_repo_list.sort(key=lambda x: -x[0])
     
@@ -866,14 +868,28 @@ def main():
     # ── Append remaining new repos to NOT-CURATED.md ────────
     not_curated_path = STARS_DIR / "NOT-CURATED.md"
     if needs_review:
-        # needs_review already excludes repos already in STAR-GUIDE or NOT-CURATED
-        with open(not_curated_path, 'a', encoding='utf-8') as f:
-            date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-            f.write(f"\n## 🆕 New Stars — {date_str}\n\n")
-            for stars, full_name, lang, desc in sorted(needs_review, key=lambda x: -x[0]):
-                desc_short = (desc or '')[:120].replace('\n', ' ').replace('|', '/')
-                f.write(f"- [{full_name}](https://github.com/{full_name}) — ⭐{stars:,} ({lang or '-'}) {desc_short}\n")
-        print(f"  → Appended {len(needs_review)} new repos to NOT-CURATED.md")
+        # Belt-and-suspenders: filter out repos already in NOT-CURATED.md
+        # (handles case-sensitivity edge cases from GitHub repo renames)
+        if not_curated_path.exists():
+            nc_existing = extract_repos_from_file(not_curated_path)
+            nc_lower = set(r.lower() for r in nc_existing)
+            filtered = [(s, fn, l, d) for s, fn, l, d in needs_review
+                        if fn.lower() not in nc_lower]
+            skipped = len(needs_review) - len(filtered)
+            if skipped:
+                print(f"  ⚠️  Skipped {skipped} repos already in NOT-CURATED.md (case-insensitive dedup)")
+            needs_review = filtered
+
+        if not needs_review:
+            print(f"  → No new repos to append to NOT-CURATED.md (all already present)")
+        else:
+            with open(not_curated_path, 'a', encoding='utf-8') as f:
+                date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+                f.write(f"\n## 🆕 New Stars — {date_str}\n\n")
+                for stars, full_name, lang, desc in sorted(needs_review, key=lambda x: -x[0]):
+                    desc_short = (desc or '')[:120].replace('\n', ' ').replace('|', '/')
+                    f.write(f"- [{full_name}](https://github.com/{full_name}) — ⭐{stars:,} ({lang or '-'}) {desc_short}\n")
+            print(f"  → Appended {len(needs_review)} new repos to NOT-CURATED.md")
         new_count = len(needs_review)
     else:
         new_count = 0
