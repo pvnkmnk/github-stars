@@ -150,3 +150,86 @@ class TestEdgeCases:
     def test_empty_keywords(self):
         score = score_repo_for_category("user/repo", "Python", "description", [], [], phrases=None, stars=0)
         assert score == 0
+
+class TestPhraseMatchingExtended:
+    """Extended phrase matching: weight 5, name bonus +1, multiple phrases."""
+
+    def test_phrase_in_description_adds_5(self):
+        """Phrase found in description -> +5, no name bonus."""
+        from update_stars import score_repo_for_category
+        result = score_repo_for_category(
+            "owner/repo", "Python", "foo bar baz reverse proxy nginx",
+            strong_keywords=[], weak_keywords=[],
+            phrases=["reverse proxy"], stars=0
+        )
+        assert result == 5
+
+    def test_phrase_in_name_adds_6(self):
+        """Phrase found in repo name -> +5 + 1 bonus = 6."""
+        from update_stars import score_repo_for_category
+        result = score_repo_for_category(
+            "owner/reverse proxy tool", "Python", "some description",
+            strong_keywords=[], weak_keywords=[],
+            phrases=["reverse proxy"], stars=0
+        )
+        assert result == 6
+
+    def test_multiple_phrases_cumulative(self):
+        """Each matching phrase adds its own score."""
+        from update_stars import score_repo_for_category
+        result = score_repo_for_category(
+            "owner/repo", "Python", "a reverse proxy for home server use",
+            strong_keywords=[], weak_keywords=[],
+            phrases=["reverse proxy", "home server"], stars=0
+        )
+        assert result == 10  # 5 + 5
+
+    def test_phrase_not_present_adds_0(self):
+        """No matching phrase -> score unchanged."""
+        from update_stars import score_repo_for_category
+        result = score_repo_for_category(
+            "owner/repo", "Python", "some unrelated text",
+            strong_keywords=[], weak_keywords=[],
+            phrases=["reverse proxy", "smart home"], stars=0
+        )
+        assert result == 0
+
+    def test_phrase_case_insensitive(self):
+        """Phrase matching is case-insensitive."""
+        from update_stars import score_repo_for_category
+        result = score_repo_for_category(
+            "owner/repo", "Python", "Uses Reverse Proxy for routing",
+            strong_keywords=[], weak_keywords=[],
+            phrases=["reverse proxy"], stars=0
+        )
+        assert result == 5
+
+    def test_phrase_none_falls_through(self):
+        """phrases=None should not crash."""
+        from update_stars import score_repo_for_category
+        result = score_repo_for_category(
+            "owner/repo", "Python", "some description",
+            strong_keywords=["python"], weak_keywords=["tool"],
+            phrases=None, stars=0
+        )
+        assert result == 4  # "python" token match = 4
+
+    def test_phrase_empty_list_works(self):
+        """Empty phrases list should not crash."""
+        from update_stars import score_repo_for_category
+        result = score_repo_for_category(
+            "owner/repo", "Python", "some description",
+            strong_keywords=["python"], weak_keywords=[],
+            phrases=[], stars=0
+        )
+        assert result == 4
+
+    def test_phrase_with_star_bonus(self):
+        """Phrase score combines with star bonus."""
+        from update_stars import score_repo_for_category
+        result = score_repo_for_category(
+            "owner/repo", "Python", "a reverse proxy for servers",
+            strong_keywords=[], weak_keywords=[],
+            phrases=["reverse proxy"], stars=60_000
+        )
+        assert result == 8  # 5 (phrase) + 3 (60k/20k star bonus)
