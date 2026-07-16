@@ -130,6 +130,8 @@
 | [Aider-AI/aider](https://github.com/Aider-AI/aider) | 46,427 | Python | AI pair programming in your terminal | |
 | [aaif-goose/goose](https://github.com/aaif-goose/goose) | 49,755 | Rust | Open source extensible AI agent — install, execute, edit, test | ⭐ [Pick](#-agentic-dev-top-10) |
 
+| [derekbar90/opencode-conductor](https://github.com/derekbar90/opencode-conductor) | 118 | TypeScript | OpenCode conductor — agent orchestration for coding workflows | 🆕 |
+| [SimonSchubert/Kai](https://github.com/SimonSchubert/Kai) | 1,061 | Kotlin | OpenClaw alternative in your pocket — AI chatbot for Android/iOS | 🆕 |
 | [dmgrok/agent-plugins](https://github.com/dmgrok/agent-plugins) | 18 | Python | Intelligent skill discovery for AI agents. Find quality-validated skills that match your project with smart recommendati | 🆕 |
 | [XiaomiMiMo/MiMo-Code](https://github.com/XiaomiMiMo/MiMo-Code) | 12,133 | TypeScript | MiMo Code: Where Models and Agents Co-Evolve | 🆕 |
 | [DeusData/codebase-memory-mcp](https://github.com/DeusData/codebase-memory-mcp) | 31,936 | C | High-performance code intelligence MCP server. Indexes codebases into a persistent knowledge graph — average repo in mil | 🆕 |
@@ -502,6 +504,7 @@
 | [hiyouga/LlamaFactory](https://github.com/hiyouga/LlamaFactory) | 72,279 | Python | Unified efficient fine-tuning of 100+ LLMs & VLMs | ⭐ [Pick](#-aillm-top-10) |
 | [AlexsJones/llmfit](https://github.com/AlexsJones/llmfit) | 28,237 | Rust | Find what LLM runs on your hardware — hundreds of models & providers | |
 
+| [huggingface/ml-intern](https://github.com/huggingface/ml-intern) | 10,657 | Python | Open-source ML engineer that reads papers, trains models, and ships ML models | 🆕 |
 | [headroomlabs-ai/headroom](https://github.com/headroomlabs-ai/headroom) | 59,386 | Python | Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 20% fewer tokens for coding agents, 60-95% | 🆕 |
 | [BerriAI/litellm](https://github.com/BerriAI/litellm) | 53,729 | Python | Python SDK, Proxy Server (AI Gateway) to call 100+ LLM APIs in OpenAI (or native) format, with cost tracking, guardrails | 🆕 |
 | [Emmimal/context-graph-benchmark](https://github.com/Emmimal/context-graph-benchmark) | 27 | Python | A pure-Python structured memory benchmark for multi-agent LLM systems — context graph vs vector RAG vs raw history dump, | 🆕 |
@@ -745,6 +748,7 @@
 | [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev) | ~95k | — | SaaS, PaaS, IaaS free tiers for devs/devops |
 | [microsoft/Web-Dev-For-Beginners](https://github.com/microsoft/Web-Dev-For-Beginners) | ~85k | JavaScript | 24-lesson web development curriculum |
 
+| [vitejs/vite](https://github.com/vitejs/vite) | 75,400 | TypeScript | Next generation frontend tooling. Instant server start, lightning fast HMR. | 🆕 |
 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 215,562 | Python | The agent that grows with you | 🆕 |
 | [OpenCut-app/OpenCut](https://github.com/OpenCut-app/OpenCut) | 72,763 | TypeScript | The open-source CapCut alternative | 🆕 |
 | [zed-industries/zed](https://github.com/zed-industries/zed) | 87,060 | Rust | Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sit | 🆕 |
@@ -807,6 +811,8 @@
 |------|-----|------|-------------|
 | [alacritty/alacritty](https://github.com/alacritty/alacritty) | ~58k | Rust | GPU-accelerated cross-platform terminal emulator |
 
+| [ljtn/epiq](https://github.com/ljtn/epiq) | 312 | TypeScript | Local-first CLI issue tracker — distributed and backed by Git | 🆕 |
+| [pranshuparmar/witr](https://github.com/pranshuparmar/witr) | 18,243 | Go | Why is this running? — CLI troubleshooting tool for devops and sysadmins | 🆕 |
 | [vgreg/faceoff](https://github.com/vgreg/faceoff) | 71 | Python | Terminal tool to watch hockey games | 🆕 |
 | [tobi/qmd](https://github.com/tobi/qmd) | 27,926 | TypeScript | mini cli search engine for your docs, knowledge bases, meeting notes, whatever. Tracking current sota approaches while b | 🆕 |
 | [zokrezyl/yetty](https://github.com/zokrezyl/yetty) | 57 | C | GPU terminal with rich inline figures for CLI tools, AI agents, plots, documents, and remote UI. | 🆕 |
