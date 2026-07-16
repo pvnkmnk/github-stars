@@ -1,7 +1,7 @@
 {
   "categories": [
     {
-      "emoji": "📡",
+      "emoji": "\ud83d\udce1",
       "name": "Homelab Infrastructure",
       "strong": [
         "self-host",
@@ -82,7 +82,7 @@
       ]
     },
     {
-      "emoji": "🤖",
+      "emoji": "\ud83e\udd16",
       "name": "Agentic Dev Tools",
       "strong": [
         "agentic",
@@ -163,12 +163,12 @@
         "ai agent",
         "agent orchestration",
         "prompt engineering",
-        "agent plugin",
-        "agent skill"
+        "models and agents",
+        "ai coding assistant"
       ]
     },
     {
-      "emoji": "🎵",
+      "emoji": "\ud83c\udfb5",
       "name": "Self-Hosted Media",
       "strong": [
         "music",
@@ -253,11 +253,14 @@
         "music management",
         "photo management",
         "audiobook player",
-        "podcast player"
+        "podcast player",
+        "download songs",
+        "spotify and apple music",
+        "music streaming"
       ]
     },
     {
-      "emoji": "🐳",
+      "emoji": "\ud83d\udc33",
       "name": "Docker & Container Management",
       "strong": [
         "docker",
@@ -318,7 +321,7 @@
       ]
     },
     {
-      "emoji": "🧠",
+      "emoji": "\ud83e\udde0",
       "name": "AI / LLM Tools",
       "strong": [
         "LLM",
@@ -403,11 +406,13 @@
         "retrieval augmented generation",
         "text generation",
         "image generation",
-        "diffusion model"
+        "diffusion model",
+        "RAG chunk",
+        "context window optimization"
       ]
     },
     {
-      "emoji": "🗄️",
+      "emoji": "\ud83d\uddc4\ufe0f",
       "name": "Databases & Storage",
       "strong": [
         "database",
@@ -497,7 +502,7 @@
       ]
     },
     {
-      "emoji": "🔒",
+      "emoji": "\ud83d\udd12",
       "name": "Security & Authentication",
       "strong": [
         "security",
@@ -554,7 +559,10 @@
         "smallstep",
         "opnsense",
         "pfsense",
-        "adguard"
+        "adguard",
+        "oauth2",
+        "openid",
+        "oauth2-proxy"
       ],
       "weak": [
         "auth",
@@ -590,14 +598,14 @@
         "secret scanning",
         "security audit",
         "certificate management",
-        "identity provider",
         "access control",
         "two factor authentication",
-        "multi factor authentication"
+        "multi factor authentication",
+        "reverse proxy that provides authentication"
       ]
     },
     {
-      "emoji": "⚡",
+      "emoji": "\u26a1",
       "name": "Automation & Workflows",
       "strong": [
         "workflow",
@@ -668,7 +676,7 @@
       ]
     },
     {
-      "emoji": "💻",
+      "emoji": "\ud83d\udcbb",
       "name": "Dev Tools & Languages",
       "strong": [
         "programming",
@@ -773,7 +781,8 @@
         "debugger",
         "profiler",
         "api-client",
-        "api-tool"
+        "api-tool",
+        "compiler"
       ],
       "phrases": [
         "package manager",
@@ -792,7 +801,7 @@
       ]
     },
     {
-      "emoji": "⌨️",
+      "emoji": "\u2328\ufe0f",
       "name": "Terminal, CLI & Shell",
       "strong": [
         "terminal",
@@ -882,11 +891,14 @@
         "syntax highlighting",
         "system monitor",
         "text editor",
-        "package manager"
+        "package manager",
+        "terminal tool",
+        "cli search engine",
+        "cli search"
       ]
     },
     {
-      "emoji": "📝",
+      "emoji": "\ud83d\udcdd",
       "name": "Knowledge Management & PKM",
       "strong": [
         "knowledge",
@@ -958,11 +970,14 @@
         "personal wiki",
         "task management",
         "desktop app",
-        "knowledge base"
+        "knowledge base",
+        "markdown knowledge base",
+        "markdown workspace",
+        "manage markdown"
       ]
     },
     {
-      "emoji": "🌐",
+      "emoji": "\ud83c\udf10",
       "name": "Web & Frontend",
       "strong": [
         "web",
@@ -1059,11 +1074,13 @@
         "ui framework",
         "web framework",
         "animation library",
-        "design tool"
+        "design tool",
+        "modern web development",
+        "front-end checklist"
       ]
     },
     {
-      "emoji": "💬",
+      "emoji": "\ud83d\udcac",
       "name": "Chat & Messaging",
       "strong": [
         "chat",
@@ -1129,7 +1146,7 @@
       ]
     },
     {
-      "emoji": "📄",
+      "emoji": "\ud83d\udcc4",
       "name": "Docs & Blog",
       "strong": [
         "documentation",
@@ -1184,11 +1201,13 @@
         "content management",
         "knowledge base",
         "technical documentation",
-        "digital publishing"
+        "digital publishing",
+        "github readme",
+        "readme homepage"
       ]
     },
     {
-      "emoji": "📱",
+      "emoji": "\ud83d\udcf1",
       "name": "Mobile",
       "strong": [
         "android",
@@ -1253,11 +1272,13 @@
         "podcast player",
         "video player",
         "screen mirroring",
-        "streaming client"
+        "streaming client",
+        "android screen",
+        "screen streaming"
       ]
     },
     {
-      "emoji": "🪟",
+      "emoji": "\ud83e\ude9f",
       "name": "Windows",
       "strong": [
         "windows",

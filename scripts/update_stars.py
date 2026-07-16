@@ -330,7 +330,7 @@ def auto_curate_repos(new_repos, star_guide_path, threshold=7, not_curated_path=
     - Top score must be >= threshold
     - If only one category matched, auto-curate (no ambiguity)
     - If top score >= threshold+4, auto-curate regardless of gap (very high confidence)
-    - Otherwise, top score must be >= 1.3x second-best (clear winner)
+    - Otherwise, top score must be >= 1.15x second-best (clear winner)
 
     Returns: (auto_curated, remaining, modified) where:
       - auto_curated: [(emoji, cat_name, score, stars, full_name, lang, desc), ...]
@@ -355,7 +355,7 @@ def auto_curate_repos(new_repos, star_guide_path, threshold=7, not_curated_path=
 
         if top_score >= threshold:
             # Floating gap: higher confidence -> looser gap needed
-            if second_score == 0 or top_score >= threshold + 4 or top_score >= 1.3 * second_score:
+            if second_score == 0 or top_score >= threshold + 4 or top_score >= 1.15 * second_score:
                 autos.append((top_emoji, top_cat, top_score, stars, full_name, lang, desc))
             else:
                 remaining.append((stars, full_name, lang, desc))

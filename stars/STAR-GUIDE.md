@@ -89,6 +89,7 @@
 | [IAmStoxe/wirehole](https://github.com/IAmStoxe/wirehole) | 4,959 | — | WireGuard + Pi-hole + Unbound in docker-compose | ⭐ [Pick](#-homelab-top-10) 🔧 [Reverse Proxy](#-reverse-proxy) |
 | [linuxserver/docker-swag](https://github.com/linuxserver/docker-swag) | 3,680 | Dockerfile | Nginx reverse proxy + Certbot + fail2ban | 🔧 [Reverse Proxy](#-reverse-proxy) |
 
+| [Tal0na/Awesome-SelfHosted-Music-Awesome](https://github.com/Tal0na/Awesome-SelfHosted-Music-Awesome) | 142 | SCSS | Everything you need for self-hosted music - servers, clients, local players, plugins, themes, scrobblers, tools, integra | 🆕 |
 | [Dokploy/dokploy](https://github.com/Dokploy/dokploy) | 34,953 | TypeScript | Open Source Alternative to Vercel, Netlify and Heroku. | 🆕 |
 | [paperless-ngx/paperless-ngx](https://github.com/paperless-ngx/paperless-ngx) | 42,217 | Python | A community-supported supercharged document management system: scan, index and archive all your documents | 🆕 |
 | [ruvnet/RuView](https://github.com/ruvnet/RuView) | 74,514 | Rust | π RuView turns commodity WiFi signals into real-time spatial intelligence, vital sign monitoring, and presence detection | 🆕 |
@@ -129,6 +130,12 @@
 | [Aider-AI/aider](https://github.com/Aider-AI/aider) | 46,427 | Python | AI pair programming in your terminal | |
 | [aaif-goose/goose](https://github.com/aaif-goose/goose) | 49,755 | Rust | Open source extensible AI agent — install, execute, edit, test | ⭐ [Pick](#-agentic-dev-top-10) |
 
+| [galdawave/pickle-rick-extension](https://github.com/galdawave/pickle-rick-extension) | 454 | TypeScript | This extension transforms the Gemini CLI into "Pickle Rick," a hyper-intelligent, arrogant, yet extremely competent  eng | 🆕 |
+| [mksglu/context-mode](https://github.com/mksglu/context-mode) | 18,981 | TypeScript | Context window optimization for AI coding agents. Sandboxes tool output (98% reduction), persists session memory, and    | 🆕 |
+| [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills) | 28,178 | - | A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex | 🆕 |
+| [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) | 52,366 | Python | AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a gro | 🆕 |
+| [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) | 84,150 | JavaScript | Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote. | 🆕 |
+| [Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify) | 87,944 | Python | AI coding assistant skill (Claude Code, Codex, OpenCode, Cursor, Gemini CLI, and more). Turn any folder of code, SQL sch | 🆕 |
 | [nicobailon/surf-cli](https://github.com/nicobailon/surf-cli) | 548 | TypeScript | The CLI for AI agents to control Chrome. Zero config, agent-agnostic, battle-tested. | 🆕 |
 | [omnigent-ai/omnigent](https://github.com/omnigent-ai/omnigent) | 7,348 | Python | Omnigent is an open-source AI agent framework and meta-harness: orchestrate Claude Code, Codex, Cursor, Pi, and custom a | 🆕 |
 | [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) | 42,916 | Python | Installable GitHub library of 1,900+ agentic skills for Claude Code, Cursor, Codex CLI, Autohand Code, Gemini CLI, Antig | 🆕 |
@@ -284,6 +291,7 @@
 | [clangen/musikcube](https://github.com/clangen/musikcube) | 4,784 | C++ | Cross-platform terminal-based music player & server | ⭐ [Pick](#-media-top-10) |
 | [dweymouth/supersonic](https://github.com/dweymouth/supersonic) | 2,210 | Go | Lightweight cross-platform desktop client for music servers | |
 
+| [tsirysndr/rockboxd](https://github.com/tsirysndr/rockboxd) | 279 | C | A modern, network-enabled music player platform built on Rockbox technology https://www.rockbox.org | 🆕 |
 | [anandprtp/Antra](https://github.com/anandprtp/Antra) | 1,275 | Python | A desktop music library builder that turns Spotify, Youtube Music Apple Music, Amazon Music, Tidal, Qobuz, and Deezer li | 🆕 |
 | [iptv-org/iptv](https://github.com/iptv-org/iptv) | 125,396 | TypeScript | Collection of publicly available IPTV channels from all over the world | 🆕 |
 | [WB2024/Navidrome-SmartPlaylist-Generator-nsp](https://github.com/WB2024/Navidrome-SmartPlaylist-Generator-nsp) | 62 | Python | A fully guided Python CLI tool for creating Navidrome .nsp smart playlist files — featuring nearly 300 presets, 100+ fie | 🆕 |
@@ -489,6 +497,7 @@
 | [hiyouga/LlamaFactory](https://github.com/hiyouga/LlamaFactory) | 72,279 | Python | Unified efficient fine-tuning of 100+ LLMs & VLMs | ⭐ [Pick](#-aillm-top-10) |
 | [AlexsJones/llmfit](https://github.com/AlexsJones/llmfit) | 28,237 | Rust | Find what LLM runs on your hardware — hundreds of models & providers | |
 
+| [headroomlabs-ai/headroom](https://github.com/headroomlabs-ai/headroom) | 59,386 | Python | Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 20% fewer tokens for coding agents, 60-95% | 🆕 |
 | [BerriAI/litellm](https://github.com/BerriAI/litellm) | 53,729 | Python | Python SDK, Proxy Server (AI Gateway) to call 100+ LLM APIs in OpenAI (or native) format, with cost tracking, guardrails | 🆕 |
 | [Emmimal/context-graph-benchmark](https://github.com/Emmimal/context-graph-benchmark) | 27 | Python | A pure-Python structured memory benchmark for multi-agent LLM systems — context graph vs vector RAG vs raw history dump, | 🆕 |
 | [Osmantic/ODS](https://github.com/Osmantic/ODS) | 2,933 | Shell | Turn your PC, Mac, or Linux box into an AI server.  LLM inference, chat UI, voice, agents, workflows, RAG, and image gen | 🆕 |
@@ -634,6 +643,7 @@
 | [gitleaks/gitleaks](https://github.com/gitleaks/gitleaks) | 27,767 | Go | Find secrets before you commit them | 🔧 [Secrets](#-secrets-management) |
 | [gemini-cli-extensions/security](https://github.com/gemini-cli-extensions/security) | 787 | TypeScript | Vulnerability scanning extension for Gemini CLI | |
 
+| [oauth2-proxy/oauth2-proxy](https://github.com/oauth2-proxy/oauth2-proxy) | 14,663 | Go | A reverse proxy that provides authentication with Google, Azure, OpenID Connect and many more identity providers. | 🆕 |
 | [hashgraph-online/hol-guard-plugin](https://github.com/hashgraph-online/hol-guard-plugin) | 2 | Shell | Codex plugin for HOL Guard AI security and ai-plugin-scanner workflows | 🆕 |
 | [dmgrok/agent_skills_directory](https://github.com/dmgrok/agent_skills_directory) | 18 | Python | Intelligent skill discovery for AI agents. Find quality-validated skills that match your project with smart recommendati | 🆕 |
 | [nextlevelbuilder/goclaw](https://github.com/nextlevelbuilder/goclaw) | 3,277 | Go | GoClaw - GoClaw is OpenClaw rebuilt in Go — with multi-tenant isolation, 5-layer security, and native concurrency. Deplo | 🆕 |
@@ -730,6 +740,9 @@
 | [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev) | ~95k | — | SaaS, PaaS, IaaS free tiers for devs/devops |
 | [microsoft/Web-Dev-For-Beginners](https://github.com/microsoft/Web-Dev-For-Beginners) | ~85k | JavaScript | 24-lesson web development curriculum |
 
+| [bobvibes/Clavix](https://github.com/bobvibes/Clavix) | 668 | TypeScript | Transform vague ideas into production-ready prompts. Analyze gaps, generate PRDs, and supercharge your AI coding workflo | 🆕 |
+| [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search) | 22,982 | TypeScript | The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor C | 🆕 |
+| [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 215,562 | Python | The agent that grows with you | 🆕 |
 | [OpenCut-app/OpenCut](https://github.com/OpenCut-app/OpenCut) | 72,763 | TypeScript | The open-source CapCut alternative | 🆕 |
 | [zed-industries/zed](https://github.com/zed-industries/zed) | 87,060 | Rust | Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sit | 🆕 |
 | [BrunkenClaas/lx](https://github.com/BrunkenClaas/lx) | 20 | Rust | AI-native equivalents of the Unix tools you know — 72 small, composable, local-first LLM CLIs. One static Rust binary ea | 🆕 |
@@ -791,6 +804,8 @@
 |------|-----|------|-------------|
 | [alacritty/alacritty](https://github.com/alacritty/alacritty) | ~58k | Rust | GPU-accelerated cross-platform terminal emulator |
 
+| [vgreg/faceoff](https://github.com/vgreg/faceoff) | 71 | Python | Terminal tool to watch hockey games | 🆕 |
+| [tobi/qmd](https://github.com/tobi/qmd) | 27,926 | TypeScript | mini cli search engine for your docs, knowledge bases, meeting notes, whatever. Tracking current sota approaches while b | 🆕 |
 | [zokrezyl/yetty](https://github.com/zokrezyl/yetty) | 57 | C | GPU terminal with rich inline figures for CLI tools, AI agents, plots, documents, and remote UI. | 🆕 |
 | [chubin/cheat.sh](https://github.com/chubin/cheat.sh) | 41,466 | Python | the only cheat sheet you need | 🆕 |
 | [gemini-cli-extensions/jules](https://github.com/gemini-cli-extensions/jules) | 403 | JavaScript | A Gemini CLI extension that allows you to use the Gemini CLI to orchestrate the Jules asynchronous agent to perform codi | 🆕 |
@@ -884,6 +899,7 @@
 | [squidfunk/mkdocs-material](https://github.com/squidfunk/mkdocs-material) | 26,960 | Python | Documentation that simply works |
 | [gamosoft/NoteDiscovery](https://github.com/gamosoft/NoteDiscovery) | 2,553 | JavaScript | Self-hosted knowledge base |
 
+| [refactoringhq/tolaria](https://github.com/refactoringhq/tolaria) | 18,686 | TypeScript | Desktop app to manage markdown knowledge bases | 🆕 |
 | [czottmann/obsidian-actions-uri](https://github.com/czottmann/obsidian-actions-uri) | 194 | TypeScript | A plugin for Obsidian (https://obsidian.md) that adds additional `x-callback-url` endpoints to the app for common action | 🆕 |
 | [joelseq/obsidian-linkstowr](https://github.com/joelseq/obsidian-linkstowr) | 59 | TypeScript | Effortlessly save and organize your web links in Obsidian | 🆕 |
 | [esodesod/obsidian-web-clipper-templates](https://github.com/esodesod/obsidian-web-clipper-templates) | 105 | - | My collection of Obsidian Web Clipper templates | 🆕 |
@@ -984,6 +1000,7 @@
 | [mui/mui-x](https://github.com/mui/mui-x) | 5,740 | TypeScript | Build complex data-rich apps with advanced React components |
 | [dembrandt/dembrandt](https://github.com/dembrandt/dembrandt) | 1,942 | TypeScript | Extract any website's design system into tokens in seconds |
 
+| [thedaviddias/Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist) | 73,219 | MDX | 🗂 The essential checklist for modern web development, for humans and AI agents | 🆕 |
 | [N-Zik-Group/N-Zik](https://github.com/N-Zik-Group/N-Zik) | 129 | Kotlin | A multilingual YouTube Music frontend for Android, focused on performance, UI/UX refinements, feature expansion, and lon | 🆕 |
 | [umami-software/umami](https://github.com/umami-software/umami) | 37,219 | TypeScript | Umami is a modern, privacy-focused analytics platform. An open-source alternative to Google Analytics, Mixpanel and Ampl | 🆕 |
 | [vercel-labs/dev3000](https://github.com/vercel-labs/dev3000) | 1,531 | TypeScript | Captures your web app's complete development timeline - server logs, browser events, console messages, network requests, | 🆕 |
@@ -1095,6 +1112,7 @@
 | [TfTHacker/obsidian42-HelpMate](https://github.com/TfTHacker/obsidian42-HelpMate) | 50 | TypeScript | HelpMate for Obsidian — documentation from within the app |
 | [langgenius/dify-docs](https://github.com/langgenius/dify-docs) | 170 | MDX | Official Dify documentation |
 
+| [oil-oil/beautify-github-readme](https://github.com/oil-oil/beautify-github-readme) | 585 | Python | Design clear, theme-specific GitHub README homepages with SVG titles, real proof, and maintainable Markdown | 🆕 |
 | [jackyzha0/quartz](https://github.com/jackyzha0/quartz) | 12,537 | TypeScript | 🌱 a fast, batteries-included static-site generator that transforms Markdown content into fully functional websites | 🆕 |
 | [kartik0trivedi/jequill](https://github.com/kartik0trivedi/jequill) | 1 | TypeScript | Write and publish Jekyll blog posts directly from your vault — front matter generation, slug management, and wiki link c | 🆕 |
 > **Note:** Static site generators (hugo, astro) are in [Dev Tools & Languages](#-dev-tools--languages).
@@ -1120,6 +1138,7 @@
 | [OminousIndustries/PhoneDriver](https://github.com/OminousIndustries/PhoneDriver) | 1,513 | Python | Android phone control with Qwen3-VL |
 | [Acode-Foundation/Acode](https://github.com/Acode-Foundation/Acode) | 5,658 | JavaScript | Powerful text/code editor for Android |
 
+| [Shrey113/App-Scrcpy](https://github.com/Shrey113/App-Scrcpy) | 97 | HTML | A scrcpy-inspired Android screen, audio, and control streaming client for Windows — built without ADB, using pure WebSoc | 🆕 |
 | [Ellicode/mage](https://github.com/Ellicode/mage) | 152 | TypeScript | A lightweight and fast app launcher for Windows | 🆕 |
 | [Skardyy/Rhiza](https://github.com/Skardyy/Rhiza) | 26 | Rust | windows shortcut creator / app launcher | 🆕 |
 | [koush/UniversalAdbDriver](https://github.com/koush/UniversalAdbDriver) | 2,303 | C# | One size fits all Windows Drivers for Android Debug Bridge. | 🆕 |
