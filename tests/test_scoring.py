@@ -95,6 +95,48 @@ class TestStarBonus:
         assert score >= 0
 
 
+class TestPluralStemming:
+    """Plural stemming: keywords match token+s forms (e.g. LLM→LLMs)."""
+
+    def test_strong_keyword_plural_in_desc(self):
+        """'LLM' should match 'LLMs' as a token (plural stemming)."""
+        score = score_repo_for_category(
+            "qualcomm/GenieX", "Rust", "Run frontier LLMs and VLMs locally",
+            ["llm"], [], phrases=None, stars=0)
+        assert score >= 4  # LLM+s → LLMs token match = 4 pts
+
+    def test_strong_keyword_plural_in_name(self):
+        """'agent' should match 'agents' in repo name."""
+        score = score_repo_for_category(
+            "user/agents", "Python", "Some tool",
+            ["agent"], [], phrases=None, stars=0)
+        # agent+s → agents in name token = 4 + 2 bonus = 6
+        assert score >= 6
+
+    def test_weak_keyword_plural_in_desc(self):
+        """'model' weak keyword should match 'models' via plural stemming."""
+        score = score_repo_for_category(
+            "user/tool", "Python", "Trains models and ships ML models",
+            [], ["model"], phrases=None, stars=0)
+        assert score >= 1  # model+s → models token match = 1 pt
+
+    def test_strong_keyword_plural_token_match(self):
+        """Substring fallback also checks kw+s form."""
+        score = score_repo_for_category(
+            "user/repo", "Go", "something about LLMs in production",
+            ["llm"], [], phrases=None, stars=0)
+        assert score >= 4  # token match via plural stemming (llm+s=llms)
+        # The description tokenizes 'LLMs' → 'llms', so kw+s matches as token
+
+    def test_no_false_positive_on_unrelated_plural(self):
+        """Words ending in 's' naturally shouldn't false-match."""
+        score = score_repo_for_category(
+            "user/bus-app", "TypeScript", "A bus tracking application with regular English words",
+            ["xyz"], [], phrases=None, stars=0)
+        # 'xyz'+s = 'xyzs' which should not match anything in the text
+        assert score == 0
+
+
 class TestEdgeCases:
     def test_empty_description(self):
         score = score_repo_for_category("user/repo", "Python", "", ["python"], ["tool"], phrases=None, stars=100)
