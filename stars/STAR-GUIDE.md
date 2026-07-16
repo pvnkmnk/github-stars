@@ -130,6 +130,8 @@
 | [Aider-AI/aider](https://github.com/Aider-AI/aider) | 46,427 | Python | AI pair programming in your terminal | |
 | [aaif-goose/goose](https://github.com/aaif-goose/goose) | 49,755 | Rust | Open source extensible AI agent — install, execute, edit, test | ⭐ [Pick](#-agentic-dev-top-10) |
 
+| [bobvibes/Clavix](https://github.com/bobvibes/Clavix) | 668 | TypeScript | Transform vague ideas into production-ready prompts. Analyze gaps, generate PRDs, and supercharge your AI coding workflo | 🆕 |
+| [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search) | 22,982 | TypeScript | The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor C | 🆕 |
 | [galdawave/pickle-rick-extension](https://github.com/galdawave/pickle-rick-extension) | 454 | TypeScript | This extension transforms the Gemini CLI into "Pickle Rick," a hyper-intelligent, arrogant, yet extremely competent  eng | 🆕 |
 | [mksglu/context-mode](https://github.com/mksglu/context-mode) | 18,981 | TypeScript | Context window optimization for AI coding agents. Sandboxes tool output (98% reduction), persists session memory, and    | 🆕 |
 | [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills) | 28,178 | - | A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex | 🆕 |
@@ -740,8 +742,6 @@
 | [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev) | ~95k | — | SaaS, PaaS, IaaS free tiers for devs/devops |
 | [microsoft/Web-Dev-For-Beginners](https://github.com/microsoft/Web-Dev-For-Beginners) | ~85k | JavaScript | 24-lesson web development curriculum |
 
-| [bobvibes/Clavix](https://github.com/bobvibes/Clavix) | 668 | TypeScript | Transform vague ideas into production-ready prompts. Analyze gaps, generate PRDs, and supercharge your AI coding workflo | 🆕 |
-| [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search) | 22,982 | TypeScript | The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor C | 🆕 |
 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 215,562 | Python | The agent that grows with you | 🆕 |
 | [OpenCut-app/OpenCut](https://github.com/OpenCut-app/OpenCut) | 72,763 | TypeScript | The open-source CapCut alternative | 🆕 |
 | [zed-industries/zed](https://github.com/zed-industries/zed) | 87,060 | Rust | Code at the speed of thought – Zed is a high-performance, multiplayer code editor from the creators of Atom and Tree-sit | 🆕 |

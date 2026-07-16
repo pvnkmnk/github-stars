@@ -103,6 +103,7 @@
   🤖 25,395 OthmanAdi/planning-with-files                        Python Persistent file-based planning for AI coding agents and long-running agentic tas
   🤖 25,354 gastownhall/beads                                    Go     Beads - A memory upgrade for your coding agent
   🤖 23,787 openai/skills                                        Python Skills Catalog for Codex
+  🤖 22,982 MadsLorentzen/ai-job-search                          TypeScript The job search that runs on your machine. AI job application framework built on 
   🤖 22,321 decolua/9router                                      JavaScript Unlimited FREE AI coding. Connect Claude Code, Codex, Cursor, Cline, Copilot, An
   🤖 21,176 coze-dev/coze-studio                                 TypeScript An AI agent development platform with all-in-one visual tools, simplifying agent
   🤖 20,628 google/adk-python                                    Python An open-source, code-first Python toolkit for building, evaluating, and deployin
@@ -141,6 +142,7 @@
   🤖    726 23blocks-OS/ai-maestro                               TypeScript AI Agent Orchestrator with Skills System - Give AI Agents superpowers: memory se
   🤖    676 sipyourdrink-ltd/bernstein                           Python Audit-grade multi-agent orchestration for CLI coding agents (Claude Code, Codex,
   🤖    675 Railly/agentfiles                                    TypeScript Browse, create, and edit AI agent files across Claude Code, Cursor, Codex, and 1
+  🤖    668 bobvibes/Clavix                                      TypeScript Transform vague ideas into production-ready prompts. Analyze gaps, generate PRDs
   🤖    605 open-gitagent/gitagent                               TypeScript A universal git-native AI agent framework. Your agent lives inside a git repo — 
   🤖    548 nicobailon/surf-cli                                  TypeScript The CLI for AI agents to control Chrome. Zero config, agent-agnostic, battle-tes
   🤖    504 MeisnerDan/mission-control                           TypeScript Open-source task management for the agentic era. The command center for solo ent
@@ -493,7 +495,6 @@
   💻 41,730 psf/black                                            Python The uncompromising Python code formatter
   💻 28,394 supermemoryai/supermemory                            TypeScript Memory and context engine + app that is extremely fast, scalable, and can be run
   💻 28,393 CloakHQ/CloakBrowser                                 Python Stealth Chromium that passes every bot detection test. Drop-in Playwright replac
-  💻 22,982 MadsLorentzen/ai-job-search                          TypeScript The job search that runs on your machine. AI job application framework built on 
   💻 19,265 modelscope/FunASR                                    Python Open-source speech recognition toolkit for training, inference, streaming ASR, V
   💻 15,064 coderamp-labs/gitingest                              Python Replace 'hub' with 'ingest' in any GitHub URL to get a prompt-friendly extract o
   💻  8,760 mps-youtube/yewtube                                  Python yewtube, forked from mps-youtube , is a Terminal based YouTube player and downlo
@@ -507,7 +508,6 @@
   💻  1,440 haydenbleasel/files-sdk                              TypeScript A unified storage SDK for object and blob backends. One small, honest API. Web-s
   💻  1,344 mattsse/chromiumoxide                                Rust   Chrome Devtools Protocol rust API
   💻    741 BYTEDz/PCLink                                        Python Cross-platform desktop app for secure remote PC control and management, featurin
-  💻    668 bobvibes/Clavix                                      TypeScript Transform vague ideas into production-ready prompts. Analyze gaps, generate PRDs
   💻    222 jatingargiitk/saas-builder                           Python AI-native SaaS framework that builds full-stack apps using autonomous AI agents
   💻    207 nloui/paperless-mcp                                  TypeScript An MCP (Model Context Protocol) server for interacting with a Paperless-NGX API 
   💻    200 Rooyca/obsidian-api-request                          TypeScript Obsidian plugin that allows you to integrate API data into your notes with reque

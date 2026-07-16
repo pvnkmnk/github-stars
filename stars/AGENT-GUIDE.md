@@ -61,6 +61,7 @@
 🤖|12305|InsForge/InsForge|TypeScript|The all-in-one, open-source backend platform for agentic coding. InsForge gives your coding agent database, auth, storage, compute, hosting, and AI gateway to ship full-stack apps end-to-end.
 🤖|1508|K-Dense-AI/karpathy|Python|An agentic Machine Learning Engineer
 🤖|26268|Kilo-Org/kilocode|TypeScript|Kilo is the all-in-one agentic engineering platform. Build, ship, and iterate faster with the most popular open source coding agent.
+🤖|22982|MadsLorentzen/ai-job-search|TypeScript|The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.
 🤖|504|MeisnerDan/mission-control|TypeScript|Open-source task management for the agentic era. The command center for solo entrepreneurs who delegate work to AI agents.
 🤖|57375|MemPalace/mempalace|Python|The best-benchmarked open-source AI memory system. And it's free.
 🤖|15578|MemoriLabs/Memori|Python|Memori is agent-native memory infrastructure. A LLM-agnostic layer that turns agent execution and conversation into structured, persistent state for production systems. Built for enterprise, Memori works with the data infrastructure you already run, no rip-and-replace, and deploys across managed cloud, single-tenant cloud, VPC, and on-premises.
@@ -87,6 +88,7 @@
 🤖|107|ben-vargas/ai-sdk-provider-opencode-sdk|TypeScript|Vercel AI SDK community provider for OpenCode SDK - Use OpenCode configured providers via SDK
 🤖|2823|bethington/ghidra-mcp|Java|Ghidra MCP Server — 200+ MCP tools for AI-powered reverse engineering. GUI plugin + headless server, lazy tool loading, convention enforcement, batch operations, Ghidra Server integration, and Docker deployment.
 🤖|50661|bmad-code-org/BMAD-METHOD|JavaScript|Breakthrough Method for Agile Ai Driven Development
+🤖|668|bobvibes/Clavix|TypeScript|Transform vague ideas into production-ready prompts. Analyze gaps, generate PRDs, and supercharge your AI coding workflow with the CLEAR framework.
 🤖|12231|browseros-ai/BrowserOS|TypeScript|🌐 The open-source Agentic browser; alternative to ChatGPT Atlas, Perplexity Comet, Dia.
 🤖|5763|builderz-labs/mission-control|TypeScript|Self-hosted control plane for AI agents: dispatch tasks, review runs, track spend, and operate OpenClaw, Claude Code, Codex, and other runtimes.
 🤖|77145|bytedance/deer-flow|Python|An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.
@@ -467,7 +469,6 @@
 💻|20|BrunkenClaas/lx|Rust|AI-native equivalents of the Unix tools you know — 72 small, composable, local-first LLM CLIs. One static Rust binary each, no API key required.
 💻|28393|CloakHQ/CloakBrowser|Python|Stealth Chromium that passes every bot detection test. Drop-in Playwright replacement with source-level fingerprint patches. 30/30 tests passed.
 💻|392215|EbookFoundation/free-programming-books|Python|:books: Freely available programming books
-💻|22982|MadsLorentzen/ai-job-search|TypeScript|The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor CVs, write cover letters, prep interviews. Fork it and own it.
 💻|215562|NousResearch/hermes-agent|Python|The agent that grows with you
 💻|?|OpenCut-app/OpenCut|-|
 💻|56894|Panniantong/Agent-Reach|Python|Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.
@@ -477,7 +478,6 @@
 💻|222749|TheAlgorithms/Python|Python|All Algorithms implemented in Python
 💻|191|TheUltimateC0der/Deemixrr|CSS|deemixrr manages your artists and playlists completely automated. You add your favorite artists and playlists, and deemixrr does the rest for you.
 💻|46|aunjaffery/restmate|JavaScript|REST api client. [Go / Wails / ReactJs]
-💻|668|bobvibes/Clavix|TypeScript|Transform vague ideas into production-ready prompts. Analyze gaps, generate PRDs, and supercharge your AI coding workflow with the CLEAR framework.
 💻|?|coasty-ai/open-computer-use|-|
 💻|525674|codecrafters-io/build-your-own-x|Markdown|Master programming by recreating your favorite technologies from scratch.
 💻|15064|coderamp-labs/gitingest|Python|Replace 'hub' with 'ingest' in any GitHub URL to get a prompt-friendly extract of a codebase 
