@@ -480,3 +480,65 @@ class TestNotCuratedPath:
         assert "user/curated" not in result
         assert "user/still-not" in result
         assert modified is True
+
+class TestEdgeCases:
+    """Edge cases: empty repos, score=0 with no second below threshold, no matching categories."""
+    def test_empty_repos_list(self, tmp_path):
+        from update_stars import auto_curate_repos
+        sg = tmp_path / "STAR-GUIDE.md"
+        sg.write_text(
+            "# Part I: The Catalog\n\n" "## 🤖 Agentic Dev Tools\n\n" "| Repository | Stars | Language | Description | Status |\n" "|------------|-------|----------|-------------|--------|\n" "| [existing/repo](https://github.com/existing/repo) | 1,000 | Python | Existing | ✅ |\n\n",
+            encoding="utf-8",
+        )
+        with patch("update_stars.suggest_categories", return_value=[]):
+            curated, remaining, modified = auto_curate_repos(
+                [], str(sg), threshold=7, dry_run=True
+            )
+        assert curated == []
+        assert remaining == []
+        assert modified is False
+
+    def test_second_score_zero_below_threshold(self, tmp_path):
+        """Only one category matched but score < threshold -> rejected by threshold check."""
+        from update_stars import auto_curate_repos
+        sg = tmp_path / "STAR-GUIDE.md"
+        sg.write_text(
+            "# Part I: The Catalog\n\n" "## 🤖 Agentic Dev Tools\n\n" "| Repository | Stars | Language | Description | Status |\n" "|------------|-------|----------|-------------|--------|\n" "| [existing/repo](https://github.com/existing/repo) | 1,000 | Python | Existing | ✅ |\n\n",
+            encoding="utf-8",
+        )
+        repos = [(100, "user/weak", "Agentic:6", "Only one category, but low score")]
+        with patch("update_stars.suggest_categories", side_effect=_mock_suggest):
+            curated, remaining, modified = auto_curate_repos(
+                repos, str(sg), threshold=7, dry_run=True
+            )
+        assert len(curated) == 0
+        assert len(remaining) == 1
+        assert remaining[0][1] == "user/weak"
+        assert modified is False
+
+    def test_no_matching_categories(self, tmp_path):
+        """Repo matches zero categories -> goes to remaining (not curated)."""
+        from update_stars import auto_curate_repos
+        sg = tmp_path / "STAR-GUIDE.md"
+        sg.write_text(
+            "# Part I: The Catalog\n\n" "## 🤖 Agentic Dev Tools\n\n" "| Repository | Stars | Language | Description | Status |\n" "|------------|-------|----------|-------------|--------|\n" "| [existing/repo](https://github.com/existing/repo) | 1,000 | Python | Existing | ✅ |\n\n",
+            encoding="utf-8",
+        )
+
+        # Custom mock returning empty cats list
+        def _empty_cats(repos):
+            results = []
+            for stars, full_name, lang, desc in repos:
+                results.append((stars, full_name, lang, desc, []))
+            return results
+
+        repos = [(2000, "user/uncategorizable", "Brainfuck", "No category matches")]
+        with patch("update_stars.suggest_categories", side_effect=_empty_cats):
+            curated, remaining, modified = auto_curate_repos(
+                repos, str(sg), threshold=7, dry_run=True
+            )
+        assert len(curated) == 0
+        assert len(remaining) == 1
+        assert remaining[0][1] == "user/uncategorizable"
+        assert modified is False
+
