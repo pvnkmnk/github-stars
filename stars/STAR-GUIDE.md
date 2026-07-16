@@ -130,6 +130,9 @@
 | [Aider-AI/aider](https://github.com/Aider-AI/aider) | 46,427 | Python | AI pair programming in your terminal | |
 | [aaif-goose/goose](https://github.com/aaif-goose/goose) | 49,755 | Rust | Open source extensible AI agent — install, execute, edit, test | ⭐ [Pick](#-agentic-dev-top-10) |
 
+| [dmgrok/agent-plugins](https://github.com/dmgrok/agent-plugins) | 18 | Python | Intelligent skill discovery for AI agents. Find quality-validated skills that match your project with smart recommendati | 🆕 |
+| [XiaomiMiMo/MiMo-Code](https://github.com/XiaomiMiMo/MiMo-Code) | 12,133 | TypeScript | MiMo Code: Where Models and Agents Co-Evolve | 🆕 |
+| [DeusData/codebase-memory-mcp](https://github.com/DeusData/codebase-memory-mcp) | 31,936 | C | High-performance code intelligence MCP server. Indexes codebases into a persistent knowledge graph — average repo in mil | 🆕 |
 | [bobvibes/Clavix](https://github.com/bobvibes/Clavix) | 668 | TypeScript | Transform vague ideas into production-ready prompts. Analyze gaps, generate PRDs, and supercharge your AI coding workflo | 🆕 |
 | [MadsLorentzen/ai-job-search](https://github.com/MadsLorentzen/ai-job-search) | 22,982 | TypeScript | The job search that runs on your machine. AI job application framework built on Claude Code: evaluate postings, tailor C | 🆕 |
 | [galdawave/pickle-rick-extension](https://github.com/galdawave/pickle-rick-extension) | 454 | TypeScript | This extension transforms the Gemini CLI into "Pickle Rick," a hyper-intelligent, arrogant, yet extremely competent  eng | 🆕 |

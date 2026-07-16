@@ -87,6 +87,7 @@
   🤖 35,738 khoj-ai/khoj                                         Python Your AI second brain. Self-hostable. Get answers from the web or your docs. Buil
   🤖 35,135 microsoft/playwright-mcp                             TypeScript Playwright MCP server
   🤖 32,038 Yeachan-Heo/oh-my-codex                              TypeScript OmX - Oh My codeX: Your codex is not alone. Add hooks, agent teams, HUDs, and so
+  🤖 31,936 DeusData/codebase-memory-mcp                         C      High-performance code intelligence MCP server. Indexes codebases into a persiste
   🤖 30,147 iOfficeAI/AionUi                                     TypeScript Free, local, open-source 24/7 Cowork app for OpenClaw, Hermes Agent, Claude Code
   🤖 29,247 ComposioHQ/composio                                  TypeScript Composio powers 1000+ toolkits, tool search, context management, authentication,
   🤖 29,121 simstudioai/sim                                      TypeScript Build, deploy, and orchestrate AI agents. Sim is the central intelligence layer 
@@ -114,6 +115,7 @@
   🤖 15,578 MemoriLabs/Memori                                    Python Memori is agent-native memory infrastructure. A LLM-agnostic layer that turns ag
   🤖 12,305 InsForge/InsForge                                    TypeScript The all-in-one, open-source backend platform for agentic coding. InsForge gives 
   🤖 12,231 browseros-ai/BrowserOS                               TypeScript 🌐 The open-source Agentic browser; alternative to ChatGPT Atlas, Perplexity Come
+  🤖 12,133 XiaomiMiMo/MiMo-Code                                 TypeScript MiMo Code: Where Models and Agents Co-Evolve
   🤖 12,021 simular-ai/Agent-S                                   Python Agent S: an open agentic framework that uses computers like a human
   🤖 11,090 EverMind-AI/EverOS                                   Python One portable memory layer for every AI agent: local-first, Markdown-native, user
   🤖  8,926 awesome-opencode/awesome-opencode                    JavaScript A curated list of awesome plugins, themes, agents, projects, and resources for h
@@ -163,6 +165,7 @@
   🤖     70 UltimateAI-org/aitoolsforobsidian                    TypeScript Bring AI agents into Obsidian via Agent Client Protocol (ACP), such as Claude Co
   🤖     65 yuki-20/CornMCP                                      TypeScript CornMCP is an open-source mono repo that gives AI coding agents (Antigravity, Cu
   🤖     63 GuppyTheCat/obsidian-clipper-template-creator        -      Agent Skill that enables AI agents (Claude Code, Cursor, Gemini CLI, etc.) to he
+  🤖     18 dmgrok/agent-plugins                                 Python Intelligent skill discovery for AI agents. Find quality-validated skills that ma
   🤖      4 colinmollenhour/occtl                                TypeScript Empower your AI to more effectively launch and steer OpenCode from the CLI.
 
 ## 🎵 Self-Hosted Media
@@ -1073,4 +1076,4 @@
   ❓      1 aiur-adept/witchs_oath                               GDScript a digital card game
 
 ---
-1050 tools · 18 categories · from 1068 stars · pvnkmnk · 2026-07-16
+1053 tools · 18 categories · from 1068 stars · pvnkmnk · 2026-07-16

@@ -112,23 +112,25 @@ def score_repo_for_category(full_name, lang, desc, strong_keywords, weak_keyword
     # Strong matches (exact word token match): weight 4
     for kw in strong_keywords:
         kw_lower = kw.lower()
-        if kw_lower in all_tokens:
+        # Exact token match (including basic plural: kw + 's')
+        if kw_lower in all_tokens or kw_lower + 's' in all_tokens:
             score += 4
             # Bonus if matched in the repo name (more signal)
-            if kw_lower in name_tokens:
+            if kw_lower in name_tokens or kw_lower + 's' in name_tokens:
                 score += 2
         # Also check compound keywords as substring in full text
-        elif kw_lower in all_text:
+        elif kw_lower in all_text or kw_lower + 's' in all_text:
             score += 1
     
     # Weak matches (substring match anywhere): weight 1
     for kw in weak_keywords:
         kw_lower = kw.lower()
-        if kw_lower in all_tokens:
+        # Exact token match (including basic plural: kw + 's')
+        if kw_lower in all_tokens or kw_lower + 's' in all_tokens:
             score += 1
-            if kw_lower in name_tokens:
+            if kw_lower in name_tokens or kw_lower + 's' in name_tokens:
                 score += 1
-        elif kw_lower in all_text:
+        elif kw_lower in all_text or kw_lower + 's' in all_text:
             score += 0.5
     
     # Multi-token phrase matching (weight 3 per phrase)
@@ -136,7 +138,7 @@ def score_repo_for_category(full_name, lang, desc, strong_keywords, weak_keyword
         for phrase in phrases:
             phrase_lower = phrase.lower()
             if phrase_lower in all_text:
-                score += 3
+                score += 5
                 if phrase_lower in name_part.lower():
                     score += 1
 

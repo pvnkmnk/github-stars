@@ -49,6 +49,7 @@
 🤖|47035|ChromeDevTools/chrome-devtools-mcp|TypeScript|Chrome DevTools for coding agents
 🤖|29247|ComposioHQ/composio|TypeScript|Composio powers 1000+ toolkits, tool search, context management, authentication, and a sandboxed workbench to help you build AI agents that turn intent into action.
 🤖|36068|CopilotKit/CopilotKit|TypeScript|The Frontend Stack for Agents & Generative UI. React, Angular, Mobile, Slack, and more.  Makers of the AG-UI Protocol
+🤖|31936|DeusData/codebase-memory-mcp|C|High-performance code intelligence MCP server. Indexes codebases into a persistent knowledge graph — average repo in milliseconds. 158 languages, sub-ms queries, 99% fewer tokens. Single static binary, zero dependencies.
 🤖|84150|DietrichGebert/ponytail|JavaScript|Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.
 🤖|11090|EverMind-AI/EverOS|Python|One portable memory layer for every AI agent: local-first, Markdown-native, user-owned, and self-evolving across apps, tools, and workflows.
 🤖|61091|Fission-AI/OpenSpec|TypeScript|Spec-driven development (SDD) for AI coding assistants.
@@ -73,6 +74,7 @@
 🤖|70|UltimateAI-org/aitoolsforobsidian|TypeScript|Bring AI agents into Obsidian via Agent Client Protocol (ACP), such as Claude Code, Codex and Gemini CLI.
 🤖|28178|VoltAgent/awesome-agent-skills|-|A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.
 🤖|102181|VoltAgent/awesome-design-md|-|A collection of DESIGN.md files analysis by popular brand design systems. Drop one into your project and let coding agents generate a matching UI.
+🤖|12133|XiaomiMiMo/MiMo-Code|TypeScript|MiMo Code: Where Models and Agents Co-Evolve
 🤖|32038|Yeachan-Heo/oh-my-codex|TypeScript|OmX - Oh My codeX: Your codex is not alone. Add hooks, agent teams, HUDs, and so much more.
 🤖|51265|aaif-goose/goose|Rust|an open source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM
 🤖|230183|affaan-m/ECC|JavaScript|The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.
@@ -102,6 +104,7 @@
 🤖|55597|crewAIInc/crewAI|Python|Framework for orchestrating role-playing, autonomous AI agents. By fostering collaborative intelligence, CrewAI empowers agents to work together seamlessly, tackling complex tasks.
 🤖|40788|danny-avila/LibreChat|TypeScript|Enhanced ChatGPT Clone: Features Agents, MCP, Skills, DeepSeek, Anthropic, AWS, OpenAI, Responses API, Azure, Groq, o1, GPT-5, Mistral, OpenRouter, Vertex AI, Gemini, Artifacts, AI model switching, message search, Code Interpreter, langchain, DALL-E-3, OpenAPI Actions, Functions, Secure Multi-User Auth, Presets, open-source for self-hosting. Active
 🤖|22321|decolua/9router|JavaScript|Unlimited FREE AI coding. Connect Claude Code, Codex, Cursor, Cline, Copilot, Antigravity to FREE Claude/GPT/Gemini via 40+ providers. Auto-fallback, RTK -40% tokens, never hit limits.
+🤖|18|dmgrok/agent-plugins|Python|Intelligent skill discovery for AI agents. Find quality-validated skills that match your project with smart recommendations, maintenance tracking, and security scanning.
 🤖|71524|earendil-works/pi|TypeScript|AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI
 🤖|454|galdawave/pickle-rick-extension|TypeScript|This extension transforms the Gemini CLI into "Pickle Rick," a hyper-intelligent, arrogant, yet extremely competent  engineering persona. It enforces a rigid, iterative software development lifecycle through continuous AI agent loops. Emphasizing "God Mode" coding practices and a disdain for
 🤖|?|galz10/pickle-rick-extension|-|
