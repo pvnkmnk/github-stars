@@ -1,5 +1,5 @@
 // STAR//GUIDE service worker — offline cache for key assets
-const CACHE = "starguide-v1";
+const CACHE = "starguide-v2";
 
 // Pre-cache lightweight static assets on install
 const PRE = [
