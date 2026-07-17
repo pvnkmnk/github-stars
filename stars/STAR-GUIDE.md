@@ -257,6 +257,7 @@
 | [openai/skills](https://github.com/openai/skills) | 22,477 | Python | Skills Catalog for Codex |
 | [kepano/obsidian-skills](https://github.com/kepano/obsidian-skills) | 36,036 | — | Agent skills for Obsidian CLI & open formats |
 | [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) | 91,248 | — | DESIGN.md files for coding agents to generate matching UI |
+| [Nutlope/hallmark](https://github.com/Nutlope/hallmark) | 10,856 | CSS | Anti-AI-slop design skill for Claude Code, Cursor, and Codex. |
 
 ### Agent Harness Power-ups
 | Repo | ⭐ | Lang | Description |
@@ -281,6 +282,7 @@
 | [agent0ai/agent-zero](https://github.com/agent0ai/agent-zero) | 18,114 | Python | Agent Zero AI framework | |
 | [bethington/ghidra-mcp](https://github.com/bethington/ghidra-mcp) | 2,510 | Java | 200+ MCP tools for AI-powered reverse engineering | |
 | [chriswritescode-dev/opencode-manager](https://github.com/chriswritescode-dev/opencode-manager) | 584 | TypeScript | Mobile-first web interface for OpenCode AI agents | |
+| [slopus/happy](https://github.com/slopus/happy) | 22,673 | TypeScript | Mobile and Web client for Codex and Claude Code, with realtime voice, encryption and fully featured | |
 
 ---
 
@@ -1015,7 +1017,6 @@
 | [mui/mui-x](https://github.com/mui/mui-x) | 5,740 | TypeScript | Build complex data-rich apps with advanced React components |
 | [dembrandt/dembrandt](https://github.com/dembrandt/dembrandt) | 1,942 | TypeScript | Extract any website's design system into tokens in seconds |
 
-| [Nutlope/hallmark](https://github.com/Nutlope/hallmark) | 10,820 | CSS | Anti-AI-slop design skill for Claude Code, Cursor, and Codex. | 🆕 |
 | [thedaviddias/Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist) | 73,219 | MDX | 🗂 The essential checklist for modern web development, for humans and AI agents | 🆕 |
 | [N-Zik-Group/N-Zik](https://github.com/N-Zik-Group/N-Zik) | 129 | Kotlin | A multilingual YouTube Music frontend for Android, focused on performance, UI/UX refinements, feature expansion, and lon | 🆕 |
 | [umami-software/umami](https://github.com/umami-software/umami) | 37,219 | TypeScript | Umami is a modern, privacy-focused analytics platform. An open-source alternative to Google Analytics, Mixpanel and Ampl | 🆕 |
@@ -1171,7 +1172,6 @@
 | [binwiederhier/ntfy](https://github.com/binwiederhier/ntfy) | 30,833 | Go | Send push notifications to your phone or desktop using PUT/POST | 🆕 |
 | [offa/android-foss](https://github.com/offa/android-foss) | 10,369 | Python | A list of Free and Open Source Software (FOSS) for Android – saving Freedom and Privacy. | 🆕 |
 | [ThioJoe/Logitech-Key-State-Indicator](https://github.com/ThioJoe/Logitech-Key-State-Indicator) | 4 | C# | Lightweight background app that uses Logitech SDK to set Toggle-able key colors such as Num Lock based on status | 🆕 |
-| [slopus/happy](https://github.com/slopus/happy) | 22,044 | TypeScript | Mobile and Web client for Codex and Claude Code, with realtime voice, encryption and fully featured | 🆕 |
 | [legendsayantan/ShizuTools](https://github.com/legendsayantan/ShizuTools) | 2,306 | Kotlin | Contains many tools to control android system via shizuku. | 🆕 |
 | [mhss1/MyBrain](https://github.com/mhss1/MyBrain) | 2,014 | Kotlin | All-in-one productivity app and AI assistant with Tasks, Notes, Calendar, Diary and Bookmarks. | 🆕 |
 | [massivemadness/Squircle-CE](https://github.com/massivemadness/Squircle-CE) | 1,832 | Kotlin | 👨‍💻 Squircle CE is a fast and free multi-language code editor for Android | 🆕 |
